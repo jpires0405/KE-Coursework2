@@ -8,7 +8,8 @@ import urllib.request
 import os
 
 URL = "https://data.bus-data.dft.gov.uk/timetable/download/gtfs-file/london/"
-OUTPUT = os.path.join(os.path.dirname(__file__), "london_gtfs.zip")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+OUTPUT = os.path.join(BASE_DIR, "data/raw/london_gtfs.zip")
 
 
 def download():

@@ -1,1 +1,8 @@
 .env
+data/raw/*.zip
+data/raw/*.pdf
+data/raw/london_gtfs/
+commands.txt
+.DS_Store
+data/.DS_Store
+data/raw/.DS_Store

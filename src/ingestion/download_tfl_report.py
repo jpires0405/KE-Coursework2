@@ -8,8 +8,8 @@ import urllib.request
 import os
 
 URL = "https://content.tfl.gov.uk/tfl-annual-report-and-statement-of-accounts-2024-25.pdf"
-OUTPUT = os.path.join(os.path.dirname(__file__), "tfl_annual_report_2024_25.pdf")
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+OUTPUT = os.path.join(BASE_DIR, "data/raw/london_gtfs.zip")
 
 def download():
     print(f"Downloading TfL Annual Report 2024/25...")
