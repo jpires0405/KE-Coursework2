@@ -56,7 +56,29 @@ def get_bus_category(name):
         return "NormalBus"
     return "OtherBus"
 
-def generate_json(lines):
+def get_last_stops():
+    regular_routes_url = f"{url}/Line/Route?serviceTypes=Regular"
+    night_routes_url = f"{url}/Line/Route?serviceTypes=Night"
+
+    regular_routes = requests.get(regular_routes_url).json()
+    night_routes = requests.get(night_routes_url).json()
+
+    night_last_stops = {}
+    for i in night_routes:
+        last_stop = {k["destinationName"] for k in i["routeSections"]}
+        night_last_stops[i["id"]] = list(last_stop)
+
+    last_stops = {}
+    for i in regular_routes:
+        line_id = i["id"]
+        regular_last_stop = {k["destinationName"] for k in i["routeSections"]}
+        night_last_stop = night_last_stops.get(line_id, [])
+        if night_last_stop and regular_last_stop != set(night_last_stop):
+            print(line_id)
+        last_stops[line_id] = {"Regular": list(regular_last_stop), "Night": night_last_stop}
+    return last_stops
+            
+def generate_json(lines, last_stops):
     all_lines = {
         "TrainLines": [],
         "BusLines": [],
@@ -87,7 +109,8 @@ def generate_json(lines):
         instances.append({
             "id": line["id"],
             "belongsToClass": sub_class,
-            "name": line["name"]
+            "name": line["name"],
+            "lastStop": last_stops[line["id"]]
         })
 
     lines_json = {
@@ -102,4 +125,5 @@ if __name__ == "__main__":
     modes = get_modes()
     modes = ",".join(modes)
     lines = get_lines(modes)
-    generate_json(lines)
+    last_stops = get_last_stops()
+    generate_json(lines, last_stops)
