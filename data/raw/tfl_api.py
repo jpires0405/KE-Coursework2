@@ -4,16 +4,17 @@ import json
 
 url = "https://api.tfl.gov.uk"
 api_key = os.getenv("TFL_API_KEY")
+params = {"app_key": api_key} if api_key else {}
 
 def get_modes():
     modes_url = f"{url}/Line/Meta/Modes"
-    modes = requests.get(modes_url).json()
+    modes = requests.get(modes_url, params=params).json()
     mode_names = [i["modeName"] for i in modes]
     return mode_names
 
 def get_lines(modes):
     lines_url = f"{url}/Line/Mode/{modes}"
-    lines = requests.get(lines_url).json()
+    lines = requests.get(lines_url, params=params).json()
     return lines
 
 def get_bus_category(name):
@@ -60,8 +61,8 @@ def get_last_stops():
     regular_routes_url = f"{url}/Line/Route?serviceTypes=Regular"
     night_routes_url = f"{url}/Line/Route?serviceTypes=Night"
 
-    regular_routes = requests.get(regular_routes_url).json()
-    night_routes = requests.get(night_routes_url).json()
+    regular_routes = requests.get(regular_routes_url, params=params).json()
+    night_routes = requests.get(night_routes_url, params=params).json()
 
     night_last_stops = {}
     for i in night_routes:
@@ -73,12 +74,34 @@ def get_last_stops():
         line_id = i["id"]
         regular_last_stop = {k["destinationName"] for k in i["routeSections"]}
         night_last_stop = night_last_stops.get(line_id, [])
-        if night_last_stop and regular_last_stop != set(night_last_stop):
-            print(line_id)
         last_stops[line_id] = {"Regular": list(regular_last_stop), "Night": night_last_stop}
     return last_stops
-            
-def generate_json(lines, last_stops):
+
+def get_all_ids():
+    id_url = f"{url}/Line/Route"
+    data = requests.get(id_url, params=params).json()
+    all_ids = [line['id'] for line in data]
+    return all_ids
+
+def get_line_status(modes):
+    status_url = f"{url}/Line/Mode/{modes}/Status?detail=true"
+    status = requests.get(status_url, params=params).json()
+
+    status_dict = {}
+    for line in status:
+        disruptions = []
+        for d in line["disruptions"]:
+            disruptions.append(d.get("description", ""))
+
+        status_dict[line["id"]] = {
+            "statusDescription": line["lineStatuses"][0]["statusSeverityDescription"],
+            "reason": line["lineStatuses"][0].get("reason", ""),
+            "disruptions": disruptions
+        }
+
+    return status_dict
+
+def generate_json(lines, last_stops, disruptions):
     all_lines = {
         "TrainLines": [],
         "BusLines": [],
@@ -89,7 +112,6 @@ def generate_json(lines, last_stops):
 
     for line in lines:
         mode = line["modeName"]
-
         if mode in ["tube", "dlr", "overground", "elizabeth-line", "tram", "national-rail"]:
             category = "TrainLines"
             sub_class = mode
@@ -110,7 +132,8 @@ def generate_json(lines, last_stops):
             "id": line["id"],
             "belongsToClass": sub_class,
             "name": line["name"],
-            "lastStop": last_stops[line["id"]]
+            "haslastStop": last_stops[line["id"]],
+            "disruptions": disruptions[line["id"]]
         })
 
     lines_json = {
@@ -125,5 +148,6 @@ if __name__ == "__main__":
     modes = get_modes()
     modes = ",".join(modes)
     lines = get_lines(modes)
+    disruptions = get_line_status(modes)
     last_stops = get_last_stops()
-    generate_json(lines, last_stops)
+    generate_json(lines, last_stops, disruptions)
