@@ -8,3 +8,5 @@ data/.DS_Store
 data/raw/.DS_Store
 coursework 2 specification.pdf
 data/
+src/kg/__pycache__/
+src/processing/__pycache__/
