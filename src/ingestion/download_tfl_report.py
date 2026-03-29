@@ -13,6 +13,7 @@ OUTPUT = os.path.join(BASE_DIR, "data/raw/tfl_annual_report_2024_25.pdf")
 
 def download():
     print(f"Downloading TfL Annual Report 2024/25...")
+    os.makedirs(os.path.dirname(OUTPUT), exist_ok=True)
     req = urllib.request.Request(URL, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req) as response, open(OUTPUT, "wb") as out:
         out.write(response.read())

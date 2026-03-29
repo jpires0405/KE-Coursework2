@@ -10,3 +10,5 @@ coursework 2 specification.pdf
 data/
 src/kg/__pycache__/
 src/processing/__pycache__/
+.venv
+venv

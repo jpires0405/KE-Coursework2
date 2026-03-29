@@ -95,7 +95,7 @@ def generate_json(lines):
         "Instances": instances
     }
 
-    with open("tfl.json", "w") as f:
+    with open("data/raw/tfl.json", "w") as f:
         json.dump(lines_json, f, indent=3)
 
 if __name__ == "__main__":
