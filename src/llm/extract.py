@@ -1,14 +1,5 @@
 """
 LLM-based entity and relation extraction from TfL Annual Report text.
-
-Sends extracted PDF text to a local Ollama model (default: llama3) and
-produces structured JSON output that can be converted to RDF triples
-by to_rdf.py.
-
-Usage:
-    python -m src.llm.extract                  # run full extraction
-    python -m src.llm.extract --pages 3-10     # extract from specific pages
-    python -m src.llm.extract --model mistral  # use a different Ollama model
 """
 
 import json
