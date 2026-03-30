@@ -12,3 +12,4 @@ src/kg/__pycache__/
 src/processing/__pycache__/
 .venv
 venv
+src/llm/__pycache__/
