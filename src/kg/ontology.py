@@ -56,12 +56,35 @@ def build_ontology():
 
     # ─── GTFS properties ───
     g.add((GTFS.stopName, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.stopName, RDFS.domain, GTFS.Stop))
+    g.add((GTFS.stopName, RDFS.range, XSD.string))
+
     g.add((GTFS.lat, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.lat, RDF.type, OWL.FunctionalProperty))
+    g.add((GTFS.lat, RDFS.domain, GTFS.Stop))
+    g.add((GTFS.lat, RDFS.range, XSD.float))
+
     g.add((GTFS.long, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.long, RDF.type, OWL.FunctionalProperty))
+    g.add((GTFS.long, RDFS.domain, GTFS.Stop))
+    g.add((GTFS.long, RDFS.range, XSD.float))
+
     g.add((GTFS.routeShortName, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.routeShortName, RDFS.domain, GTFS.Route))
+    g.add((GTFS.routeShortName, RDFS.range, XSD.string))
+
     g.add((GTFS.headsign, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.headsign, RDFS.domain, GTFS.Trip))
+    g.add((GTFS.headsign, RDFS.range, XSD.string))
+
     g.add((GTFS.arrivalTime, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.arrivalTime, RDFS.domain, GTFS.StopTime))
+    g.add((GTFS.arrivalTime, RDFS.range, XSD.time))
+
     g.add((GTFS.departureTime, RDF.type, OWL.DatatypeProperty))
+    g.add((GTFS.departureTime, RDFS.domain, GTFS.StopTime))
+    g.add((GTFS.departureTime, RDFS.range, XSD.time))
+
 
     # ─── Extend GTFS with subproperties ───
     g.add((LT.naptanCode, RDF.type, OWL.DatatypeProperty))
