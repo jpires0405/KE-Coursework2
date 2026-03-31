@@ -144,9 +144,17 @@ def build_ontology():
 
     # ─── Schema.org properties ───
     g.add((SCHEMA.name, RDF.type, OWL.DatatypeProperty))
-    g.add((SCHEMA.geo, RDF.type, OWL.ObjectProperty))
-    g.add((SCHEMA.url, RDF.type, OWL.DatatypeProperty))
+    g.add((SCHEMA.name, RDFS.domain, SCHEMA.Place))
+    g.add((SCHEMA.name, RDFS.range, XSD.string))
 
+    g.add((SCHEMA.geo, RDF.type, OWL.ObjectProperty))
+    g.add((SCHEMA.geo, RDFS.domain, SCHEMA.Place))
+    g.add((SCHEMA.geo, RDFS.range, SCHEMA.Place))
+
+    g.add((SCHEMA.url, RDF.type, OWL.DatatypeProperty))
+    g.add((SCHEMA.url, RDFS.domain, SCHEMA.Organization))
+    g.add((SCHEMA.url, RDFS.range, XSD.anyURI))
+    
     # ─── Extend Schema.org with subproperties ───
     g.add((LT.operatorName, RDF.type, OWL.DatatypeProperty))
     g.add((LT.operatorName, RDFS.subPropertyOf, SCHEMA.name))
@@ -161,6 +169,31 @@ def build_ontology():
     g.add((LT.lineName, RDFS.range, XSD.string))
 
     # ─── Custom object properties ───
+
+    g.add((LT.hasTrip, RDF.type, OWL.ObjectProperty))
+    g.add((LT.hasTrip, RDFS.label, Literal("has trip")))
+    g.add((LT.hasTrip, RDFS.comment, Literal("connects route to trip")))
+    g.add((LT.hasTrip, RDFS.domain, GTFS.Route))
+    g.add((LT.hasTrip, RDFS.range, GTFS.Trip))
+
+    g.add((LT.connectsTo, RDF.type, OWL.ObjectProperty))
+    g.add((LT.connectsTo, RDFS.label, Literal("connects to")))
+    g.add((LT.connectsTo, RDFS.comment, Literal("A stop is connected to another stop")))
+    g.add((LT.connectsTo, RDFS.domain, GTFS.Stop))
+    g.add((LT.connectsTo, RDFS.range, GTFS.Stop))
+
+    g.add((LT.operatesLine, RDF.type, OWL.ObjectProperty))
+    g.add((LT.operatesLine, RDFS.label, Literal("operates line")))
+    g.add((LT.operatesLine, RDFS.comment, Literal("A transport operator operates a transport line")))
+    g.add((LT.operatesLine, RDFS.domain, LT.TransportOperator))
+    g.add((LT.operatesLine, RDFS.range, LT.TransportLine))
+
+    g.add((LT.managedByAgency, RDF.type, OWL.ObjectProperty))
+    g.add((LT.managedByAgency, RDFS.label, Literal("managed by agency")))
+    g.add((LT.managedByAgency, RDFS.comment, Literal("A route is managed by a transit agency")))
+    g.add((LT.managedByAgency, RDFS.domain, GTFS.Route))
+    g.add((LT.managedByAgency, RDFS.range, GTFS.Agency))
+
     g.add((LT.operatedBy, RDF.type, OWL.ObjectProperty))
     g.add((LT.operatedBy, RDFS.label, Literal("operated by")))
     g.add((LT.operatedBy, RDFS.domain, GTFS.Route))
@@ -198,6 +231,7 @@ def build_ontology():
 
     g.add((LT.wheelchairAccessible, RDF.type, OWL.DatatypeProperty))
     g.add((LT.wheelchairAccessible, RDFS.label, Literal("wheelchair accessible")))
+    g.add((LT.wheelchairAccessible, RDFS.domain, GTFS.Stop))
     g.add((LT.wheelchairAccessible, RDFS.range, XSD.boolean))
 
     return g
