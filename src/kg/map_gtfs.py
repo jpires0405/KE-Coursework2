@@ -32,7 +32,7 @@ def map_stops(g):
     for s in stops:
         stop = uri("stop", s["stop_id"])
 
-        if s["stop_id"].startswith("9400"):
+        if s["stop_id"].startswith(("9400", "940G")):
             g.add((stop, RDF.type, LT.TrainStation))
         else:
             g.add((stop, RDF.type, LT.BusStop))
@@ -45,6 +45,10 @@ def map_stops(g):
         if s.get("stop_code"):
             g.add((stop, LT.stopCode, Literal(s["stop_code"])))
 
+        if s.get("parent_station"):
+            parent_uri = uri("stop", s["parent_station"])
+            g.add((stop, LT.locatedIn, parent_uri))
+        
         wheelchair = s.get("wheelchair_boarding", "0")
         g.add((stop, LT.wheelchairAccessible, Literal(wheelchair == "1", datatype=XSD.boolean)))
 
@@ -74,6 +78,7 @@ def map_routes(g):
         if r.get("agency_id"):
             agency = uri("agency", r["agency_id"])
             g.add((route, LT.operatedBy, agency))
+
 
     print(f"  Mapped {len(routes)} routes")
     return g
@@ -110,12 +115,24 @@ def map_trips(g, limit=10000):
         service = uri("service", t["service_id"])
         g.add((trip, LT.belongsToService, service))
 
+        g.add((route, LT.hasTrip, trip))
+
     print(f"  Mapped {len(trips)} trips")
     return g
 
 
 def map_stop_times(g, limit=50000):
     stop_times = parse_stop_times(limit=limit)
+
+    trips = parse_trips(limit=None)
+    trip_to_route = {t["trip_id"]: t["route_id"] for t in trips}
+
+    stops_data = parse_stops()
+    stop_to_parent = {s['stop_id']: s['parent_station'] for s in stops_data if s.get('parent_station')}
+
+    last_trip_id = None
+    last_stop_uri = None
+
     for st in stop_times:
         stop_time = uri("stoptime", f"{st['trip_id'][:16]}_{st['stop_sequence']}")
         g.add((stop_time, RDF.type, LT.StopTime))
@@ -127,6 +144,24 @@ def map_stop_times(g, limit=50000):
 
         g.add((stop_time, LT.stopsAt, stop))
         g.add((stop_time, LT.onTrip, trip))
+
+        if st["trip_id"] == last_trip_id and last_stop_uri:
+            g.add((last_stop_uri, LT.connectsTo, stop))
+
+        route_id = trip_to_route.get(st["trip_id"])
+        if route_id:
+            route_uri = uri("route", route_id)
+            g.add((route_uri, LT.hasStop, stop))
+            g.add((stop, LT.isStopOn, route_uri))
+
+            parent_id = stop_to_parent.get(st["stop_id"])
+            if parent_id:
+                station_uri = uri("stop", parent_id)
+                g.add((route_uri, LT.servesStation, station_uri))
+                g.add((station_uri, LT.isServedBy, route_uri))
+
+        last_trip_id = st["trip_id"]
+        last_stop_uri = stop
 
     print(f"  Mapped {len(stop_times)} stop times")
     return g

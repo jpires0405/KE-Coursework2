@@ -1,8 +1,9 @@
 import os
 import sys
 import json
-
-from rdflib import Literal, RDF, RDFS
+import re
+from collections import defaultdict
+from rdflib import Literal, RDF, RDFS, XSD
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
@@ -52,14 +53,22 @@ def line_uri(line_id: str):
     clean = str(line_id).replace(" ", "_").replace("/", "_")
     return LT[f"line_{clean}"]
 
+def normalise_stop(name: str) -> str:
+    name = re.sub(r'\s*\([^)]*\)', '', name)
+    return ' '.join(name.lower().split())      
 
 def map_tfl_lines(g, data):
     instances = data.get("Instances", [])
+    stop_to_lines = defaultdict(list)
 
     for inst in instances:
         line_id = inst.get("id", "").strip()
         line_name = inst.get("name", "").strip()
         belongs_to = inst.get("belongsToClass", "").strip()
+        last_stops_data = inst.get("haslastStop", {})
+        stops = inst.get("stops", [])
+        status_info = inst.get("disruptions", {})
+        status_desc = status_info.get("statusDescription", "Good Service")
 
         if not line_id:
             continue
@@ -73,7 +82,34 @@ def map_tfl_lines(g, data):
             g.add((uri, LT.name, Literal(line_name)))
             g.add((uri, RDFS.label, Literal(line_name)))
 
-    print(f"  Mapped {len(instances)} transport lines")
+        destinations = set(last_stops_data.get("Regular", []) + last_stops_data.get("Night", []))
+        for dest_name in destinations:
+            if dest_name:
+                g.add((uri, LT.extendsTo, Literal(dest_name)))
+
+        for stop_name in stops:
+            if stop_name:
+                key = normalise_stop(stop_name)
+                if key:
+                    stop_to_lines[key].append(uri)
+                g.add((uri, LT.hasStopName, Literal(stop_name)))
+
+        g.add((uri, LT.hasStatus, Literal(status_desc)))
+        g.add((uri, LT.isDisrupted, Literal(status_desc != "Good Service", datatype=XSD.boolean)))
+
+        if status_info.get("reason"):
+            g.add((uri, LT.disruptionReason, Literal(status_info["reason"])))
+
+        has_night = len(last_stops_data.get("Night", [])) > 0
+        g.add((uri, LT.hasNightService, Literal(has_night, datatype=XSD.boolean)))
+
+    for stop, lines in stop_to_lines.items():
+        unique = list(set(lines))
+        for i in range(len(unique)):
+            for j in range(i + 1, len(unique)):
+                g.add((unique[i], LT.intersectsWith, unique[j]))
+                g.add((unique[j], LT.intersectsWith, unique[i]))
+    print(f"Mapped {len(instances)} transport lines")
     return g
 
 
