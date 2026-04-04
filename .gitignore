@@ -12,3 +12,5 @@ src/kg/__pycache__/
 src/processing/__pycache__/
 .venv
 venv
+src/llm/__pycache__/
+src/mapping/__pycache__/to_rdf.cpython-314.pyc
