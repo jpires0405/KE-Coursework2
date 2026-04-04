@@ -1,17 +1,30 @@
+from pathlib import Path
 from rdflib import Graph
 
-def merge_transport_graphs(file1, file2, output_file):
-    merged_kg = Graph()
+BASE_DIR = Path(__file__).resolve().parents[2]
 
-    print(f"Parsing {file1}")
-    merged_kg.parse(file1, format="turtle")
+def merge_graphs(files, output_file):
+    merged = Graph()
 
-    print(f"Parsing {file2}...")
-    merged_kg.parse(file2, format="turtle")
+    for file in files:
+        file_path = BASE_DIR / file
+        print(f"Parsing {file_path}")
 
-    print(f"Saving merged graph to {output_file}")
-    merged_kg.serialize(destination=output_file, format="turtle")
-    
+        with open(file_path, "rb") as f:
+            merged.parse(file=f, format="turtle")
+
+    output_path = BASE_DIR / output_file
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    print(f"Saving merged graph to {output_path}")
+    merged.serialize(destination=str(output_path), format="turtle")
     print("Merge complete!")
 
-merge_transport_graphs("data/kg/gtfs_kg.ttl", "data/kg/tfl_lines_kg.ttl", "data/kg/public_transport.ttl")
+
+if __name__ == "__main__":
+    files = [
+        "data/kg/gtfs_kg.ttl",
+        "data/kg/tfl_lines_kg.ttl",
+        "data/processed/llm_extracted_graph.ttl",
+    ]
+    merge_graphs(files, "data/kg/public_transport.ttl")
