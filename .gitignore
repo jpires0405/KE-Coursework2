@@ -16,3 +16,4 @@ src/llm/__pycache__/
 src/mapping/__pycache__/to_rdf.cpython-314.pyc
 src/llm/__pycache__/__init__.cpython-314.pyc
 src/llm/__pycache__/*
+src/llm/__pycache__/__init__.cpython-314.pyc
