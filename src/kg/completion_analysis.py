@@ -19,7 +19,7 @@ OUTPUT_PATH = BASE_DIR / "data" / "kg" / "completion_report.json"
 
 LT = Namespace("http://example.org/london-transport#")
 GTFS = Namespace("http://vocab.gtfs.org/terms#")
-SCHEMA = Namespace("http://schema.org/")
+SCHEMA = Namespace("https://schema.org/")
 
 
 def load_kg(path=KG_PATH):
@@ -351,7 +351,7 @@ INSTANCE_GAPS = [
             SELECT ?op ?name
             WHERE {
                 ?op a lt:TransportOperator .
-                OPTIONAL { ?op lt:name ?name }
+                OPTIONAL { ?op lt:operatorName ?name }
                 OPTIONAL { ?op rdfs:label ?label }
             }
             LIMIT 10
@@ -361,7 +361,7 @@ INSTANCE_GAPS = [
                    (SUM(IF(BOUND(?name), 1, 0)) AS ?with_name)
             WHERE {
                 ?op a lt:TransportOperator .
-                OPTIONAL { ?op lt:name ?name }
+                OPTIONAL { ?op lt:operatorName ?name }
             }
         """,
     },
@@ -395,7 +395,7 @@ INSTANCE_GAPS = [
                    (SUM(IF(BOUND(?name), 1, 0)) AS ?with_name)
             WHERE {
                 ?trip a gtfs:Trip .
-                OPTIONAL { ?trip lt:name ?name }
+                OPTIONAL { ?trip gtfs:headsign ?name }
             }
         """,
     },

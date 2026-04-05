@@ -83,7 +83,7 @@ def query_ollama(prompt, model=DEFAULT_MODEL):
         "stream": False,
         "options": {"temperature": 0.1, "num_predict": 2048},
     }
-    resp = requests.post(OLLAMA_URL, json=payload, timeout=120)
+    resp = requests.post(OLLAMA_URL, json=payload, timeout=300)
     resp.raise_for_status()
     return resp.json()["response"]
 
