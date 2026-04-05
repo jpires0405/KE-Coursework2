@@ -57,11 +57,11 @@ def build_ontology() -> Graph:
         g.bind(prefix, ns)
 
     # Classes from GTFS ontology
-    add_class(g, GTFS.Stop, "Stop", "A physical location passengers use for transport", LT.TransportEntity)
-    add_class(g, GTFS.Route, "Route", "A transit route representing a group of trips", LT.TransportEntity)
-    add_class(g, GTFS.Trip, "Trip", "A single journey along a route", LT.TransportEntity)    
-    add_class(g, GTFS.Service, "Service", "A set of trips operating on specific days", LT.TransportEntity)
-    add_class(g, GTFS.StopTime, "Stop Time", "Arrival and departure times at a stop for a trip", LT.TransportEntity)
+    add_class(g, GTFS.Stop, "gtfs:Stop", "A physical location passengers use for transport", SCHEMA.Place)
+    add_class(g, GTFS.Route, "gtfs:Route", "A transit route representing a group of trips")
+    add_class(g, GTFS.Trip, "gtfs:Trip", "A single journey along a route")    
+    add_class(g, GTFS.Service, "gtfs:Service", "A set of trips operating on specific days")
+    add_class(g, GTFS.StopTime, "gtfs:Stop Time", "Arrival and departure times at a stop for a trip")
 
     # Extend GTFS with subclasses
     add_class(g, LT.BusRoute, "Bus Route", "A route used by buses", GTFS.Route)
@@ -83,13 +83,11 @@ def build_ontology() -> Graph:
     add_datatype_property(g, LT.busRouteNumber, "Bus route number/name", "The specific identifier or number used to distinguish a London bus route", LT.BusRoute, XSD.string, GTFS.routeShortName)
 
     # Classes from Schema.org
-    add_class(g, SCHEMA.Place, "Place", "Schema.org Place")
-    add_class(g, SCHEMA.Organization, "Organization", "Schema.org Organization")
-    add_class(g, SCHEMA.BusStation, "Bus Station", "Schema.org Bus Station")
-    add_class(g, SCHEMA.TrainStation, "Train Station", "Schema.org Train Station")
+    add_class(g, SCHEMA.Place, "schema:Place", "Schema.org Place")
+    add_class(g, SCHEMA.Organization, "schema:Organization", "Schema.org Organization")
 
     # Extend Schema.org with subclasses
-    add_class(g, LT.TransportLine, "Transport Line", "A transport service line consisting of multiple routes", SCHEMA.Place)
+    add_class(g, LT.TransportLine, "Transport Line", "A transport service line consisting of multiple routes", LT.TransportEntity)
     add_class(g, LT.BusLine, "Bus Line", "A transport line operated by buses", LT.TransportLine)
     add_class(g, LT.TubeLine, "London Underground Line", "A transport line operating within the London Underground network", LT.TransportLine)
     add_class(g, LT.DLRLine, "DLR Line", "A transport line operating within the Docklands Light Railway system", LT.TransportLine)
@@ -102,7 +100,6 @@ def build_ontology() -> Graph:
 
     # Schema.org properties
     add_datatype_property(g, SCHEMA.name, "Name", "The name", range_=XSD.string)
-    add_object_property(g, SCHEMA.geo, "Geo coordinates", "The coordinates of the place")
     add_datatype_property(g, SCHEMA.url, "URL", "URL", range_=XSD.string)
 
     # Extend Schema.org with subproperties
@@ -116,16 +113,16 @@ def build_ontology() -> Graph:
 
     # Generic properties
     add_object_property(g, LT.relatedTo, "related to", "A general relationship between any two transport entities.")
-    add_object_property(g, LT.operatedBy, "operated by", "A route is operated by a transport operator", LT.Route, LT.TransportOperator, LT.relatedTo)
-    add_object_property(g, LT.hasRoute, "has route", "A transport line contains routes", LT.TransportLine, LT.Route, LT.relatedTo)
-    add_object_property(g, LT.hasStop, "has stop", "A route goes through specific stops", LT.Route, LT.Stop, LT.relatedTo)
-    add_object_property(g, LT.stopsAt, "stops at", "A stop time occurs at a specific stop", LT.StopTime, LT.Stop, LT.relatedTo)
-    add_object_property(g, LT.onTrip, "on trip", "A stop time is part of a trip", LT.StopTime, LT.Trip, LT.relatedTo)
-    add_object_property(g, LT.onRoute, "on route", "A trip is part of a route", LT.Trip, LT.Route, LT.relatedTo)
-    add_object_property(g, LT.belongsToService, "belongs to service", "A trip is associated with a service schedule", LT.Trip, LT.Service, LT.relatedTo)
-    add_object_property(g, LT.servesStation, "serves station", "Identifies a station served by a particular route or line", LT.Route, LT.TrainStation, LT.relatedTo)
-    add_object_property(g, LT.connectsTo, "connects to", "A stop is connected to another stop", LT.Stop, LT.Stop, parent=LT.relatedTo)
-    add_object_property(g, LT.locatedIn, "located in", "Specifies the geographic or administrative container of a place", LT.Stop, LT.Stop, parent=LT.relatedTo)
+    add_object_property(g, LT.operatedBy, "operated by", "A route is operated by a transport operator", GTFS.Route, LT.TransportOperator, LT.relatedTo)
+    add_object_property(g, LT.hasRoute, "has route", "A transport line contains routes", LT.TransportLine, GTFS.Route, LT.relatedTo)
+    add_object_property(g, LT.hasStop, "has stop", "A route goes through specific stops", GTFS.Route, GTFS.Stop, LT.relatedTo)
+    add_object_property(g, LT.stopsAt, "stops at", "A stop time occurs at a specific stop", GTFS.StopTime, GTFS.Stop, LT.relatedTo)
+    add_object_property(g, LT.onTrip, "on trip", "A stop time is part of a trip", GTFS.StopTime, GTFS.Trip, LT.relatedTo)
+    add_object_property(g, LT.onRoute, "on route", "A trip is part of a route", GTFS.Trip, GTFS.Route, LT.relatedTo)
+    add_object_property(g, LT.belongsToService, "belongs to service", "A trip is associated with a service schedule", GTFS.Trip, GTFS.Service, LT.relatedTo)
+    add_object_property(g, LT.servesStation, "serves station", "Identifies a station served by a particular route or line", GTFS.Route, LT.TrainStation, LT.relatedTo)
+    add_object_property(g, LT.connectsTo, "connects to", "A stop is connected to another stop", GTFS.Stop, GTFS.Stop, parent=LT.relatedTo)
+    add_object_property(g, LT.locatedIn, "located in", "Specifies the geographic or administrative container of a place", GTFS.Stop, GTFS.Stop, parent=LT.relatedTo)
     add_object_property(g, LT.mentionedInReport, "mentioned in report", "Links a transport entity to a report discussing its status", parent=LT.relatedTo)
     add_object_property(g, LT.aboutLine, "about line", "Links a report to the transport line it concerns", LT.Report, LT.TransportLine, LT.relatedTo)
     add_object_property(g, LT.servedBy, "served by", "Indicates the transport service that provides access to a location", parent=LT.relatedTo)
@@ -135,11 +132,11 @@ def build_ontology() -> Graph:
 
     add_datatype_property(g, LT.name, "name", "The name of a place or organisation", parent=LT.value)
     add_datatype_property(g, LT.description, "description", "A textual explanation providing additional details", parent=LT.value)
-    add_datatype_property(g, LT.routeNumber, "route number", "The identifier or number used to distinguish a bus route", LT.Route, XSD.string, LT.value)
-    add_datatype_property(g, LT.stopCode, "stop code", "A unique identifier assigned to a stop within the UK NaPTAN system", LT.Stop, XSD.string, LT.value)
-    add_datatype_property(g, LT.wheelchairAccessible, "wheelchair accessible", "Indicates whether a stop is accessible to wheelchair users", LT.Stop, XSD.boolean, LT.value)
-    add_datatype_property(g, LT.startDate, "start date", "The date on which a service begins operation", LT.Service, XSD.string, LT.value)
-    add_datatype_property(g, LT.endDate, "end date", "The date on which a service ceases operation", LT.Service, XSD.string, LT.value)
+    add_datatype_property(g, LT.routeNumber, "route number", "The identifier or number used to distinguish a bus route", GTFS.Route, XSD.string, LT.value)
+    add_datatype_property(g, LT.stopCode, "stop code", "A unique identifier assigned to a stop within the UK NaPTAN system", GTFS.Stop, XSD.string, LT.value)
+    add_datatype_property(g, LT.wheelchairAccessible, "wheelchair accessible", "Indicates whether a stop is accessible to wheelchair users", GTFS.Stop, XSD.boolean, LT.value)
+    add_datatype_property(g, LT.startDate, "start date", "The date on which a service begins operation", GTFS.Service, XSD.string, LT.value)
+    add_datatype_property(g, LT.endDate, "end date", "The date on which a service ceases operation", GTFS.Service, XSD.string, LT.value)
     add_datatype_property(g, LT.hasRidership, "has ridership", "Data regarding the number of passengers using a service", None, XSD.string, LT.value)
     add_datatype_property(g, LT.hasFrequency, "has frequency", "Information about how often a service runs", None, XSD.string, LT.value)
     add_datatype_property(g, LT.extendsTo, "extends to", "The geographic reach or terminal destination of a service", None, XSD.string, LT.value)
@@ -150,11 +147,11 @@ def build_ontology() -> Graph:
     add_datatype_property(g, LT.hasNightService, "has night service", "A flag indicating if a line operates during night hours", LT.TransportLine, XSD.boolean, LT.value)
 
     # Inverse Properties
-    add_object_property(g, LT.isStopOn, "is stop on", "Inverse property linking a stop to the routes it serves", LT.Stop, LT.Route, LT.relatedTo)
+    add_object_property(g, LT.isStopOn, "is stop on", "Inverse property linking a stop to the routes it serves", GTFS.Stop, GTFS.Route, LT.relatedTo)
     g.add((LT.hasStop, OWL.inverseOf, LT.isStopOn))
-    add_object_property(g, LT.hasTrip, "has trip", "Links a route to the journeys scheduled upon it", LT.Route, LT.Trip, LT.relatedTo)
+    add_object_property(g, LT.hasTrip, "has trip", "Links a route to the journeys scheduled upon it", GTFS.Route, GTFS.Trip, LT.relatedTo)
     g.add((LT.onRoute, OWL.inverseOf, LT.hasTrip))
-    add_object_property(g, LT.isServedBy, "is served by", "Inverse property linking a station to its calling routes", LT.TrainStation, LT.Route, LT.relatedTo)
+    add_object_property(g, LT.isServedBy, "is served by", "Inverse property linking a station to its calling routes", LT.TrainStation, GTFS.Route, LT.relatedTo)
     g.add((LT.servesStation, OWL.inverseOf, LT.isServedBy))
 
     # Symmetric Properties

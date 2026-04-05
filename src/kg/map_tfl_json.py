@@ -79,7 +79,7 @@ def map_tfl_lines(g, data):
         g.add((uri, RDF.type, cls))
 
         if line_name:
-            g.add((uri, LT.name, Literal(line_name)))
+            g.add((uri, LT.lineName, Literal(line_name)))
             g.add((uri, RDFS.label, Literal(line_name)))
 
         destinations = set(last_stops_data.get("Regular", []) + last_stops_data.get("Night", []))

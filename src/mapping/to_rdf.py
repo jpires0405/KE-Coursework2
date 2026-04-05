@@ -10,12 +10,14 @@ JSON_PATH = REPO_ROOT / "data" / "processed" / "llm_extractions.json"
 OUTPUT_PATH = REPO_ROOT / "data" / "processed" / "llm_extracted_graph.ttl"
 
 LT = Namespace("http://example.org/london-transport#")
+GTFS = Namespace("http://vocab.gtfs.org/terms#")
+SCHEMA = Namespace("https://schema.org/")
 
 ENTITY_CLASS_MAP = {
     "TransportOperator": LT.TransportOperator,
-    "Route": LT.Route,
+    "Route": GTFS.Route,
     "Station": LT.TrainStation,
-    "Place": LT.Place,
+    "Place": SCHEMA.Place,
     "Statistic": LT.Statistic,
 }
 

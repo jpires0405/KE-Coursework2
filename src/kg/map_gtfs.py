@@ -8,7 +8,7 @@ from src.processing.parse_gtfs import (
     parse_agencies, parse_stops, parse_routes, parse_trips,
     parse_calendar, parse_stop_times
 )
-from src.kg.ontology import build_ontology, LT
+from src.kg.ontology import build_ontology, LT, GTFS, SCHEMA
 
 
 def uri(prefix, local_id):
@@ -20,8 +20,10 @@ def map_agencies(g):
     agencies = parse_agencies()
     for a in agencies:
         agent = uri("agency", a["agency_id"])
+        if a.get("agency_url"):
+            g.add((agent, SCHEMA.url, Literal(a["agency_url"], datatype=XSD.string)))
         g.add((agent, RDF.type, LT.TransportOperator))
-        g.add((agent, LT.name, Literal(a["agency_name"])))
+        g.add((agent, LT.operatorName, Literal(a["agency_name"])))
         g.add((agent, RDFS.label, Literal(a["agency_name"])))
     print(f"  Mapped {len(agencies)} agencies")
     return g
@@ -39,11 +41,11 @@ def map_stops(g):
 
         g.add((stop, LT.name, Literal(s["stop_name"])))
         g.add((stop, RDFS.label, Literal(s["stop_name"])))
-        g.add((stop, LT.latitude, Literal(float(s["stop_lat"]), datatype=XSD.float)))
-        g.add((stop, LT.longitude, Literal(float(s["stop_lon"]), datatype=XSD.float)))
+        g.add((stop, GTFS.lat, Literal(float(s["stop_lat"]), datatype=XSD.float)))
+        g.add((stop, GTFS.long, Literal(float(s["stop_lon"]), datatype=XSD.float)))
 
         if s.get("stop_code"):
-            g.add((stop, LT.stopCode, Literal(s["stop_code"])))
+            g.add((stop, LT.naptanCode, Literal(s["stop_code"])))
 
         if s.get("parent_station"):
             parent_uri = uri("stop", s["parent_station"])
@@ -67,7 +69,10 @@ def map_routes(g):
             g.add((route, RDF.type, LT.TrainRoute))
 
         if r.get("route_short_name"):
-            g.add((route, LT.routeNumber, Literal(r["route_short_name"])))
+            if r.get("route_type") == "200":
+                g.add((route, LT.busRouteNumber, Literal(r["route_short_name"])))
+            else:
+                g.add((route, LT.routeNumber, Literal(r["route_short_name"])))
             g.add((route, LT.name, Literal(r["route_short_name"])))
 
         if r.get("route_long_name"):
@@ -88,7 +93,7 @@ def map_calendar(g):
     calendar = parse_calendar()
     for c in calendar:
         service = uri("service", c["service_id"])
-        g.add((service, RDF.type, LT.Service))
+        g.add((service, RDF.type, GTFS.Service))
 
         if c.get("start_date"):
             g.add((service, LT.startDate, Literal(c["start_date"])))
@@ -103,10 +108,10 @@ def map_trips(g, limit=10000):
     trips = parse_trips(limit=limit)
     for t in trips:
         trip = uri("trip", t["trip_id"][:16])
-        g.add((trip, RDF.type, LT.Trip))
+        g.add((trip, RDF.type, GTFS.Trip))
 
         if t.get("trip_headsign"):
-            g.add((trip, LT.name, Literal(t["trip_headsign"])))
+            g.add((trip, GTFS.headsign, Literal(t["trip_headsign"])))
             g.add((trip, RDFS.label, Literal(t["trip_headsign"])))
 
         route = uri("route", t["route_id"])
@@ -135,9 +140,9 @@ def map_stop_times(g, limit=50000):
 
     for st in stop_times:
         stop_time = uri("stoptime", f"{st['trip_id'][:16]}_{st['stop_sequence']}")
-        g.add((stop_time, RDF.type, LT.StopTime))
-        g.add((stop_time, LT.arrivalTime, Literal(st["arrival_time"])))
-        g.add((stop_time, LT.departureTime, Literal(st["departure_time"])))
+        g.add((stop_time, RDF.type, GTFS.StopTime))
+        g.add((stop_time, GTFS.arrivalTime, Literal(st["arrival_time"])))
+        g.add((stop_time, GTFS.departureTime, Literal(st["departure_time"])))
 
         stop = uri("stop", st["stop_id"])
         trip = uri("trip", st["trip_id"][:16])
