@@ -82,15 +82,14 @@ def build_ontology() -> Graph:
     add_datatype_property(g, LT.naptanCode, "NaPTAN stop code", "A unique identifier assigned to a stop within the UK NaPTAN system", GTFS.Stop, XSD.string, GTFS.stopName)
     add_datatype_property(g, LT.busRouteNumber, "Bus route number/name", "The specific identifier or number used to distinguish a London bus route", LT.BusRoute, XSD.string, GTFS.routeShortName)
 
-    # Core classes
-    add_class(g, LT.TransportEntity, "Transport Entity", "The root class for all London transport-related concepts.")
-    add_class(g, LT.TransportOperator, "Transport Operator", "An organisation responsible for operating transport services", LT.TransportEntity)
-    add_class(g, LT.TransportLine, "Transport Line", "A transport service line consisting of multiple routes", LT.TransportEntity)
-    add_class(g, LT.Place, "Place", "A physical location", LT.TransportEntity)
-    add_class(g, LT.Report, "Report", "A service update, incident report, or status announcement", LT.TransportEntity)
-    add_class(g, LT.Statistic, "Statistic", "Quantitative data regarding ridership, performance, or usage", LT.TransportEntity)
+    # Classes from Schema.org
+    add_class(g, SCHEMA.Place, "Place", "Schema.org Place")
+    add_class(g, SCHEMA.Organization, "Organization", "Schema.org Organization")
+    add_class(g, SCHEMA.BusStation, "Bus Station", "Schema.org Bus Station")
+    add_class(g, SCHEMA.TrainStation, "Train Station", "Schema.org Train Station")
 
-    # Richer subclasses
+    # Extend Schema.org with subclasses
+    add_class(g, LT.TransportLine, "Transport Line", "A transport service line consisting of multiple routes", SCHEMA.Place)
     add_class(g, LT.BusLine, "Bus Line", "A transport line operated by buses", LT.TransportLine)
     add_class(g, LT.TubeLine, "London Underground Line", "A transport line operating within the London Underground network", LT.TransportLine)
     add_class(g, LT.DLRLine, "DLR Line", "A transport line operating within the Docklands Light Railway system", LT.TransportLine)
@@ -99,7 +98,21 @@ def build_ontology() -> Graph:
     add_class(g, LT.TramLine, "Tram Line", "A transport line operated by trams", LT.TransportLine)
     add_class(g, LT.RiverBusLine, "River Bus Line", "A transport line operating on river services", LT.TransportLine)
     add_class(g, LT.NationalRailLine, "National Rail Line", "A rail line operating as part of the UK National Rail network", LT.TransportLine)
+    add_class(g, LT.TransportOperator, "Transport Operator", "An organisation responsible for operating transport services", SCHEMA.Organization)
 
+    # Schema.org properties
+    add_datatype_property(g, SCHEMA.name, "Name", "The name", range_=XSD.string)
+    add_object_property(g, SCHEMA.geo, "Geo coordinates", "The coordinates of the place")
+    add_datatype_property(g, SCHEMA.url, "URL", "URL", range_=XSD.string)
+
+    # Extend Schema.org with subproperties
+    add_datatype_property(g, LT.operatorName, "Operator trading name", "The trading name of a transport operator", LT.TransportOperator, XSD.string, SCHEMA.name)
+    add_datatype_property(g, LT.lineName, "Transport line name", "The specific name of a transport service line", LT.TransportLine, XSD.string, SCHEMA.name)
+
+    # Core classes
+    add_class(g, LT.TransportEntity, "Transport Entity", "The root class for all London transport-related concepts.")
+    add_class(g, LT.Report, "Report", "A service update, incident report, or status announcement", LT.TransportEntity)
+    add_class(g, LT.Statistic, "Statistic", "Quantitative data regarding ridership, performance, or usage", LT.TransportEntity)
 
     # Generic properties
     add_object_property(g, LT.relatedTo, "related to", "A general relationship between any two transport entities.")
