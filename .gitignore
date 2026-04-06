@@ -1,20 +1,23 @@
+# Environment & Virtual Environments
 .env
-data/raw/*.zip
-data/raw/*.pdf
-data/raw/london_gtfs/
-commands.txt
-.DS_Store
-data/.DS_Store
-data/raw/.DS_Store
-coursework 2 specification.pdf
-data/
-src/kg/__pycache__/
-src/processing/__pycache__/
 .venv
 venv
-src/llm/__pycache__/
-src/mapping/__pycache__/to_rdf.cpython-314.pyc
-src/llm/__pycache__/__init__.cpython-314.pyc
-src/llm/__pycache__/*
-src/llm/__pycache__/__init__.cpython-314.pyc
+
+# Python Cache & Build Artifacts
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS & Editor Files
+.DS_Store
+.vscode/
+.idea/
+
+# Data & Large Files
+data/
+
+# Documentation & Temporary Files
 CLAUDE.md
+commands.txt
+coursework 2 specification.pdf
