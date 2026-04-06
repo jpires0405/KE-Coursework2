@@ -139,3 +139,112 @@ Generate valid OWL/RDF Turtle that resolves all 8 gaps. Your output must:
 The RAG approach here directly satisfies the KG completion requirement: rather than manually authoring the missing triples, the LLM is given authoritative context (the ontology source) and asked to reason about the gaps. This is documented as an LLM-assisted completion step with traceable inputs (the ontology file) and a deterministic low-temperature setting (0.1) to ensure reproducible output.
 
 ---
+
+## KE Task 4 — LLM-Augmented Competency Question Generation (CQ11–CQ20)
+
+**Task:** Generate 10 LLM-augmented Competency Questions that complement the 10 manually authored CQs, targeting deeper domain insights and cross-referencing GTFS structured data with TfL Annual Report text.
+
+**Date:** 2026-04-06
+
+**Script:** `src/llm/generate_augmented_cqs.py`
+**Model:** Groq — `llama-3.3-70b-versatile`
+**Output:** Appended CQ11–CQ20 to `docs/requirements.md`
+
+---
+
+### System Prompt
+
+```
+You are an expert Knowledge Engineer specialising in public transport ontologies and SPARQL-queryable Knowledge Graphs.
+You have deep familiarity with the London transport network — including TfL's bus, Tube, Overground, DLR, Elizabeth line,
+Tram, and River Bus services — and with the GTFS data standard (routes, stops, trips, stop_times, services, agencies).
+Your task is to generate Competency Questions (CQs) that are precise, non-trivial, and directly answerable by a SPARQL query
+over a Knowledge Graph built from two sources: (1) structured GTFS schedule data and (2) unstructured text from the TfL Annual Report 2024/25.
+```
+
+### User Prompt
+
+```
+## Context
+
+We are building a London Transport Knowledge Graph (KG) that combines two data sources:
+- Structured source: London GTFS feed (routes, stops, trips, stop_times, calendar, agencies)
+- Unstructured source: TfL Annual Report 2024/25 (LLM-extracted entities: lines, stations, operators, ridership statistics, projects)
+
+The ontology uses the `lt:` namespace with classes including:
+lt:TransportOperator, lt:TransportLine (and subclasses: lt:TubeLine, lt:DLRLine, lt:OvergroundLine,
+lt:ElizabethLine, lt:BusLine, lt:TramLine, lt:RiverBusLine), lt:Route, lt:BusRoute, lt:TrainRoute,
+lt:Stop, lt:BusStop, lt:TrainStation, lt:Service, lt:Trip, lt:StopTime, lt:Place, lt:Report.
+
+Key properties include: lt:operatedBy, lt:hasRoute, lt:hasStop, lt:onRoute, lt:belongsToService,
+lt:stopsAt, lt:connectsTo, lt:servesStation, lt:mentionedInReport, lt:wheelchairAccessible,
+lt:latitude, lt:longitude, lt:stopCode, lt:routeNumber, lt:startDate, lt:endDate,
+lt:arrivalTime, lt:departureTime, lt:hasRidership, lt:hasFrequency, lt:lineColour.
+
+## Already-authored Manual CQs (DO NOT repeat or closely paraphrase these)
+
+CQ1:  What transport operators are in this ontology?
+CQ2:  What are the names of all tube lines available?
+CQ3:  Which stations are served by the Piccadilly line?
+CQ4:  Which bus routes are operated by 'National Express'?
+CQ5:  Which stops are located in Wandsworth?
+CQ6:  What are the operational dates for 'Service 33'?
+CQ7:  Which routes are mentioned in the TfL Annual Report?
+CQ8:  What are the coordinates of 'Plaistow Green'?
+CQ9:  Which stops are wheelchair accessible?
+CQ10: Which lines have night service?
+
+## Task
+
+Generate exactly 10 new Competency Questions (CQ11–CQ20) that:
+
+1. Complement the manual CQs above — do not repeat or trivially rephrase them.
+2. Target deeper domain insights — e.g. multi-hop queries, aggregations, comparisons across lines or operators.
+3. At least 3 questions must require cross-referencing both data sources — combining GTFS schedule facts with entities
+   or statistics mentioned in the TfL Annual Report (use lt:mentionedInReport or lt:hasRidership/lt:hasFrequency).
+4. At least 2 questions must involve accessibility or interchange (lt:wheelchairAccessible, lt:Interchange,
+   or multi-modal connections).
+5. Questions must be answerable by SPARQL over the KG — avoid questions that require free-text reasoning.
+6. Write each question as a clear, natural-language sentence ending with a question mark.
+
+## Output Format
+
+Return ONLY a numbered list of 10 questions in this exact format:
+CQ11: <question text>
+...
+CQ20: <question text>
+No preamble, no explanation, no commentary.
+```
+
+---
+
+### Prompt Design Justification
+
+**Why these constraints produce complementary CQs:**
+
+The manual CQs (CQ1–CQ10) are deliberately basic — single-class lookups, single-property filters, and one identifier-resolution query (CQ8). They validate that the KG's core instances are correctly typed and labelled.
+
+The LLM prompt is designed to force a different register of question by imposing three hard constraints:
+
+1. **"Do not repeat or paraphrase"** — the LLM is shown all 10 manual CQs explicitly, preventing it from generating near-duplicates.
+2. **"At least 3 cross-source questions"** — this directly targets the coursework requirement to demonstrate value from combining GTFS structured data with TfL Annual Report unstructured text. Questions requiring both `lt:mentionedInReport` and GTFS properties (e.g. frequency, ridership) can only be answered by a KG that integrates both pipelines — they cannot be answered by either source alone.
+3. **"At least 2 accessibility/interchange questions"** — these probe the RAG-completed ontology extensions (`lt:Interchange`, `lt:AccessibilityFeature`) and verify that completion step added usable knowledge.
+
+The temperature is set to 0.4 (higher than the ontology completion script) to encourage lexical diversity in the questions while keeping them factual and SPARQL-compatible.
+
+### Generated CQs (CQ11–CQ20)
+
+| ID | Question |
+|----|----------|
+| CQ11 | What are the most frequently served stations by bus routes operated by Transport for London? |
+| CQ12 | Which tube lines have the highest average ridership during peak hours, according to the TfL Annual Report? |
+| CQ13 | What are the names of all train stations that are wheelchair accessible and have a direct connection to the Elizabeth line? |
+| CQ14 | Which bus routes have the highest frequency of service and are mentioned in the TfL Annual Report as having improved reliability? |
+| CQ15 | What are the coordinates of all stops that are within a 1km radius of a wheelchair accessible train station on the Overground line? |
+| CQ16 | Which transport operators have the most routes with night service, and what are the corresponding route numbers? |
+| CQ17 | What is the total number of bus stops that are served by routes operated by multiple transport operators, and which operators are they? |
+| CQ18 | Which tram lines have the lowest average ridership during off-peak hours, according to the TfL Annual Report, and what are their corresponding line colours? |
+| CQ19 | What are the names of all places that are served by both a river bus line and a train line, and what are the nearest stops for each mode of transport? |
+| CQ20 | Which train stations have the most interchanges with other transport lines, and what are the corresponding line names and colours? |
+
+---
