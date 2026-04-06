@@ -1,5 +1,6 @@
 """
-RAG-based KG completion — retrieves context from the TfL report to fill
+RAG-based KG completion
+Retrieves context from the TfL report to fill
 gaps identified by the completion analysis.
 """
 
@@ -186,7 +187,7 @@ def complete_stop_locations(g, pages, model, log):
     qres = g.query("""
         SELECT ?stop ?name WHERE {
             ?stop a lt:TrainStation .
-            { ?stop gtfs:stopName ?name } UNION { ?stop lt:name ?name }
+            ?stop lt:name ?name
             FILTER NOT EXISTS { ?stop lt:locatedIn ?place }
         } LIMIT 50
     """, initNs={"lt": LT, "gtfs": GTFS})
@@ -274,7 +275,7 @@ def complete_entity_links(g, pages, model, log):
     qres2 = g.query("""
         SELECT ?route ?name WHERE {
             { ?route a lt:TrainRoute } UNION { ?route a lt:BusRoute }
-            { ?route gtfs:routeShortName ?name } UNION { ?route lt:name ?name }
+            ?route lt:name ?name
         } LIMIT 200
     """, initNs={"lt": LT, "gtfs": GTFS})
     routes = [(str(r[0]), str(r[1])) for r in qres2]
@@ -347,7 +348,7 @@ def complete_operator_names(g, pages, model, log):
         SELECT ?op ?label WHERE {
             ?op a lt:TransportOperator .
             OPTIONAL { ?op rdfs:label ?label }
-            FILTER NOT EXISTS { ?op lt:name ?name }
+            FILTER NOT EXISTS { ?op lt:operatorName ?name }
         } LIMIT 30
     """, initNs={"lt": LT, "rdfs": RDFS})
     operators = [(str(r[0]), str(r[1]) if r[1] else None) for r in qres]
@@ -360,7 +361,7 @@ def complete_operator_names(g, pages, model, log):
     triples_added = 0
     for op_uri, label in operators:
         if label:
-            g.add((URIRef(op_uri), LT.name, Literal(label)))
+            g.add((URIRef(op_uri), LT.operatorName, Literal(label)))
             triples_added += 1
 
     # For those still without, try RAG
@@ -401,7 +402,7 @@ Only return the JSON array, no other text.
                     continue
                 for uri, _ in still_missing:
                     if op_id in uri:
-                        g.add((URIRef(uri), LT.name, Literal(name)))
+                        g.add((URIRef(uri), LT.operatorName, Literal(name)))
                         g.add((URIRef(uri), RDFS.label, Literal(name)))
                         triples_added += 1
 
@@ -422,11 +423,11 @@ def complete_trip_headsigns(g, pages, model, log):
         SELECT ?trip ?routeName ?stopName WHERE {
             ?trip a gtfs:Trip .
             ?trip lt:onRoute ?route .
-            { ?route gtfs:routeShortName ?routeName } UNION { ?route lt:name ?routeName }
+            ?route lt:name ?routeName
             OPTIONAL {
                 ?st lt:onTrip ?trip .
                 ?st lt:stopsAt ?stop .
-                { ?stop gtfs:stopName ?stopName } UNION { ?stop lt:name ?stopName }
+                ?stop lt:name ?stopName
             }
             FILTER NOT EXISTS { ?trip lt:name ?name }
             FILTER NOT EXISTS { ?trip rdfs:label ?lbl }
@@ -510,29 +511,85 @@ Only return the JSON array, no other text.
     })
 
 
-def complete_route_stops(g, pages, model, log):
-    """I6: Derive hasStop links from StopTime → Trip → Route chain."""
-    print("\n--- [I6] Deriving Route hasStop links ---")
+def complete_line_routes(g, pages, model, log):
+    """I6: Link TransportLine instances to GTFS Route instances via hasRoute."""
+    print("\n--- [I6] Linking TransportLines to GTFS Routes ---")
 
-    # This one doesn't need the LLM — it's a SPARQL CONSTRUCT from existing data
+    # Get TransportLine names
     qres = g.query("""
-        SELECT DISTINCT ?route ?stop WHERE {
-            ?st a gtfs:StopTime .
-            ?st lt:onTrip ?trip .
-            ?trip lt:onRoute ?route .
-            ?st lt:stopsAt ?stop .
-        } LIMIT 5000
-    """, initNs={"lt": LT, "gtfs": GTFS})
+        SELECT ?line ?name WHERE {
+            ?line a lt:TransportLine .
+            ?line lt:lineName ?name .
+            FILTER NOT EXISTS { ?line lt:hasRoute ?route }
+        } LIMIT 50
+    """, initNs={"lt": LT})
+    lines = [(str(r[0]), str(r[1])) for r in qres]
+
+    # Get Route names
+    qres2 = g.query("""
+        SELECT ?route ?name WHERE {
+            { ?route a lt:TrainRoute } UNION { ?route a lt:BusRoute }
+            ?route lt:name ?name .
+        } LIMIT 200
+    """, initNs={"lt": LT})
+    routes = [(str(r[0]), str(r[1])) for r in qres2]
+
+    if not lines or not routes:
+        print("  No lines or routes to link — skipping")
+        return
+
+    line_names = [name for _, name in lines[:30]]
+    route_names = [name for _, name in routes[:100]]
+
+    prompt = f"""You are linking entities in a London transport knowledge graph.
+
+These are TransportLine instances (from TfL API) with no route links:
+{json.dumps(line_names[:30], indent=2)}
+
+These are GTFS Route names already in the knowledge graph:
+{json.dumps(route_names[:100], indent=2)}
+
+Match each TransportLine to the GTFS routes that belong to it.
+For example, line "Northern" should match routes containing "Northern" in their name.
+Bus lines with number names (e.g. "24") should match routes with the same number.
+
+Return a JSON array with "line_name" and "matching_routes" (list of route names).
+Only return the JSON array, no other text.
+"""
+
+    print(f"  Querying LLM to match {len(line_names)} lines to {len(route_names)} routes...")
+    raw = query_ollama(prompt, model)
+    results = parse_json_response(raw)
 
     triples_added = 0
-    for row in qres:
-        g.add((URIRef(str(row[0])), LT.hasStop, URIRef(str(row[1]))))
-        triples_added += 1
+    if results and isinstance(results, list):
+        for item in results:
+            lname = item.get("line_name", "")
+            matching = item.get("matching_routes", [])
+            if not lname or not matching:
+                continue
+            line_uri = None
+            for uri, name in lines:
+                if name.lower() == lname.lower() or lname.lower() in name.lower():
+                    line_uri = URIRef(uri)
+                    break
+            if not line_uri:
+                continue
+            for route_name in matching:
+                if not isinstance(route_name, str):
+                    continue
+                for route_uri, rname in routes:
+                    if rname.lower() == route_name.lower() or route_name.lower() in rname.lower():
+                        g.add((line_uri, LT.hasRoute, URIRef(route_uri)))
+                        triples_added += 1
+                        break
 
-    print(f"  Derived {triples_added} hasStop triples from StopTime data")
+    print(f"  Added {triples_added} hasRoute link triples")
     log.append({
-        "gap": "I6", "task": "Route hasStop derivation",
+        "gap": "I6", "task": "TransportLine-Route linking",
         "triples_added": triples_added,
+        "lines_queried": len(line_names),
+        "routes_available": len(route_names),
     })
 
 
@@ -567,7 +624,7 @@ def complete_tube_stations(g, pages, model, log):
     qres2 = g.query("""
         SELECT ?station ?name WHERE {
             ?station a lt:TrainStation .
-            { ?station gtfs:stopName ?name } UNION { ?station lt:name ?name }
+            ?station lt:name ?name
         } LIMIT 200
     """, initNs={"lt": LT, "gtfs": GTFS})
     stations = [(str(r[0]), str(r[1])) for r in qres2]
@@ -688,7 +745,7 @@ Example:
     qres = g.query("""
         SELECT ?station ?name WHERE {
             ?station a lt:TrainStation .
-            { ?station gtfs:stopName ?name } UNION { ?station lt:name ?name }
+            ?station lt:name ?name
         }
     """, initNs={"lt": LT, "gtfs": GTFS})
     station_lookup = {}
@@ -724,7 +781,6 @@ Example:
     })
 
 
-# Ontology completion — add missing classes and properties
 def complete_ontology(g, log):
     """Add the 8 missing ontology elements identified in the analysis."""
     print("\n--- Completing ontology gaps ---")
@@ -809,7 +865,6 @@ def complete_ontology(g, log):
     })
 
 
-# Main
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="RAG-based KG completion")
@@ -825,7 +880,6 @@ def main():
 
     log = []
 
-    # Always run ontology completion 
     complete_ontology(g, log)
 
     if not args.skip_llm:
@@ -842,7 +896,7 @@ def main():
         complete_entity_links(g, pages, args.model, log)
         complete_operator_names(g, pages, args.model, log)
         complete_trip_headsigns(g, pages, args.model, log)
-        complete_route_stops(g, pages, args.model, log)
+        complete_line_routes(g, pages, args.model, log)
         complete_tube_stations(g, pages, args.model, log)
         complete_accessibility(g, pages, args.model, log)
 
