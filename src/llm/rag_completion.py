@@ -1,5 +1,6 @@
 """
-RAG-based KG completion — retrieves context from the TfL report to fill
+RAG-based KG completion
+Retrieves context from the TfL report to fill
 gaps identified by the completion analysis.
 """
 
@@ -780,7 +781,6 @@ Example:
     })
 
 
-# Ontology completion — add missing classes and properties
 def complete_ontology(g, log):
     """Add the 8 missing ontology elements identified in the analysis."""
     print("\n--- Completing ontology gaps ---")
@@ -865,7 +865,6 @@ def complete_ontology(g, log):
     })
 
 
-# Main
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="RAG-based KG completion")
@@ -881,7 +880,6 @@ def main():
 
     log = []
 
-    # Always run ontology completion 
     complete_ontology(g, log)
 
     if not args.skip_llm:
