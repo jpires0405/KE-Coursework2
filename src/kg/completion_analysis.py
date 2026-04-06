@@ -282,7 +282,7 @@ INSTANCE_GAPS = [
             SELECT ?stop ?name ?lat ?lon
             WHERE {
                 { ?stop a lt:BusStop } UNION { ?stop a lt:TrainStation }
-                { ?stop gtfs:stopName ?name } UNION { ?stop lt:name ?name }
+                ?stop lt:name ?name .
                 ?stop gtfs:lat ?lat .
                 ?stop gtfs:long ?lon .
                 FILTER NOT EXISTS { ?stop lt:locatedIn ?place }
@@ -401,33 +401,34 @@ INSTANCE_GAPS = [
     },
     {
         "id": "I6",
-        "title": "Routes have zero hasStop links to stops",
+        "title": "TransportLine instances have no hasRoute links to GTFS Routes",
         "description": (
-            "The ontology defines lt:hasStop (Route → Stop), but none of "
-            "the 1,102 route instances actually link to any stop. The only "
-            "route-stop connection is indirect: Route ← Trip ← StopTime → Stop, "
-            "which is expensive to traverse and misses a direct relationship."
+            "704 TransportLine instances (from TfL JSON) and 1,102 Route "
+            "instances (from GTFS) exist as separate, unlinked nodes. The "
+            "ontology defines lt:hasRoute (TransportLine → Route) but no "
+            "instances use it. It is impossible to navigate from a named "
+            "line like 'Northern' to its actual GTFS route schedules."
         ),
         "resolution": (
-            "Derive hasStop links by aggregating StopTime data: for each "
-            "route, collect all stops reachable via its trips' stop times, "
-            "then add direct lt:hasStop triples."
+            "Use RAG: query KG for TransportLines and Routes, use the LLM "
+            "to match line names to route names/numbers, then add "
+            "lt:hasRoute links between them."
         ),
         "query": """
-            SELECT ?route ?name
+            SELECT ?line ?name
             WHERE {
-                { ?route a lt:BusRoute } UNION { ?route a lt:TrainRoute }
-                { ?route gtfs:routeShortName ?name } UNION { ?route lt:name ?name }
-                FILTER NOT EXISTS { ?route lt:hasStop ?stop }
+                ?line a lt:TransportLine .
+                ?line lt:lineName ?name .
+                FILTER NOT EXISTS { ?line lt:hasRoute ?route }
             }
             LIMIT 10
         """,
         "count_query": """
-            SELECT (COUNT(?route) AS ?total)
-                   (SUM(IF(BOUND(?stop), 1, 0)) AS ?with_stop)
+            SELECT (COUNT(?line) AS ?total)
+                   (SUM(IF(BOUND(?route), 1, 0)) AS ?with_route)
             WHERE {
-                { ?route a lt:BusRoute } UNION { ?route a lt:TrainRoute }
-                OPTIONAL { ?route lt:hasStop ?stop }
+                ?line a lt:TransportLine .
+                OPTIONAL { ?line lt:hasRoute ?route }
             }
         """,
     },
