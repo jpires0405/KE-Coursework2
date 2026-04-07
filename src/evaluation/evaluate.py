@@ -15,8 +15,10 @@ import argparse
 import time
 import tracemalloc
 from pathlib import Path
+import re
+from collections import Counter
 
-from rdflib import Graph
+from rdflib import Graph, RDF
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_KG = REPO_ROOT / "data" / "kg" / "final_submission_kg.ttl"
@@ -39,12 +41,21 @@ def evaluate(kg_path: Path) -> dict:
     _, peak_bytes = tracemalloc.get_traced_memory()
     tracemalloc.stop()
 
+    type_counters = Counter(g.objects(None, RDF.type))
+
+    class_dist = {}
+    for i, count in type_counters.items():
+        name = str(re.split(r"[#/]", i)[-1])
+        class_dist[name] = count
+    sorted_dict = sorted(class_dist.items(), key=lambda x: x[1], reverse=True)
+
     return {
         "kg_file":        str(kg_path),
         "file_size_mb":   round(file_size_mb, 2),
         "parse_time_s":   round(t_end - t_start, 3),
         "peak_memory_mb": round(peak_bytes / (1024 ** 2), 2),
         "total_triples":  len(g),
+        "class_distribution": dict(sorted_dict)
     }
 
 
@@ -58,6 +69,10 @@ def print_report(results: dict) -> None:
     print(f"  Parse time      : {results['parse_time_s']} s")
     print(f"  Peak memory     : {results['peak_memory_mb']} MB")
     print(f"  Total triples   : {results['total_triples']:,}")
+    print(f"\n  Class Distribution:")
+
+    for i, count in results["class_distribution"].items():
+        print(f"  {i}: {count}")
     print(sep)
 
 
