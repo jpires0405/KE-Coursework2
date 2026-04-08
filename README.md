@@ -560,7 +560,7 @@ KE-Coursework2/
 - `rdflib` — RDF graph library for building, querying, and serialising the KG
 - `requests` — HTTP requests for data downloads
 - `pdfplumber` — PDF text extraction
-- `dotenv` — environment variable loading
+- `python-dotenv` — environment variable loading from `.env` files
 
 ### Additional install
 - `groq` — Groq Python client (`pip install groq`), required for Steps 9–12
