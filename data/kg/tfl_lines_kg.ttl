@@ -1,0 +1,3070 @@
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix lt: <http://example.org/london-transport#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+lt:BusLine a owl:Class ;
+    rdfs:label "Bus Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+lt:BusStop a owl:Class ;
+    rdfs:label "Bus Stop" ;
+    rdfs:subClassOf gtfs:Stop .
+
+lt:TrainRoute a owl:Class ;
+    rdfs:label "Train Route" ;
+    rdfs:subClassOf gtfs:Route .
+
+lt:TrainStation a owl:Class ;
+    rdfs:label "Train Station" ;
+    rdfs:subClassOf gtfs:Stop .
+
+lt:belongsToService a owl:ObjectProperty ;
+    rdfs:label "belongs to service" ;
+    rdfs:domain gtfs:Trip ;
+    rdfs:range gtfs:Service .
+
+lt:busRouteNumber a owl:DatatypeProperty ;
+    rdfs:label "Bus route number/name" ;
+    rdfs:domain lt:BusRoute ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf gtfs:routeShortName .
+
+lt:hasRoute a owl:ObjectProperty ;
+    rdfs:label "has route" ;
+    rdfs:domain lt:TransportLine ;
+    rdfs:range gtfs:Route .
+
+lt:hasStop a owl:ObjectProperty ;
+    rdfs:label "has stop" ;
+    rdfs:domain gtfs:Route ;
+    rdfs:range gtfs:Stop .
+
+lt:lineName a owl:DatatypeProperty ;
+    rdfs:label "Transport line name" ;
+    rdfs:domain lt:TransportLine ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf schema1:name .
+
+lt:line_1 a lt:TransportLine ;
+    rdfs:label "1" ;
+    lt:lineName "1" .
+
+lt:line_100 a lt:TransportLine ;
+    rdfs:label "100" ;
+    lt:lineName "100" .
+
+lt:line_101 a lt:TransportLine ;
+    rdfs:label "101" ;
+    lt:lineName "101" .
+
+lt:line_102 a lt:TransportLine ;
+    rdfs:label "102" ;
+    lt:lineName "102" .
+
+lt:line_103 a lt:TransportLine ;
+    rdfs:label "103" ;
+    lt:lineName "103" .
+
+lt:line_104 a lt:TransportLine ;
+    rdfs:label "104" ;
+    lt:lineName "104" .
+
+lt:line_105 a lt:TransportLine ;
+    rdfs:label "105" ;
+    lt:lineName "105" .
+
+lt:line_106 a lt:TransportLine ;
+    rdfs:label "106" ;
+    lt:lineName "106" .
+
+lt:line_107 a lt:TransportLine ;
+    rdfs:label "107" ;
+    lt:lineName "107" .
+
+lt:line_108 a lt:TransportLine ;
+    rdfs:label "108" ;
+    lt:lineName "108" .
+
+lt:line_109 a lt:TransportLine ;
+    rdfs:label "109" ;
+    lt:lineName "109" .
+
+lt:line_11 a lt:TransportLine ;
+    rdfs:label "11" ;
+    lt:lineName "11" .
+
+lt:line_110 a lt:TransportLine ;
+    rdfs:label "110" ;
+    lt:lineName "110" .
+
+lt:line_111 a lt:TransportLine ;
+    rdfs:label "111" ;
+    lt:lineName "111" .
+
+lt:line_112 a lt:TransportLine ;
+    rdfs:label "112" ;
+    lt:lineName "112" .
+
+lt:line_113 a lt:TransportLine ;
+    rdfs:label "113" ;
+    lt:lineName "113" .
+
+lt:line_114 a lt:TransportLine ;
+    rdfs:label "114" ;
+    lt:lineName "114" .
+
+lt:line_115 a lt:TransportLine ;
+    rdfs:label "115" ;
+    lt:lineName "115" .
+
+lt:line_116 a lt:TransportLine ;
+    rdfs:label "116" ;
+    lt:lineName "116" .
+
+lt:line_117 a lt:TransportLine ;
+    rdfs:label "117" ;
+    lt:lineName "117" .
+
+lt:line_119 a lt:TransportLine ;
+    rdfs:label "119" ;
+    lt:lineName "119" .
+
+lt:line_12 a lt:TransportLine ;
+    rdfs:label "12" ;
+    lt:lineName "12" .
+
+lt:line_120 a lt:TransportLine ;
+    rdfs:label "120" ;
+    lt:lineName "120" .
+
+lt:line_121 a lt:TransportLine ;
+    rdfs:label "121" ;
+    lt:lineName "121" .
+
+lt:line_122 a lt:TransportLine ;
+    rdfs:label "122" ;
+    lt:lineName "122" .
+
+lt:line_123 a lt:TransportLine ;
+    rdfs:label "123" ;
+    lt:lineName "123" .
+
+lt:line_124 a lt:TransportLine ;
+    rdfs:label "124" ;
+    lt:lineName "124" .
+
+lt:line_125 a lt:TransportLine ;
+    rdfs:label "125" ;
+    lt:lineName "125" .
+
+lt:line_126 a lt:TransportLine ;
+    rdfs:label "126" ;
+    lt:lineName "126" .
+
+lt:line_127 a lt:TransportLine ;
+    rdfs:label "127" ;
+    lt:lineName "127" .
+
+lt:line_128 a lt:TransportLine ;
+    rdfs:label "128" ;
+    lt:lineName "128" .
+
+lt:line_129 a lt:TransportLine ;
+    rdfs:label "129" ;
+    lt:lineName "129" .
+
+lt:line_13 a lt:TransportLine ;
+    rdfs:label "13" ;
+    lt:lineName "13" .
+
+lt:line_130 a lt:TransportLine ;
+    rdfs:label "130" ;
+    lt:lineName "130" .
+
+lt:line_131 a lt:TransportLine ;
+    rdfs:label "131" ;
+    lt:lineName "131" .
+
+lt:line_132 a lt:TransportLine ;
+    rdfs:label "132" ;
+    lt:lineName "132" .
+
+lt:line_133 a lt:TransportLine ;
+    rdfs:label "133" ;
+    lt:lineName "133" .
+
+lt:line_134 a lt:TransportLine ;
+    rdfs:label "134" ;
+    lt:lineName "134" .
+
+lt:line_135 a lt:TransportLine ;
+    rdfs:label "135" ;
+    lt:lineName "135" .
+
+lt:line_136 a lt:TransportLine ;
+    rdfs:label "136" ;
+    lt:lineName "136" .
+
+lt:line_137 a lt:TransportLine ;
+    rdfs:label "137" ;
+    lt:lineName "137" .
+
+lt:line_138 a lt:TransportLine ;
+    rdfs:label "138" ;
+    lt:lineName "138" .
+
+lt:line_139 a lt:TransportLine ;
+    rdfs:label "139" ;
+    lt:lineName "139" .
+
+lt:line_14 a lt:TransportLine ;
+    rdfs:label "14" ;
+    lt:lineName "14" .
+
+lt:line_140 a lt:TransportLine ;
+    rdfs:label "140" ;
+    lt:lineName "140" .
+
+lt:line_141 a lt:TransportLine ;
+    rdfs:label "141" ;
+    lt:lineName "141" .
+
+lt:line_142 a lt:TransportLine ;
+    rdfs:label "142" ;
+    lt:lineName "142" .
+
+lt:line_143 a lt:TransportLine ;
+    rdfs:label "143" ;
+    lt:lineName "143" .
+
+lt:line_144 a lt:TransportLine ;
+    rdfs:label "144" ;
+    lt:lineName "144" .
+
+lt:line_145 a lt:TransportLine ;
+    rdfs:label "145" ;
+    lt:lineName "145" .
+
+lt:line_146 a lt:TransportLine ;
+    rdfs:label "146" ;
+    lt:lineName "146" .
+
+lt:line_147 a lt:TransportLine ;
+    rdfs:label "147" ;
+    lt:lineName "147" .
+
+lt:line_148 a lt:TransportLine ;
+    rdfs:label "148" ;
+    lt:lineName "148" .
+
+lt:line_149 a lt:TransportLine ;
+    rdfs:label "149" ;
+    lt:lineName "149" .
+
+lt:line_15 a lt:TransportLine ;
+    rdfs:label "15" ;
+    lt:lineName "15" .
+
+lt:line_150 a lt:TransportLine ;
+    rdfs:label "150" ;
+    lt:lineName "150" .
+
+lt:line_151 a lt:TransportLine ;
+    rdfs:label "151" ;
+    lt:lineName "151" .
+
+lt:line_152 a lt:TransportLine ;
+    rdfs:label "152" ;
+    lt:lineName "152" .
+
+lt:line_153 a lt:TransportLine ;
+    rdfs:label "153" ;
+    lt:lineName "153" .
+
+lt:line_154 a lt:TransportLine ;
+    rdfs:label "154" ;
+    lt:lineName "154" .
+
+lt:line_155 a lt:TransportLine ;
+    rdfs:label "155" ;
+    lt:lineName "155" .
+
+lt:line_156 a lt:TransportLine ;
+    rdfs:label "156" ;
+    lt:lineName "156" .
+
+lt:line_157 a lt:TransportLine ;
+    rdfs:label "157" ;
+    lt:lineName "157" .
+
+lt:line_158 a lt:TransportLine ;
+    rdfs:label "158" ;
+    lt:lineName "158" .
+
+lt:line_159 a lt:TransportLine ;
+    rdfs:label "159" ;
+    lt:lineName "159" .
+
+lt:line_16 a lt:TransportLine ;
+    rdfs:label "16" ;
+    lt:lineName "16" .
+
+lt:line_160 a lt:TransportLine ;
+    rdfs:label "160" ;
+    lt:lineName "160" .
+
+lt:line_161 a lt:TransportLine ;
+    rdfs:label "161" ;
+    lt:lineName "161" .
+
+lt:line_162 a lt:TransportLine ;
+    rdfs:label "162" ;
+    lt:lineName "162" .
+
+lt:line_163 a lt:TransportLine ;
+    rdfs:label "163" ;
+    lt:lineName "163" .
+
+lt:line_164 a lt:TransportLine ;
+    rdfs:label "164" ;
+    lt:lineName "164" .
+
+lt:line_165 a lt:TransportLine ;
+    rdfs:label "165" ;
+    lt:lineName "165" .
+
+lt:line_166 a lt:TransportLine ;
+    rdfs:label "166" ;
+    lt:lineName "166" .
+
+lt:line_167 a lt:TransportLine ;
+    rdfs:label "167" ;
+    lt:lineName "167" .
+
+lt:line_169 a lt:TransportLine ;
+    rdfs:label "169" ;
+    lt:lineName "169" .
+
+lt:line_17 a lt:TransportLine ;
+    rdfs:label "17" ;
+    lt:lineName "17" .
+
+lt:line_170 a lt:TransportLine ;
+    rdfs:label "170" ;
+    lt:lineName "170" .
+
+lt:line_171 a lt:TransportLine ;
+    rdfs:label "171" ;
+    lt:lineName "171" .
+
+lt:line_172 a lt:TransportLine ;
+    rdfs:label "172" ;
+    lt:lineName "172" .
+
+lt:line_173 a lt:TransportLine ;
+    rdfs:label "173" ;
+    lt:lineName "173" .
+
+lt:line_174 a lt:TransportLine ;
+    rdfs:label "174" ;
+    lt:lineName "174" .
+
+lt:line_175 a lt:TransportLine ;
+    rdfs:label "175" ;
+    lt:lineName "175" .
+
+lt:line_176 a lt:TransportLine ;
+    rdfs:label "176" ;
+    lt:lineName "176" .
+
+lt:line_177 a lt:TransportLine ;
+    rdfs:label "177" ;
+    lt:lineName "177" .
+
+lt:line_178 a lt:TransportLine ;
+    rdfs:label "178" ;
+    lt:lineName "178" .
+
+lt:line_179 a lt:TransportLine ;
+    rdfs:label "179" ;
+    lt:lineName "179" .
+
+lt:line_18 a lt:TransportLine ;
+    rdfs:label "18" ;
+    lt:lineName "18" .
+
+lt:line_180 a lt:TransportLine ;
+    rdfs:label "180" ;
+    lt:lineName "180" .
+
+lt:line_181 a lt:TransportLine ;
+    rdfs:label "181" ;
+    lt:lineName "181" .
+
+lt:line_182 a lt:TransportLine ;
+    rdfs:label "182" ;
+    lt:lineName "182" .
+
+lt:line_183 a lt:TransportLine ;
+    rdfs:label "183" ;
+    lt:lineName "183" .
+
+lt:line_184 a lt:TransportLine ;
+    rdfs:label "184" ;
+    lt:lineName "184" .
+
+lt:line_185 a lt:TransportLine ;
+    rdfs:label "185" ;
+    lt:lineName "185" .
+
+lt:line_186 a lt:TransportLine ;
+    rdfs:label "186" ;
+    lt:lineName "186" .
+
+lt:line_187 a lt:TransportLine ;
+    rdfs:label "187" ;
+    lt:lineName "187" .
+
+lt:line_188 a lt:TransportLine ;
+    rdfs:label "188" ;
+    lt:lineName "188" .
+
+lt:line_189 a lt:TransportLine ;
+    rdfs:label "189" ;
+    lt:lineName "189" .
+
+lt:line_19 a lt:TransportLine ;
+    rdfs:label "19" ;
+    lt:lineName "19" .
+
+lt:line_190 a lt:TransportLine ;
+    rdfs:label "190" ;
+    lt:lineName "190" .
+
+lt:line_191 a lt:TransportLine ;
+    rdfs:label "191" ;
+    lt:lineName "191" .
+
+lt:line_192 a lt:TransportLine ;
+    rdfs:label "192" ;
+    lt:lineName "192" .
+
+lt:line_193 a lt:TransportLine ;
+    rdfs:label "193" ;
+    lt:lineName "193" .
+
+lt:line_194 a lt:TransportLine ;
+    rdfs:label "194" ;
+    lt:lineName "194" .
+
+lt:line_195 a lt:TransportLine ;
+    rdfs:label "195" ;
+    lt:lineName "195" .
+
+lt:line_196 a lt:TransportLine ;
+    rdfs:label "196" ;
+    lt:lineName "196" .
+
+lt:line_197 a lt:TransportLine ;
+    rdfs:label "197" ;
+    lt:lineName "197" .
+
+lt:line_198 a lt:TransportLine ;
+    rdfs:label "198" ;
+    lt:lineName "198" .
+
+lt:line_199 a lt:TransportLine ;
+    rdfs:label "199" ;
+    lt:lineName "199" .
+
+lt:line_2 a lt:TransportLine ;
+    rdfs:label "2" ;
+    lt:lineName "2" .
+
+lt:line_20 a lt:TransportLine ;
+    rdfs:label "20" ;
+    lt:lineName "20" .
+
+lt:line_200 a lt:TransportLine ;
+    rdfs:label "200" ;
+    lt:lineName "200" .
+
+lt:line_201 a lt:TransportLine ;
+    rdfs:label "201" ;
+    lt:lineName "201" .
+
+lt:line_202 a lt:TransportLine ;
+    rdfs:label "202" ;
+    lt:lineName "202" .
+
+lt:line_203 a lt:TransportLine ;
+    rdfs:label "203" ;
+    lt:lineName "203" .
+
+lt:line_204 a lt:TransportLine ;
+    rdfs:label "204" ;
+    lt:lineName "204" .
+
+lt:line_205 a lt:TransportLine ;
+    rdfs:label "205" ;
+    lt:lineName "205" .
+
+lt:line_206 a lt:TransportLine ;
+    rdfs:label "206" ;
+    lt:lineName "206" .
+
+lt:line_207 a lt:TransportLine ;
+    rdfs:label "207" ;
+    lt:lineName "207" .
+
+lt:line_208 a lt:TransportLine ;
+    rdfs:label "208" ;
+    lt:lineName "208" .
+
+lt:line_209 a lt:TransportLine ;
+    rdfs:label "209" ;
+    lt:lineName "209" .
+
+lt:line_21 a lt:TransportLine ;
+    rdfs:label "21" ;
+    lt:lineName "21" .
+
+lt:line_210 a lt:TransportLine ;
+    rdfs:label "210" ;
+    lt:lineName "210" .
+
+lt:line_211 a lt:TransportLine ;
+    rdfs:label "211" ;
+    lt:lineName "211" .
+
+lt:line_212 a lt:TransportLine ;
+    rdfs:label "212" ;
+    lt:lineName "212" .
+
+lt:line_213 a lt:TransportLine ;
+    rdfs:label "213" ;
+    lt:lineName "213" .
+
+lt:line_214 a lt:TransportLine ;
+    rdfs:label "214" ;
+    lt:lineName "214" .
+
+lt:line_215 a lt:TransportLine ;
+    rdfs:label "215" ;
+    lt:lineName "215" .
+
+lt:line_216 a lt:TransportLine ;
+    rdfs:label "216" ;
+    lt:lineName "216" .
+
+lt:line_217 a lt:TransportLine ;
+    rdfs:label "217" ;
+    lt:lineName "217" .
+
+lt:line_218 a lt:TransportLine ;
+    rdfs:label "218" ;
+    lt:lineName "218" .
+
+lt:line_219 a lt:TransportLine ;
+    rdfs:label "219" ;
+    lt:lineName "219" .
+
+lt:line_22 a lt:TransportLine ;
+    rdfs:label "22" ;
+    lt:lineName "22" .
+
+lt:line_220 a lt:TransportLine ;
+    rdfs:label "220" ;
+    lt:lineName "220" .
+
+lt:line_221 a lt:TransportLine ;
+    rdfs:label "221" ;
+    lt:lineName "221" .
+
+lt:line_222 a lt:TransportLine ;
+    rdfs:label "222" ;
+    lt:lineName "222" .
+
+lt:line_223 a lt:TransportLine ;
+    rdfs:label "223" ;
+    lt:lineName "223" .
+
+lt:line_224 a lt:TransportLine ;
+    rdfs:label "224" ;
+    lt:lineName "224" .
+
+lt:line_225 a lt:TransportLine ;
+    rdfs:label "225" ;
+    lt:lineName "225" .
+
+lt:line_226 a lt:TransportLine ;
+    rdfs:label "226" ;
+    lt:lineName "226" .
+
+lt:line_227 a lt:TransportLine ;
+    rdfs:label "227" ;
+    lt:lineName "227" .
+
+lt:line_228 a lt:TransportLine ;
+    rdfs:label "228" ;
+    lt:lineName "228" .
+
+lt:line_229 a lt:TransportLine ;
+    rdfs:label "229" ;
+    lt:lineName "229" .
+
+lt:line_23 a lt:TransportLine ;
+    rdfs:label "23" ;
+    lt:lineName "23" .
+
+lt:line_230 a lt:TransportLine ;
+    rdfs:label "230" ;
+    lt:lineName "230" .
+
+lt:line_231 a lt:TransportLine ;
+    rdfs:label "231" ;
+    lt:lineName "231" .
+
+lt:line_232 a lt:TransportLine ;
+    rdfs:label "232" ;
+    lt:lineName "232" .
+
+lt:line_233 a lt:TransportLine ;
+    rdfs:label "233" ;
+    lt:lineName "233" .
+
+lt:line_234 a lt:TransportLine ;
+    rdfs:label "234" ;
+    lt:lineName "234" .
+
+lt:line_235 a lt:TransportLine ;
+    rdfs:label "235" ;
+    lt:lineName "235" .
+
+lt:line_236 a lt:TransportLine ;
+    rdfs:label "236" ;
+    lt:lineName "236" .
+
+lt:line_237 a lt:TransportLine ;
+    rdfs:label "237" ;
+    lt:lineName "237" .
+
+lt:line_238 a lt:TransportLine ;
+    rdfs:label "238" ;
+    lt:lineName "238" .
+
+lt:line_24 a lt:TransportLine ;
+    rdfs:label "24" ;
+    lt:lineName "24" .
+
+lt:line_240 a lt:TransportLine ;
+    rdfs:label "240" ;
+    lt:lineName "240" .
+
+lt:line_241 a lt:TransportLine ;
+    rdfs:label "241" ;
+    lt:lineName "241" .
+
+lt:line_242 a lt:TransportLine ;
+    rdfs:label "242" ;
+    lt:lineName "242" .
+
+lt:line_243 a lt:TransportLine ;
+    rdfs:label "243" ;
+    lt:lineName "243" .
+
+lt:line_244 a lt:TransportLine ;
+    rdfs:label "244" ;
+    lt:lineName "244" .
+
+lt:line_245 a lt:TransportLine ;
+    rdfs:label "245" ;
+    lt:lineName "245" .
+
+lt:line_246 a lt:TransportLine ;
+    rdfs:label "246" ;
+    lt:lineName "246" .
+
+lt:line_247 a lt:TransportLine ;
+    rdfs:label "247" ;
+    lt:lineName "247" .
+
+lt:line_248 a lt:TransportLine ;
+    rdfs:label "248" ;
+    lt:lineName "248" .
+
+lt:line_249 a lt:TransportLine ;
+    rdfs:label "249" ;
+    lt:lineName "249" .
+
+lt:line_25 a lt:TransportLine ;
+    rdfs:label "25" ;
+    lt:lineName "25" .
+
+lt:line_250 a lt:TransportLine ;
+    rdfs:label "250" ;
+    lt:lineName "250" .
+
+lt:line_251 a lt:TransportLine ;
+    rdfs:label "251" ;
+    lt:lineName "251" .
+
+lt:line_252 a lt:TransportLine ;
+    rdfs:label "252" ;
+    lt:lineName "252" .
+
+lt:line_253 a lt:TransportLine ;
+    rdfs:label "253" ;
+    lt:lineName "253" .
+
+lt:line_254 a lt:TransportLine ;
+    rdfs:label "254" ;
+    lt:lineName "254" .
+
+lt:line_255 a lt:TransportLine ;
+    rdfs:label "255" ;
+    lt:lineName "255" .
+
+lt:line_256 a lt:TransportLine ;
+    rdfs:label "256" ;
+    lt:lineName "256" .
+
+lt:line_257 a lt:TransportLine ;
+    rdfs:label "257" ;
+    lt:lineName "257" .
+
+lt:line_258 a lt:TransportLine ;
+    rdfs:label "258" ;
+    lt:lineName "258" .
+
+lt:line_259 a lt:TransportLine ;
+    rdfs:label "259" ;
+    lt:lineName "259" .
+
+lt:line_26 a lt:TransportLine ;
+    rdfs:label "26" ;
+    lt:lineName "26" .
+
+lt:line_260 a lt:TransportLine ;
+    rdfs:label "260" ;
+    lt:lineName "260" .
+
+lt:line_261 a lt:TransportLine ;
+    rdfs:label "261" ;
+    lt:lineName "261" .
+
+lt:line_262 a lt:TransportLine ;
+    rdfs:label "262" ;
+    lt:lineName "262" .
+
+lt:line_263 a lt:TransportLine ;
+    rdfs:label "263" ;
+    lt:lineName "263" .
+
+lt:line_264 a lt:TransportLine ;
+    rdfs:label "264" ;
+    lt:lineName "264" .
+
+lt:line_265 a lt:TransportLine ;
+    rdfs:label "265" ;
+    lt:lineName "265" .
+
+lt:line_266 a lt:TransportLine ;
+    rdfs:label "266" ;
+    lt:lineName "266" .
+
+lt:line_267 a lt:TransportLine ;
+    rdfs:label "267" ;
+    lt:lineName "267" .
+
+lt:line_268 a lt:TransportLine ;
+    rdfs:label "268" ;
+    lt:lineName "268" .
+
+lt:line_269 a lt:TransportLine ;
+    rdfs:label "269" ;
+    lt:lineName "269" .
+
+lt:line_27 a lt:TransportLine ;
+    rdfs:label "27" ;
+    lt:lineName "27" .
+
+lt:line_270 a lt:TransportLine ;
+    rdfs:label "270" ;
+    lt:lineName "270" .
+
+lt:line_272 a lt:TransportLine ;
+    rdfs:label "272" ;
+    lt:lineName "272" .
+
+lt:line_273 a lt:TransportLine ;
+    rdfs:label "273" ;
+    lt:lineName "273" .
+
+lt:line_274 a lt:TransportLine ;
+    rdfs:label "274" ;
+    lt:lineName "274" .
+
+lt:line_275 a lt:TransportLine ;
+    rdfs:label "275" ;
+    lt:lineName "275" .
+
+lt:line_276 a lt:TransportLine ;
+    rdfs:label "276" ;
+    lt:lineName "276" .
+
+lt:line_277 a lt:TransportLine ;
+    rdfs:label "277" ;
+    lt:lineName "277" .
+
+lt:line_278 a lt:TransportLine ;
+    rdfs:label "278" ;
+    lt:lineName "278" .
+
+lt:line_279 a lt:TransportLine ;
+    rdfs:label "279" ;
+    lt:lineName "279" .
+
+lt:line_28 a lt:TransportLine ;
+    rdfs:label "28" ;
+    lt:lineName "28" .
+
+lt:line_280 a lt:TransportLine ;
+    rdfs:label "280" ;
+    lt:lineName "280" .
+
+lt:line_281 a lt:TransportLine ;
+    rdfs:label "281" ;
+    lt:lineName "281" .
+
+lt:line_282 a lt:TransportLine ;
+    rdfs:label "282" ;
+    lt:lineName "282" .
+
+lt:line_284 a lt:TransportLine ;
+    rdfs:label "284" ;
+    lt:lineName "284" .
+
+lt:line_285 a lt:TransportLine ;
+    rdfs:label "285" ;
+    lt:lineName "285" .
+
+lt:line_286 a lt:TransportLine ;
+    rdfs:label "286" ;
+    lt:lineName "286" .
+
+lt:line_287 a lt:TransportLine ;
+    rdfs:label "287" ;
+    lt:lineName "287" .
+
+lt:line_288 a lt:TransportLine ;
+    rdfs:label "288" ;
+    lt:lineName "288" .
+
+lt:line_289 a lt:TransportLine ;
+    rdfs:label "289" ;
+    lt:lineName "289" .
+
+lt:line_29 a lt:TransportLine ;
+    rdfs:label "29" ;
+    lt:lineName "29" .
+
+lt:line_290 a lt:TransportLine ;
+    rdfs:label "290" ;
+    lt:lineName "290" .
+
+lt:line_291 a lt:TransportLine ;
+    rdfs:label "291" ;
+    lt:lineName "291" .
+
+lt:line_292 a lt:TransportLine ;
+    rdfs:label "292" ;
+    lt:lineName "292" .
+
+lt:line_293 a lt:TransportLine ;
+    rdfs:label "293" ;
+    lt:lineName "293" .
+
+lt:line_294 a lt:TransportLine ;
+    rdfs:label "294" ;
+    lt:lineName "294" .
+
+lt:line_295 a lt:TransportLine ;
+    rdfs:label "295" ;
+    lt:lineName "295" .
+
+lt:line_296 a lt:TransportLine ;
+    rdfs:label "296" ;
+    lt:lineName "296" .
+
+lt:line_297 a lt:TransportLine ;
+    rdfs:label "297" ;
+    lt:lineName "297" .
+
+lt:line_298 a lt:TransportLine ;
+    rdfs:label "298" ;
+    lt:lineName "298" .
+
+lt:line_299 a lt:TransportLine ;
+    rdfs:label "299" ;
+    lt:lineName "299" .
+
+lt:line_3 a lt:TransportLine ;
+    rdfs:label "3" ;
+    lt:lineName "3" .
+
+lt:line_30 a lt:TransportLine ;
+    rdfs:label "30" ;
+    lt:lineName "30" .
+
+lt:line_300 a lt:TransportLine ;
+    rdfs:label "300" ;
+    lt:lineName "300" .
+
+lt:line_301 a lt:TransportLine ;
+    rdfs:label "301" ;
+    lt:lineName "301" .
+
+lt:line_302 a lt:TransportLine ;
+    rdfs:label "302" ;
+    lt:lineName "302" .
+
+lt:line_303 a lt:TransportLine ;
+    rdfs:label "303" ;
+    lt:lineName "303" .
+
+lt:line_304 a lt:TransportLine ;
+    rdfs:label "304" ;
+    lt:lineName "304" .
+
+lt:line_306 a lt:TransportLine ;
+    rdfs:label "306" ;
+    lt:lineName "306" .
+
+lt:line_307 a lt:TransportLine ;
+    rdfs:label "307" ;
+    lt:lineName "307" .
+
+lt:line_308 a lt:TransportLine ;
+    rdfs:label "308" ;
+    lt:lineName "308" .
+
+lt:line_309 a lt:TransportLine ;
+    rdfs:label "309" ;
+    lt:lineName "309" .
+
+lt:line_31 a lt:TransportLine ;
+    rdfs:label "31" ;
+    lt:lineName "31" .
+
+lt:line_310 a lt:TransportLine ;
+    rdfs:label "310" ;
+    lt:lineName "310" .
+
+lt:line_312 a lt:TransportLine ;
+    rdfs:label "312" ;
+    lt:lineName "312" .
+
+lt:line_313 a lt:TransportLine ;
+    rdfs:label "313" ;
+    lt:lineName "313" .
+
+lt:line_314 a lt:TransportLine ;
+    rdfs:label "314" ;
+    lt:lineName "314" .
+
+lt:line_315 a lt:TransportLine ;
+    rdfs:label "315" ;
+    lt:lineName "315" .
+
+lt:line_316 a lt:TransportLine ;
+    rdfs:label "316" ;
+    lt:lineName "316" .
+
+lt:line_317 a lt:TransportLine ;
+    rdfs:label "317" ;
+    lt:lineName "317" .
+
+lt:line_318 a lt:TransportLine ;
+    rdfs:label "318" ;
+    lt:lineName "318" .
+
+lt:line_319 a lt:TransportLine ;
+    rdfs:label "319" ;
+    lt:lineName "319" .
+
+lt:line_32 a lt:TransportLine ;
+    rdfs:label "32" ;
+    lt:lineName "32" .
+
+lt:line_320 a lt:TransportLine ;
+    rdfs:label "320" ;
+    lt:lineName "320" .
+
+lt:line_321 a lt:TransportLine ;
+    rdfs:label "321" ;
+    lt:lineName "321" .
+
+lt:line_322 a lt:TransportLine ;
+    rdfs:label "322" ;
+    lt:lineName "322" .
+
+lt:line_323 a lt:TransportLine ;
+    rdfs:label "323" ;
+    lt:lineName "323" .
+
+lt:line_324 a lt:TransportLine ;
+    rdfs:label "324" ;
+    lt:lineName "324" .
+
+lt:line_325 a lt:TransportLine ;
+    rdfs:label "325" ;
+    lt:lineName "325" .
+
+lt:line_326 a lt:TransportLine ;
+    rdfs:label "326" ;
+    lt:lineName "326" .
+
+lt:line_327 a lt:TransportLine ;
+    rdfs:label "327" ;
+    lt:lineName "327" .
+
+lt:line_328 a lt:TransportLine ;
+    rdfs:label "328" ;
+    lt:lineName "328" .
+
+lt:line_329 a lt:TransportLine ;
+    rdfs:label "329" ;
+    lt:lineName "329" .
+
+lt:line_33 a lt:TransportLine ;
+    rdfs:label "33" ;
+    lt:lineName "33" .
+
+lt:line_330 a lt:TransportLine ;
+    rdfs:label "330" ;
+    lt:lineName "330" .
+
+lt:line_331 a lt:TransportLine ;
+    rdfs:label "331" ;
+    lt:lineName "331" .
+
+lt:line_333 a lt:TransportLine ;
+    rdfs:label "333" ;
+    lt:lineName "333" .
+
+lt:line_335 a lt:TransportLine ;
+    rdfs:label "335" ;
+    lt:lineName "335" .
+
+lt:line_336 a lt:TransportLine ;
+    rdfs:label "336" ;
+    lt:lineName "336" .
+
+lt:line_337 a lt:TransportLine ;
+    rdfs:label "337" ;
+    lt:lineName "337" .
+
+lt:line_339 a lt:TransportLine ;
+    rdfs:label "339" ;
+    lt:lineName "339" .
+
+lt:line_34 a lt:TransportLine ;
+    rdfs:label "34" ;
+    lt:lineName "34" .
+
+lt:line_340 a lt:TransportLine ;
+    rdfs:label "340" ;
+    lt:lineName "340" .
+
+lt:line_341 a lt:TransportLine ;
+    rdfs:label "341" ;
+    lt:lineName "341" .
+
+lt:line_343 a lt:TransportLine ;
+    rdfs:label "343" ;
+    lt:lineName "343" .
+
+lt:line_344 a lt:TransportLine ;
+    rdfs:label "344" ;
+    lt:lineName "344" .
+
+lt:line_345 a lt:TransportLine ;
+    rdfs:label "345" ;
+    lt:lineName "345" .
+
+lt:line_346 a lt:TransportLine ;
+    rdfs:label "346" ;
+    lt:lineName "346" .
+
+lt:line_349 a lt:TransportLine ;
+    rdfs:label "349" ;
+    lt:lineName "349" .
+
+lt:line_35 a lt:TransportLine ;
+    rdfs:label "35" ;
+    lt:lineName "35" .
+
+lt:line_350 a lt:TransportLine ;
+    rdfs:label "350" ;
+    lt:lineName "350" .
+
+lt:line_352 a lt:TransportLine ;
+    rdfs:label "352" ;
+    lt:lineName "352" .
+
+lt:line_353 a lt:TransportLine ;
+    rdfs:label "353" ;
+    lt:lineName "353" .
+
+lt:line_354 a lt:TransportLine ;
+    rdfs:label "354" ;
+    lt:lineName "354" .
+
+lt:line_355 a lt:TransportLine ;
+    rdfs:label "355" ;
+    lt:lineName "355" .
+
+lt:line_356 a lt:TransportLine ;
+    rdfs:label "356" ;
+    lt:lineName "356" .
+
+lt:line_357 a lt:TransportLine ;
+    rdfs:label "357" ;
+    lt:lineName "357" .
+
+lt:line_358 a lt:TransportLine ;
+    rdfs:label "358" ;
+    lt:lineName "358" .
+
+lt:line_359 a lt:TransportLine ;
+    rdfs:label "359" ;
+    lt:lineName "359" .
+
+lt:line_36 a lt:TransportLine ;
+    rdfs:label "36" ;
+    lt:lineName "36" .
+
+lt:line_360 a lt:TransportLine ;
+    rdfs:label "360" ;
+    lt:lineName "360" .
+
+lt:line_362 a lt:TransportLine ;
+    rdfs:label "362" ;
+    lt:lineName "362" .
+
+lt:line_363 a lt:TransportLine ;
+    rdfs:label "363" ;
+    lt:lineName "363" .
+
+lt:line_364 a lt:TransportLine ;
+    rdfs:label "364" ;
+    lt:lineName "364" .
+
+lt:line_365 a lt:TransportLine ;
+    rdfs:label "365" ;
+    lt:lineName "365" .
+
+lt:line_366 a lt:TransportLine ;
+    rdfs:label "366" ;
+    lt:lineName "366" .
+
+lt:line_367 a lt:TransportLine ;
+    rdfs:label "367" ;
+    lt:lineName "367" .
+
+lt:line_368 a lt:TransportLine ;
+    rdfs:label "368" ;
+    lt:lineName "368" .
+
+lt:line_37 a lt:TransportLine ;
+    rdfs:label "37" ;
+    lt:lineName "37" .
+
+lt:line_370 a lt:TransportLine ;
+    rdfs:label "370" ;
+    lt:lineName "370" .
+
+lt:line_371 a lt:TransportLine ;
+    rdfs:label "371" ;
+    lt:lineName "371" .
+
+lt:line_372 a lt:TransportLine ;
+    rdfs:label "372" ;
+    lt:lineName "372" .
+
+lt:line_375 a lt:TransportLine ;
+    rdfs:label "375" ;
+    lt:lineName "375" .
+
+lt:line_376 a lt:TransportLine ;
+    rdfs:label "376" ;
+    lt:lineName "376" .
+
+lt:line_377 a lt:TransportLine ;
+    rdfs:label "377" ;
+    lt:lineName "377" .
+
+lt:line_378 a lt:TransportLine ;
+    rdfs:label "378" ;
+    lt:lineName "378" .
+
+lt:line_379 a lt:TransportLine ;
+    rdfs:label "379" ;
+    lt:lineName "379" .
+
+lt:line_38 a lt:TransportLine ;
+    rdfs:label "38" ;
+    lt:lineName "38" .
+
+lt:line_380 a lt:TransportLine ;
+    rdfs:label "380" ;
+    lt:lineName "380" .
+
+lt:line_381 a lt:TransportLine ;
+    rdfs:label "381" ;
+    lt:lineName "381" .
+
+lt:line_382 a lt:TransportLine ;
+    rdfs:label "382" ;
+    lt:lineName "382" .
+
+lt:line_383 a lt:TransportLine ;
+    rdfs:label "383" ;
+    lt:lineName "383" .
+
+lt:line_384 a lt:TransportLine ;
+    rdfs:label "384" ;
+    lt:lineName "384" .
+
+lt:line_385 a lt:TransportLine ;
+    rdfs:label "385" ;
+    lt:lineName "385" .
+
+lt:line_386 a lt:TransportLine ;
+    rdfs:label "386" ;
+    lt:lineName "386" .
+
+lt:line_388 a lt:TransportLine ;
+    rdfs:label "388" ;
+    lt:lineName "388" .
+
+lt:line_389 a lt:TransportLine ;
+    rdfs:label "389" ;
+    lt:lineName "389" .
+
+lt:line_39 a lt:TransportLine ;
+    rdfs:label "39" ;
+    lt:lineName "39" .
+
+lt:line_390 a lt:TransportLine ;
+    rdfs:label "390" ;
+    lt:lineName "390" .
+
+lt:line_393 a lt:TransportLine ;
+    rdfs:label "393" ;
+    lt:lineName "393" .
+
+lt:line_394 a lt:TransportLine ;
+    rdfs:label "394" ;
+    lt:lineName "394" .
+
+lt:line_395 a lt:TransportLine ;
+    rdfs:label "395" ;
+    lt:lineName "395" .
+
+lt:line_396 a lt:TransportLine ;
+    rdfs:label "396" ;
+    lt:lineName "396" .
+
+lt:line_397 a lt:TransportLine ;
+    rdfs:label "397" ;
+    lt:lineName "397" .
+
+lt:line_398 a lt:TransportLine ;
+    rdfs:label "398" ;
+    lt:lineName "398" .
+
+lt:line_399 a lt:TransportLine ;
+    rdfs:label "399" ;
+    lt:lineName "399" .
+
+lt:line_4 a lt:TransportLine ;
+    rdfs:label "4" ;
+    lt:lineName "4" .
+
+lt:line_40 a lt:TransportLine ;
+    rdfs:label "40" ;
+    lt:lineName "40" .
+
+lt:line_401 a lt:TransportLine ;
+    rdfs:label "401" ;
+    lt:lineName "401" .
+
+lt:line_403 a lt:TransportLine ;
+    rdfs:label "403" ;
+    lt:lineName "403" .
+
+lt:line_404 a lt:TransportLine ;
+    rdfs:label "404" ;
+    lt:lineName "404" .
+
+lt:line_405 a lt:TransportLine ;
+    rdfs:label "405" ;
+    lt:lineName "405" .
+
+lt:line_406 a lt:TransportLine ;
+    rdfs:label "406" ;
+    lt:lineName "406" .
+
+lt:line_407 a lt:TransportLine ;
+    rdfs:label "407" ;
+    lt:lineName "407" .
+
+lt:line_41 a lt:TransportLine ;
+    rdfs:label "41" ;
+    lt:lineName "41" .
+
+lt:line_410 a lt:TransportLine ;
+    rdfs:label "410" ;
+    lt:lineName "410" .
+
+lt:line_411 a lt:TransportLine ;
+    rdfs:label "411" ;
+    lt:lineName "411" .
+
+lt:line_412 a lt:TransportLine ;
+    rdfs:label "412" ;
+    lt:lineName "412" .
+
+lt:line_413 a lt:TransportLine ;
+    rdfs:label "413" ;
+    lt:lineName "413" .
+
+lt:line_415 a lt:TransportLine ;
+    rdfs:label "415" ;
+    lt:lineName "415" .
+
+lt:line_417 a lt:TransportLine ;
+    rdfs:label "417" ;
+    lt:lineName "417" .
+
+lt:line_418 a lt:TransportLine ;
+    rdfs:label "418" ;
+    lt:lineName "418" .
+
+lt:line_419 a lt:TransportLine ;
+    rdfs:label "419" ;
+    lt:lineName "419" .
+
+lt:line_42 a lt:TransportLine ;
+    rdfs:label "42" ;
+    lt:lineName "42" .
+
+lt:line_422 a lt:TransportLine ;
+    rdfs:label "422" ;
+    lt:lineName "422" .
+
+lt:line_423 a lt:TransportLine ;
+    rdfs:label "423" ;
+    lt:lineName "423" .
+
+lt:line_424 a lt:TransportLine ;
+    rdfs:label "424" ;
+    lt:lineName "424" .
+
+lt:line_425 a lt:TransportLine ;
+    rdfs:label "425" ;
+    lt:lineName "425" .
+
+lt:line_427 a lt:TransportLine ;
+    rdfs:label "427" ;
+    lt:lineName "427" .
+
+lt:line_428 a lt:TransportLine ;
+    rdfs:label "428" ;
+    lt:lineName "428" .
+
+lt:line_43 a lt:TransportLine ;
+    rdfs:label "43" ;
+    lt:lineName "43" .
+
+lt:line_430 a lt:TransportLine ;
+    rdfs:label "430" ;
+    lt:lineName "430" .
+
+lt:line_432 a lt:TransportLine ;
+    rdfs:label "432" ;
+    lt:lineName "432" .
+
+lt:line_433 a lt:TransportLine ;
+    rdfs:label "433" ;
+    lt:lineName "433" .
+
+lt:line_434 a lt:TransportLine ;
+    rdfs:label "434" ;
+    lt:lineName "434" .
+
+lt:line_436 a lt:TransportLine ;
+    rdfs:label "436" ;
+    lt:lineName "436" .
+
+lt:line_439 a lt:TransportLine ;
+    rdfs:label "439" ;
+    lt:lineName "439" .
+
+lt:line_44 a lt:TransportLine ;
+    rdfs:label "44" ;
+    lt:lineName "44" .
+
+lt:line_440 a lt:TransportLine ;
+    rdfs:label "440" ;
+    lt:lineName "440" .
+
+lt:line_444 a lt:TransportLine ;
+    rdfs:label "444" ;
+    lt:lineName "444" .
+
+lt:line_45 a lt:TransportLine ;
+    rdfs:label "45" ;
+    lt:lineName "45" .
+
+lt:line_450 a lt:TransportLine ;
+    rdfs:label "450" ;
+    lt:lineName "450" .
+
+lt:line_452 a lt:TransportLine ;
+    rdfs:label "452" ;
+    lt:lineName "452" .
+
+lt:line_453 a lt:TransportLine ;
+    rdfs:label "453" ;
+    lt:lineName "453" .
+
+lt:line_456 a lt:TransportLine ;
+    rdfs:label "456" ;
+    lt:lineName "456" .
+
+lt:line_46 a lt:TransportLine ;
+    rdfs:label "46" ;
+    lt:lineName "46" .
+
+lt:line_460 a lt:TransportLine ;
+    rdfs:label "460" ;
+    lt:lineName "460" .
+
+lt:line_462 a lt:TransportLine ;
+    rdfs:label "462" ;
+    lt:lineName "462" .
+
+lt:line_463 a lt:TransportLine ;
+    rdfs:label "463" ;
+    lt:lineName "463" .
+
+lt:line_464 a lt:TransportLine ;
+    rdfs:label "464" ;
+    lt:lineName "464" .
+
+lt:line_465 a lt:TransportLine ;
+    rdfs:label "465" ;
+    lt:lineName "465" .
+
+lt:line_466 a lt:TransportLine ;
+    rdfs:label "466" ;
+    lt:lineName "466" .
+
+lt:line_467 a lt:TransportLine ;
+    rdfs:label "467" ;
+    lt:lineName "467" .
+
+lt:line_468 a lt:TransportLine ;
+    rdfs:label "468" ;
+    lt:lineName "468" .
+
+lt:line_469 a lt:TransportLine ;
+    rdfs:label "469" ;
+    lt:lineName "469" .
+
+lt:line_47 a lt:TransportLine ;
+    rdfs:label "47" ;
+    lt:lineName "47" .
+
+lt:line_470 a lt:TransportLine ;
+    rdfs:label "470" ;
+    lt:lineName "470" .
+
+lt:line_473 a lt:TransportLine ;
+    rdfs:label "473" ;
+    lt:lineName "473" .
+
+lt:line_474 a lt:TransportLine ;
+    rdfs:label "474" ;
+    lt:lineName "474" .
+
+lt:line_476 a lt:TransportLine ;
+    rdfs:label "476" ;
+    lt:lineName "476" .
+
+lt:line_481 a lt:TransportLine ;
+    rdfs:label "481" ;
+    lt:lineName "481" .
+
+lt:line_482 a lt:TransportLine ;
+    rdfs:label "482" ;
+    lt:lineName "482" .
+
+lt:line_483 a lt:TransportLine ;
+    rdfs:label "483" ;
+    lt:lineName "483" .
+
+lt:line_484 a lt:TransportLine ;
+    rdfs:label "484" ;
+    lt:lineName "484" .
+
+lt:line_485 a lt:TransportLine ;
+    rdfs:label "485" ;
+    lt:lineName "485" .
+
+lt:line_486 a lt:TransportLine ;
+    rdfs:label "486" ;
+    lt:lineName "486" .
+
+lt:line_487 a lt:TransportLine ;
+    rdfs:label "487" ;
+    lt:lineName "487" .
+
+lt:line_488 a lt:TransportLine ;
+    rdfs:label "488" ;
+    lt:lineName "488" .
+
+lt:line_49 a lt:TransportLine ;
+    rdfs:label "49" ;
+    lt:lineName "49" .
+
+lt:line_490 a lt:TransportLine ;
+    rdfs:label "490" ;
+    lt:lineName "490" .
+
+lt:line_491 a lt:TransportLine ;
+    rdfs:label "491" ;
+    lt:lineName "491" .
+
+lt:line_492 a lt:TransportLine ;
+    rdfs:label "492" ;
+    lt:lineName "492" .
+
+lt:line_493 a lt:TransportLine ;
+    rdfs:label "493" ;
+    lt:lineName "493" .
+
+lt:line_496 a lt:TransportLine ;
+    rdfs:label "496" ;
+    lt:lineName "496" .
+
+lt:line_498 a lt:TransportLine ;
+    rdfs:label "498" ;
+    lt:lineName "498" .
+
+lt:line_499 a lt:TransportLine ;
+    rdfs:label "499" ;
+    lt:lineName "499" .
+
+lt:line_5 a lt:TransportLine ;
+    rdfs:label "5" ;
+    lt:lineName "5" .
+
+lt:line_50 a lt:TransportLine ;
+    rdfs:label "50" ;
+    lt:lineName "50" .
+
+lt:line_51 a lt:TransportLine ;
+    rdfs:label "51" ;
+    lt:lineName "51" .
+
+lt:line_52 a lt:TransportLine ;
+    rdfs:label "52" ;
+    lt:lineName "52" .
+
+lt:line_53 a lt:TransportLine ;
+    rdfs:label "53" ;
+    lt:lineName "53" .
+
+lt:line_533 a lt:TransportLine ;
+    rdfs:label "533" ;
+    lt:lineName "533" .
+
+lt:line_54 a lt:TransportLine ;
+    rdfs:label "54" ;
+    lt:lineName "54" .
+
+lt:line_55 a lt:TransportLine ;
+    rdfs:label "55" ;
+    lt:lineName "55" .
+
+lt:line_56 a lt:TransportLine ;
+    rdfs:label "56" ;
+    lt:lineName "56" .
+
+lt:line_57 a lt:TransportLine ;
+    rdfs:label "57" ;
+    lt:lineName "57" .
+
+lt:line_58 a lt:TransportLine ;
+    rdfs:label "58" ;
+    lt:lineName "58" .
+
+lt:line_59 a lt:TransportLine ;
+    rdfs:label "59" ;
+    lt:lineName "59" .
+
+lt:line_6 a lt:TransportLine ;
+    rdfs:label "6" ;
+    lt:lineName "6" .
+
+lt:line_60 a lt:TransportLine ;
+    rdfs:label "60" ;
+    lt:lineName "60" .
+
+lt:line_601 a lt:TransportLine ;
+    rdfs:label "601" ;
+    lt:lineName "601" .
+
+lt:line_602 a lt:TransportLine ;
+    rdfs:label "602" ;
+    lt:lineName "602" .
+
+lt:line_603 a lt:TransportLine ;
+    rdfs:label "603" ;
+    lt:lineName "603" .
+
+lt:line_606 a lt:TransportLine ;
+    rdfs:label "606" ;
+    lt:lineName "606" .
+
+lt:line_608 a lt:TransportLine ;
+    rdfs:label "608" ;
+    lt:lineName "608" .
+
+lt:line_61 a lt:TransportLine ;
+    rdfs:label "61" ;
+    lt:lineName "61" .
+
+lt:line_612 a lt:TransportLine ;
+    rdfs:label "612" ;
+    lt:lineName "612" .
+
+lt:line_613 a lt:TransportLine ;
+    rdfs:label "613" ;
+    lt:lineName "613" .
+
+lt:line_616 a lt:TransportLine ;
+    rdfs:label "616" ;
+    lt:lineName "616" .
+
+lt:line_617 a lt:TransportLine ;
+    rdfs:label "617" ;
+    lt:lineName "617" .
+
+lt:line_618 a lt:TransportLine ;
+    rdfs:label "618" ;
+    lt:lineName "618" .
+
+lt:line_62 a lt:TransportLine ;
+    rdfs:label "62" ;
+    lt:lineName "62" .
+
+lt:line_621 a lt:TransportLine ;
+    rdfs:label "621" ;
+    lt:lineName "621" .
+
+lt:line_624 a lt:TransportLine ;
+    rdfs:label "624" ;
+    lt:lineName "624" .
+
+lt:line_625 a lt:TransportLine ;
+    rdfs:label "625" ;
+    lt:lineName "625" .
+
+lt:line_626 a lt:TransportLine ;
+    rdfs:label "626" ;
+    lt:lineName "626" .
+
+lt:line_627 a lt:TransportLine ;
+    rdfs:label "627" ;
+    lt:lineName "627" .
+
+lt:line_628 a lt:TransportLine ;
+    rdfs:label "628" ;
+    lt:lineName "628" .
+
+lt:line_629 a lt:TransportLine ;
+    rdfs:label "629" ;
+    lt:lineName "629" .
+
+lt:line_63 a lt:TransportLine ;
+    rdfs:label "63" ;
+    lt:lineName "63" .
+
+lt:line_631 a lt:TransportLine ;
+    rdfs:label "631" ;
+    lt:lineName "631" .
+
+lt:line_632 a lt:TransportLine ;
+    rdfs:label "632" ;
+    lt:lineName "632" .
+
+lt:line_633 a lt:TransportLine ;
+    rdfs:label "633" ;
+    lt:lineName "633" .
+
+lt:line_634 a lt:TransportLine ;
+    rdfs:label "634" ;
+    lt:lineName "634" .
+
+lt:line_635 a lt:TransportLine ;
+    rdfs:label "635" ;
+    lt:lineName "635" .
+
+lt:line_638 a lt:TransportLine ;
+    rdfs:label "638" ;
+    lt:lineName "638" .
+
+lt:line_639 a lt:TransportLine ;
+    rdfs:label "639" ;
+    lt:lineName "639" .
+
+lt:line_64 a lt:TransportLine ;
+    rdfs:label "64" ;
+    lt:lineName "64" .
+
+lt:line_640 a lt:TransportLine ;
+    rdfs:label "640" ;
+    lt:lineName "640" .
+
+lt:line_642 a lt:TransportLine ;
+    rdfs:label "642" ;
+    lt:lineName "642" .
+
+lt:line_643 a lt:TransportLine ;
+    rdfs:label "643" ;
+    lt:lineName "643" .
+
+lt:line_645 a lt:TransportLine ;
+    rdfs:label "645" ;
+    lt:lineName "645" .
+
+lt:line_646 a lt:TransportLine ;
+    rdfs:label "646" ;
+    lt:lineName "646" .
+
+lt:line_649 a lt:TransportLine ;
+    rdfs:label "649" ;
+    lt:lineName "649" .
+
+lt:line_65 a lt:TransportLine ;
+    rdfs:label "65" ;
+    lt:lineName "65" .
+
+lt:line_650 a lt:TransportLine ;
+    rdfs:label "650" ;
+    lt:lineName "650" .
+
+lt:line_651 a lt:TransportLine ;
+    rdfs:label "651" ;
+    lt:lineName "651" .
+
+lt:line_652 a lt:TransportLine ;
+    rdfs:label "652" ;
+    lt:lineName "652" .
+
+lt:line_653 a lt:TransportLine ;
+    rdfs:label "653" ;
+    lt:lineName "653" .
+
+lt:line_655 a lt:TransportLine ;
+    rdfs:label "655" ;
+    lt:lineName "655" .
+
+lt:line_656 a lt:TransportLine ;
+    rdfs:label "656" ;
+    lt:lineName "656" .
+
+lt:line_657 a lt:TransportLine ;
+    rdfs:label "657" ;
+    lt:lineName "657" .
+
+lt:line_658 a lt:TransportLine ;
+    rdfs:label "658" ;
+    lt:lineName "658" .
+
+lt:line_66 a lt:TransportLine ;
+    rdfs:label "66" ;
+    lt:lineName "66" .
+
+lt:line_660 a lt:TransportLine ;
+    rdfs:label "660" ;
+    lt:lineName "660" .
+
+lt:line_661 a lt:TransportLine ;
+    rdfs:label "661" ;
+    lt:lineName "661" .
+
+lt:line_662 a lt:TransportLine ;
+    rdfs:label "662" ;
+    lt:lineName "662" .
+
+lt:line_663 a lt:TransportLine ;
+    rdfs:label "663" ;
+    lt:lineName "663" .
+
+lt:line_664 a lt:TransportLine ;
+    rdfs:label "664" ;
+    lt:lineName "664" .
+
+lt:line_665 a lt:TransportLine ;
+    rdfs:label "665" ;
+    lt:lineName "665" .
+
+lt:line_667 a lt:TransportLine ;
+    rdfs:label "667" ;
+    lt:lineName "667" .
+
+lt:line_669 a lt:TransportLine ;
+    rdfs:label "669" ;
+    lt:lineName "669" .
+
+lt:line_67 a lt:TransportLine ;
+    rdfs:label "67" ;
+    lt:lineName "67" .
+
+lt:line_670 a lt:TransportLine ;
+    rdfs:label "670" ;
+    lt:lineName "670" .
+
+lt:line_671 a lt:TransportLine ;
+    rdfs:label "671" ;
+    lt:lineName "671" .
+
+lt:line_672 a lt:TransportLine ;
+    rdfs:label "672" ;
+    lt:lineName "672" .
+
+lt:line_674 a lt:TransportLine ;
+    rdfs:label "674" ;
+    lt:lineName "674" .
+
+lt:line_675 a lt:TransportLine ;
+    rdfs:label "675" ;
+    lt:lineName "675" .
+
+lt:line_677 a lt:TransportLine ;
+    rdfs:label "677" ;
+    lt:lineName "677" .
+
+lt:line_679 a lt:TransportLine ;
+    rdfs:label "679" ;
+    lt:lineName "679" .
+
+lt:line_68 a lt:TransportLine ;
+    rdfs:label "68" ;
+    lt:lineName "68" .
+
+lt:line_681 a lt:TransportLine ;
+    rdfs:label "681" ;
+    lt:lineName "681" .
+
+lt:line_683 a lt:TransportLine ;
+    rdfs:label "683" ;
+    lt:lineName "683" .
+
+lt:line_684 a lt:TransportLine ;
+    rdfs:label "684" ;
+    lt:lineName "684" .
+
+lt:line_685 a lt:TransportLine ;
+    rdfs:label "685" ;
+    lt:lineName "685" .
+
+lt:line_686 a lt:TransportLine ;
+    rdfs:label "686" ;
+    lt:lineName "686" .
+
+lt:line_687 a lt:TransportLine ;
+    rdfs:label "687" ;
+    lt:lineName "687" .
+
+lt:line_688 a lt:TransportLine ;
+    rdfs:label "688" ;
+    lt:lineName "688" .
+
+lt:line_689 a lt:TransportLine ;
+    rdfs:label "689" ;
+    lt:lineName "689" .
+
+lt:line_69 a lt:TransportLine ;
+    rdfs:label "69" ;
+    lt:lineName "69" .
+
+lt:line_690 a lt:TransportLine ;
+    rdfs:label "690" ;
+    lt:lineName "690" .
+
+lt:line_695 a lt:TransportLine ;
+    rdfs:label "695" ;
+    lt:lineName "695" .
+
+lt:line_696 a lt:TransportLine ;
+    rdfs:label "696" ;
+    lt:lineName "696" .
+
+lt:line_697 a lt:TransportLine ;
+    rdfs:label "697" ;
+    lt:lineName "697" .
+
+lt:line_698 a lt:TransportLine ;
+    rdfs:label "698" ;
+    lt:lineName "698" .
+
+lt:line_699 a lt:TransportLine ;
+    rdfs:label "699" ;
+    lt:lineName "699" .
+
+lt:line_7 a lt:TransportLine ;
+    rdfs:label "7" ;
+    lt:lineName "7" .
+
+lt:line_70 a lt:TransportLine ;
+    rdfs:label "70" ;
+    lt:lineName "70" .
+
+lt:line_71 a lt:TransportLine ;
+    rdfs:label "71" ;
+    lt:lineName "71" .
+
+lt:line_72 a lt:TransportLine ;
+    rdfs:label "72" ;
+    lt:lineName "72" .
+
+lt:line_73 a lt:TransportLine ;
+    rdfs:label "73" ;
+    lt:lineName "73" .
+
+lt:line_74 a lt:TransportLine ;
+    rdfs:label "74" ;
+    lt:lineName "74" .
+
+lt:line_75 a lt:TransportLine ;
+    rdfs:label "75" ;
+    lt:lineName "75" .
+
+lt:line_76 a lt:TransportLine ;
+    rdfs:label "76" ;
+    lt:lineName "76" .
+
+lt:line_77 a lt:TransportLine ;
+    rdfs:label "77" ;
+    lt:lineName "77" .
+
+lt:line_78 a lt:TransportLine ;
+    rdfs:label "78" ;
+    lt:lineName "78" .
+
+lt:line_79 a lt:TransportLine ;
+    rdfs:label "79" ;
+    lt:lineName "79" .
+
+lt:line_8 a lt:TransportLine ;
+    rdfs:label "8" ;
+    lt:lineName "8" .
+
+lt:line_80 a lt:TransportLine ;
+    rdfs:label "80" ;
+    lt:lineName "80" .
+
+lt:line_81 a lt:TransportLine ;
+    rdfs:label "81" ;
+    lt:lineName "81" .
+
+lt:line_83 a lt:TransportLine ;
+    rdfs:label "83" ;
+    lt:lineName "83" .
+
+lt:line_85 a lt:TransportLine ;
+    rdfs:label "85" ;
+    lt:lineName "85" .
+
+lt:line_86 a lt:TransportLine ;
+    rdfs:label "86" ;
+    lt:lineName "86" .
+
+lt:line_87 a lt:TransportLine ;
+    rdfs:label "87" ;
+    lt:lineName "87" .
+
+lt:line_88 a lt:TransportLine ;
+    rdfs:label "88" ;
+    lt:lineName "88" .
+
+lt:line_89 a lt:TransportLine ;
+    rdfs:label "89" ;
+    lt:lineName "89" .
+
+lt:line_9 a lt:TransportLine ;
+    rdfs:label "9" ;
+    lt:lineName "9" .
+
+lt:line_90 a lt:TransportLine ;
+    rdfs:label "90" ;
+    lt:lineName "90" .
+
+lt:line_91 a lt:TransportLine ;
+    rdfs:label "91" ;
+    lt:lineName "91" .
+
+lt:line_92 a lt:TransportLine ;
+    rdfs:label "92" ;
+    lt:lineName "92" .
+
+lt:line_93 a lt:TransportLine ;
+    rdfs:label "93" ;
+    lt:lineName "93" .
+
+lt:line_94 a lt:TransportLine ;
+    rdfs:label "94" ;
+    lt:lineName "94" .
+
+lt:line_95 a lt:TransportLine ;
+    rdfs:label "95" ;
+    lt:lineName "95" .
+
+lt:line_96 a lt:TransportLine ;
+    rdfs:label "96" ;
+    lt:lineName "96" .
+
+lt:line_969 a lt:TransportLine ;
+    rdfs:label "969" ;
+    lt:lineName "969" .
+
+lt:line_97 a lt:TransportLine ;
+    rdfs:label "97" ;
+    lt:lineName "97" .
+
+lt:line_98 a lt:TransportLine ;
+    rdfs:label "98" ;
+    lt:lineName "98" .
+
+lt:line_99 a lt:TransportLine ;
+    rdfs:label "99" ;
+    lt:lineName "99" .
+
+lt:line_a10 a lt:TransportLine ;
+    rdfs:label "A10" ;
+    lt:lineName "A10" .
+
+lt:line_avanti-west-coast a lt:TransportLine ;
+    rdfs:label "Avanti West Coast" ;
+    lt:lineName "Avanti West Coast" .
+
+lt:line_b11 a lt:TransportLine ;
+    rdfs:label "B11" ;
+    lt:lineName "B11" .
+
+lt:line_b12 a lt:TransportLine ;
+    rdfs:label "B12" ;
+    lt:lineName "B12" .
+
+lt:line_b13 a lt:TransportLine ;
+    rdfs:label "B13" ;
+    lt:lineName "B13" .
+
+lt:line_b14 a lt:TransportLine ;
+    rdfs:label "B14" ;
+    lt:lineName "B14" .
+
+lt:line_b15 a lt:TransportLine ;
+    rdfs:label "B15" ;
+    lt:lineName "B15" .
+
+lt:line_b16 a lt:TransportLine ;
+    rdfs:label "B16" ;
+    lt:lineName "B16" .
+
+lt:line_bakerloo a lt:TubeLine ;
+    rdfs:label "Bakerloo" ;
+    lt:lineName "Bakerloo" .
+
+lt:line_bl1 a lt:TransportLine ;
+    rdfs:label "BL1" ;
+    lt:lineName "BL1" .
+
+lt:line_c1 a lt:TransportLine ;
+    rdfs:label "C1" ;
+    lt:lineName "C1" .
+
+lt:line_c10 a lt:TransportLine ;
+    rdfs:label "C10" ;
+    lt:lineName "C10" .
+
+lt:line_c11 a lt:TransportLine ;
+    rdfs:label "C11" ;
+    lt:lineName "C11" .
+
+lt:line_c2c a lt:TransportLine ;
+    rdfs:label "c2c" ;
+    lt:lineName "c2c" .
+
+lt:line_c3 a lt:TransportLine ;
+    rdfs:label "C3" ;
+    lt:lineName "C3" .
+
+lt:line_central a lt:TubeLine ;
+    rdfs:label "Central" ;
+    lt:lineName "Central" .
+
+lt:line_chiltern-railways a lt:TransportLine ;
+    rdfs:label "Chiltern Railways" ;
+    lt:lineName "Chiltern Railways" .
+
+lt:line_circle a lt:TubeLine ;
+    rdfs:label "Circle" ;
+    lt:lineName "Circle" .
+
+lt:line_crosscountry a lt:TransportLine ;
+    rdfs:label "CrossCountry" ;
+    lt:lineName "CrossCountry" .
+
+lt:line_d3 a lt:TransportLine ;
+    rdfs:label "D3" ;
+    lt:lineName "D3" .
+
+lt:line_d6 a lt:TransportLine ;
+    rdfs:label "D6" ;
+    lt:lineName "D6" .
+
+lt:line_d7 a lt:TransportLine ;
+    rdfs:label "D7" ;
+    lt:lineName "D7" .
+
+lt:line_d8 a lt:TransportLine ;
+    rdfs:label "D8" ;
+    lt:lineName "D8" .
+
+lt:line_district a lt:TubeLine ;
+    rdfs:label "District" ;
+    lt:lineName "District" .
+
+lt:line_dlr a lt:DLRLine ;
+    rdfs:label "DLR" ;
+    lt:lineName "DLR" .
+
+lt:line_e1 a lt:TransportLine ;
+    rdfs:label "E1" ;
+    lt:lineName "E1" .
+
+lt:line_e10 a lt:TransportLine ;
+    rdfs:label "E10" ;
+    lt:lineName "E10" .
+
+lt:line_e11 a lt:TransportLine ;
+    rdfs:label "E11" ;
+    lt:lineName "E11" .
+
+lt:line_e2 a lt:TransportLine ;
+    rdfs:label "E2" ;
+    lt:lineName "E2" .
+
+lt:line_e3 a lt:TransportLine ;
+    rdfs:label "E3" ;
+    lt:lineName "E3" .
+
+lt:line_e5 a lt:TransportLine ;
+    rdfs:label "E5" ;
+    lt:lineName "E5" .
+
+lt:line_e6 a lt:TransportLine ;
+    rdfs:label "E6" ;
+    lt:lineName "E6" .
+
+lt:line_e7 a lt:TransportLine ;
+    rdfs:label "E7" ;
+    lt:lineName "E7" .
+
+lt:line_e8 a lt:TransportLine ;
+    rdfs:label "E8" ;
+    lt:lineName "E8" .
+
+lt:line_e9 a lt:TransportLine ;
+    rdfs:label "E9" ;
+    lt:lineName "E9" .
+
+lt:line_east-midlands-railway a lt:TransportLine ;
+    rdfs:label "East Midlands Railway" ;
+    lt:lineName "East Midlands Railway" .
+
+lt:line_el1 a lt:TransportLine ;
+    rdfs:label "EL1" ;
+    lt:lineName "EL1" .
+
+lt:line_el2 a lt:TransportLine ;
+    rdfs:label "EL2" ;
+    lt:lineName "EL2" .
+
+lt:line_el3 a lt:TransportLine ;
+    rdfs:label "EL3" ;
+    lt:lineName "EL3" .
+
+lt:line_elizabeth a lt:ElizabethLine ;
+    rdfs:label "Elizabeth line" ;
+    lt:lineName "Elizabeth line" .
+
+lt:line_g1 a lt:TransportLine ;
+    rdfs:label "G1" ;
+    lt:lineName "G1" .
+
+lt:line_gatwick-express a lt:TransportLine ;
+    rdfs:label "Gatwick Express" ;
+    lt:lineName "Gatwick Express" .
+
+lt:line_grand-central a lt:TransportLine ;
+    rdfs:label "Grand Central" ;
+    lt:lineName "Grand Central" .
+
+lt:line_great-northern a lt:TransportLine ;
+    rdfs:label "Great Northern" ;
+    lt:lineName "Great Northern" .
+
+lt:line_great-western-railway a lt:TransportLine ;
+    rdfs:label "Great Western Railway" ;
+    lt:lineName "Great Western Railway" .
+
+lt:line_greater-anglia a lt:TransportLine ;
+    rdfs:label "Greater Anglia" ;
+    lt:lineName "Greater Anglia" .
+
+lt:line_h10 a lt:TransportLine ;
+    rdfs:label "H10" ;
+    lt:lineName "H10" .
+
+lt:line_h11 a lt:TransportLine ;
+    rdfs:label "H11" ;
+    lt:lineName "H11" .
+
+lt:line_h12 a lt:TransportLine ;
+    rdfs:label "H12" ;
+    lt:lineName "H12" .
+
+lt:line_h13 a lt:TransportLine ;
+    rdfs:label "H13" ;
+    lt:lineName "H13" .
+
+lt:line_h14 a lt:TransportLine ;
+    rdfs:label "H14" ;
+    lt:lineName "H14" .
+
+lt:line_h17 a lt:TransportLine ;
+    rdfs:label "H17" ;
+    lt:lineName "H17" .
+
+lt:line_h18 a lt:TransportLine ;
+    rdfs:label "H18" ;
+    lt:lineName "H18" .
+
+lt:line_h19 a lt:TransportLine ;
+    rdfs:label "H19" ;
+    lt:lineName "H19" .
+
+lt:line_h2 a lt:TransportLine ;
+    rdfs:label "H2" ;
+    lt:lineName "H2" .
+
+lt:line_h20 a lt:TransportLine ;
+    rdfs:label "H20" ;
+    lt:lineName "H20" .
+
+lt:line_h22 a lt:TransportLine ;
+    rdfs:label "H22" ;
+    lt:lineName "H22" .
+
+lt:line_h25 a lt:TransportLine ;
+    rdfs:label "H25" ;
+    lt:lineName "H25" .
+
+lt:line_h26 a lt:TransportLine ;
+    rdfs:label "H26" ;
+    lt:lineName "H26" .
+
+lt:line_h28 a lt:TransportLine ;
+    rdfs:label "H28" ;
+    lt:lineName "H28" .
+
+lt:line_h3 a lt:TransportLine ;
+    rdfs:label "H3" ;
+    lt:lineName "H3" .
+
+lt:line_h32 a lt:TransportLine ;
+    rdfs:label "H32" ;
+    lt:lineName "H32" .
+
+lt:line_h37 a lt:TransportLine ;
+    rdfs:label "H37" ;
+    lt:lineName "H37" .
+
+lt:line_h9 a lt:TransportLine ;
+    rdfs:label "H9" ;
+    lt:lineName "H9" .
+
+lt:line_h91 a lt:TransportLine ;
+    rdfs:label "H91" ;
+    lt:lineName "H91" .
+
+lt:line_h98 a lt:TransportLine ;
+    rdfs:label "H98" ;
+    lt:lineName "H98" .
+
+lt:line_hammersmith-city a lt:TubeLine ;
+    rdfs:label "Hammersmith & City" ;
+    lt:lineName "Hammersmith & City" .
+
+lt:line_heathrow-express a lt:TransportLine ;
+    rdfs:label "Heathrow Express" ;
+    lt:lineName "Heathrow Express" .
+
+lt:line_hull-trains a lt:TransportLine ;
+    rdfs:label "Hull Trains" ;
+    lt:lineName "Hull Trains" .
+
+lt:line_island-line a lt:TransportLine ;
+    rdfs:label "Island Line" ;
+    lt:lineName "Island Line" .
+
+lt:line_jubilee a lt:TubeLine ;
+    rdfs:label "Jubilee" ;
+    lt:lineName "Jubilee" .
+
+lt:line_k1 a lt:TransportLine ;
+    rdfs:label "K1" ;
+    lt:lineName "K1" .
+
+lt:line_k2 a lt:TransportLine ;
+    rdfs:label "K2" ;
+    lt:lineName "K2" .
+
+lt:line_k3 a lt:TransportLine ;
+    rdfs:label "K3" ;
+    lt:lineName "K3" .
+
+lt:line_k4 a lt:TransportLine ;
+    rdfs:label "K4" ;
+    lt:lineName "K4" .
+
+lt:line_k5 a lt:TransportLine ;
+    rdfs:label "K5" ;
+    lt:lineName "K5" .
+
+lt:line_liberty a lt:OvergroundLine ;
+    rdfs:label "Liberty" ;
+    lt:lineName "Liberty" .
+
+lt:line_lioness a lt:OvergroundLine ;
+    rdfs:label "Lioness" ;
+    lt:lineName "Lioness" .
+
+lt:line_london-cable-car a lt:TransportLine ;
+    rdfs:label "IFS Cloud Cable Car" ;
+    lt:lineName "IFS Cloud Cable Car" .
+
+lt:line_london-north-eastern-railway a lt:TransportLine ;
+    rdfs:label "London North Eastern Railway" ;
+    lt:lineName "London North Eastern Railway" .
+
+lt:line_lumo a lt:TransportLine ;
+    rdfs:label "Lumo" ;
+    lt:lineName "Lumo" .
+
+lt:line_merseyrail a lt:TransportLine ;
+    rdfs:label "Merseyrail" ;
+    lt:lineName "Merseyrail" .
+
+lt:line_metropolitan a lt:TubeLine ;
+    rdfs:label "Metropolitan" ;
+    lt:lineName "Metropolitan" .
+
+lt:line_mildmay a lt:OvergroundLine ;
+    rdfs:label "Mildmay" ;
+    lt:lineName "Mildmay" .
+
+lt:line_n1 a lt:TransportLine ;
+    rdfs:label "N1" ;
+    lt:lineName "N1" .
+
+lt:line_n109 a lt:TransportLine ;
+    rdfs:label "N109" ;
+    lt:lineName "N109" .
+
+lt:line_n11 a lt:TransportLine ;
+    rdfs:label "N11" ;
+    lt:lineName "N11" .
+
+lt:line_n113 a lt:TransportLine ;
+    rdfs:label "N113" ;
+    lt:lineName "N113" .
+
+lt:line_n118 a lt:TransportLine ;
+    rdfs:label "N118" ;
+    lt:lineName "N118" .
+
+lt:line_n133 a lt:TransportLine ;
+    rdfs:label "N133" ;
+    lt:lineName "N133" .
+
+lt:line_n136 a lt:TransportLine ;
+    rdfs:label "N136" ;
+    lt:lineName "N136" .
+
+lt:line_n137 a lt:TransportLine ;
+    rdfs:label "N137" ;
+    lt:lineName "N137" .
+
+lt:line_n140 a lt:TransportLine ;
+    rdfs:label "N140" ;
+    lt:lineName "N140" .
+
+lt:line_n15 a lt:TransportLine ;
+    rdfs:label "N15" ;
+    lt:lineName "N15" .
+
+lt:line_n155 a lt:TransportLine ;
+    rdfs:label "N155" ;
+    lt:lineName "N155" .
+
+lt:line_n171 a lt:TransportLine ;
+    rdfs:label "N171" ;
+    lt:lineName "N171" .
+
+lt:line_n18 a lt:TransportLine ;
+    rdfs:label "N18" ;
+    lt:lineName "N18" .
+
+lt:line_n19 a lt:TransportLine ;
+    rdfs:label "N19" ;
+    lt:lineName "N19" .
+
+lt:line_n199 a lt:TransportLine ;
+    rdfs:label "N199" ;
+    lt:lineName "N199" .
+
+lt:line_n2 a lt:TransportLine ;
+    rdfs:label "N2" ;
+    lt:lineName "N2" .
+
+lt:line_n20 a lt:TransportLine ;
+    rdfs:label "N20" ;
+    lt:lineName "N20" .
+
+lt:line_n205 a lt:TransportLine ;
+    rdfs:label "N205" ;
+    lt:lineName "N205" .
+
+lt:line_n207 a lt:TransportLine ;
+    rdfs:label "N207" ;
+    lt:lineName "N207" .
+
+lt:line_n21 a lt:TransportLine ;
+    rdfs:label "N21" ;
+    lt:lineName "N21" .
+
+lt:line_n22 a lt:TransportLine ;
+    rdfs:label "N22" ;
+    lt:lineName "N22" .
+
+lt:line_n242 a lt:TransportLine ;
+    rdfs:label "N242" ;
+    lt:lineName "N242" .
+
+lt:line_n25 a lt:TransportLine ;
+    rdfs:label "N25" ;
+    lt:lineName "N25" .
+
+lt:line_n250 a lt:TransportLine ;
+    rdfs:label "N250" ;
+    lt:lineName "N250" .
+
+lt:line_n253 a lt:TransportLine ;
+    rdfs:label "N253" ;
+    lt:lineName "N253" .
+
+lt:line_n26 a lt:TransportLine ;
+    rdfs:label "N26" ;
+    lt:lineName "N26" .
+
+lt:line_n263 a lt:TransportLine ;
+    rdfs:label "N263" ;
+    lt:lineName "N263" .
+
+lt:line_n266 a lt:TransportLine ;
+    rdfs:label "N266" ;
+    lt:lineName "N266" .
+
+lt:line_n27 a lt:TransportLine ;
+    rdfs:label "N27" ;
+    lt:lineName "N27" .
+
+lt:line_n277 a lt:TransportLine ;
+    rdfs:label "N277" ;
+    lt:lineName "N277" .
+
+lt:line_n279 a lt:TransportLine ;
+    rdfs:label "N279" ;
+    lt:lineName "N279" .
+
+lt:line_n28 a lt:TransportLine ;
+    rdfs:label "N28" ;
+    lt:lineName "N28" .
+
+lt:line_n29 a lt:TransportLine ;
+    rdfs:label "N29" ;
+    lt:lineName "N29" .
+
+lt:line_n3 a lt:TransportLine ;
+    rdfs:label "N3" ;
+    lt:lineName "N3" .
+
+lt:line_n31 a lt:TransportLine ;
+    rdfs:label "N31" ;
+    lt:lineName "N31" .
+
+lt:line_n32 a lt:TransportLine ;
+    rdfs:label "N32" ;
+    lt:lineName "N32" .
+
+lt:line_n33 a lt:TransportLine ;
+    rdfs:label "N33" ;
+    lt:lineName "N33" .
+
+lt:line_n343 a lt:TransportLine ;
+    rdfs:label "N343" ;
+    lt:lineName "N343" .
+
+lt:line_n38 a lt:TransportLine ;
+    rdfs:label "N38" ;
+    lt:lineName "N38" .
+
+lt:line_n381 a lt:TransportLine ;
+    rdfs:label "N381" ;
+    lt:lineName "N381" .
+
+lt:line_n41 a lt:TransportLine ;
+    rdfs:label "N41" ;
+    lt:lineName "N41" .
+
+lt:line_n44 a lt:TransportLine ;
+    rdfs:label "N44" ;
+    lt:lineName "N44" .
+
+lt:line_n472 a lt:TransportLine ;
+    rdfs:label "N472" ;
+    lt:lineName "N472" .
+
+lt:line_n5 a lt:TransportLine ;
+    rdfs:label "N5" ;
+    lt:lineName "N5" .
+
+lt:line_n53 a lt:TransportLine ;
+    rdfs:label "N53" ;
+    lt:lineName "N53" .
+
+lt:line_n55 a lt:TransportLine ;
+    rdfs:label "N55" ;
+    lt:lineName "N55" .
+
+lt:line_n550 a lt:TransportLine ;
+    rdfs:label "N550" ;
+    lt:lineName "N550" .
+
+lt:line_n551 a lt:TransportLine ;
+    rdfs:label "N551" ;
+    lt:lineName "N551" .
+
+lt:line_n63 a lt:TransportLine ;
+    rdfs:label "N63" ;
+    lt:lineName "N63" .
+
+lt:line_n65 a lt:TransportLine ;
+    rdfs:label "N65" ;
+    lt:lineName "N65" .
+
+lt:line_n68 a lt:TransportLine ;
+    rdfs:label "N68" ;
+    lt:lineName "N68" .
+
+lt:line_n7 a lt:TransportLine ;
+    rdfs:label "N7" ;
+    lt:lineName "N7" .
+
+lt:line_n72 a lt:TransportLine ;
+    rdfs:label "N72" ;
+    lt:lineName "N72" .
+
+lt:line_n73 a lt:TransportLine ;
+    rdfs:label "N73" ;
+    lt:lineName "N73" .
+
+lt:line_n74 a lt:TransportLine ;
+    rdfs:label "N74" ;
+    lt:lineName "N74" .
+
+lt:line_n8 a lt:TransportLine ;
+    rdfs:label "N8" ;
+    lt:lineName "N8" .
+
+lt:line_n83 a lt:TransportLine ;
+    rdfs:label "N83" ;
+    lt:lineName "N83" .
+
+lt:line_n86 a lt:TransportLine ;
+    rdfs:label "N86" ;
+    lt:lineName "N86" .
+
+lt:line_n87 a lt:TransportLine ;
+    rdfs:label "N87" ;
+    lt:lineName "N87" .
+
+lt:line_n89 a lt:TransportLine ;
+    rdfs:label "N89" ;
+    lt:lineName "N89" .
+
+lt:line_n9 a lt:TransportLine ;
+    rdfs:label "N9" ;
+    lt:lineName "N9" .
+
+lt:line_n91 a lt:TransportLine ;
+    rdfs:label "N91" ;
+    lt:lineName "N91" .
+
+lt:line_n97 a lt:TransportLine ;
+    rdfs:label "N97" ;
+    lt:lineName "N97" .
+
+lt:line_n98 a lt:TransportLine ;
+    rdfs:label "N98" ;
+    lt:lineName "N98" .
+
+lt:line_northern a lt:TubeLine ;
+    rdfs:label "Northern" ;
+    lt:lineName "Northern" .
+
+lt:line_northern-rail a lt:TransportLine ;
+    rdfs:label "Northern Rail" ;
+    lt:lineName "Northern Rail" .
+
+lt:line_p12 a lt:TransportLine ;
+    rdfs:label "P12" ;
+    lt:lineName "P12" .
+
+lt:line_p13 a lt:TransportLine ;
+    rdfs:label "P13" ;
+    lt:lineName "P13" .
+
+lt:line_p4 a lt:TransportLine ;
+    rdfs:label "P4" ;
+    lt:lineName "P4" .
+
+lt:line_p5 a lt:TransportLine ;
+    rdfs:label "P5" ;
+    lt:lineName "P5" .
+
+lt:line_piccadilly a lt:TubeLine ;
+    rdfs:label "Piccadilly" ;
+    lt:lineName "Piccadilly" .
+
+lt:line_r1 a lt:TransportLine ;
+    rdfs:label "R1" ;
+    lt:lineName "R1" .
+
+lt:line_r10 a lt:TransportLine ;
+    rdfs:label "R10" ;
+    lt:lineName "R10" .
+
+lt:line_r11 a lt:TransportLine ;
+    rdfs:label "R11" ;
+    lt:lineName "R11" .
+
+lt:line_r2 a lt:TransportLine ;
+    rdfs:label "R2" ;
+    lt:lineName "R2" .
+
+lt:line_r3 a lt:TransportLine ;
+    rdfs:label "R3" ;
+    lt:lineName "R3" .
+
+lt:line_r4 a lt:TransportLine ;
+    rdfs:label "R4" ;
+    lt:lineName "R4" .
+
+lt:line_r5 a lt:TransportLine ;
+    rdfs:label "R5" ;
+    lt:lineName "R5" .
+
+lt:line_r68 a lt:TransportLine ;
+    rdfs:label "R68" ;
+    lt:lineName "R68" .
+
+lt:line_r7 a lt:TransportLine ;
+    rdfs:label "R7" ;
+    lt:lineName "R7" .
+
+lt:line_r70 a lt:TransportLine ;
+    rdfs:label "R70" ;
+    lt:lineName "R70" .
+
+lt:line_r8 a lt:TransportLine ;
+    rdfs:label "R8" ;
+    lt:lineName "R8" .
+
+lt:line_r9 a lt:TransportLine ;
+    rdfs:label "R9" ;
+    lt:lineName "R9" .
+
+lt:line_rb1 a lt:RiverBusLine ;
+    rdfs:label "RB1" ;
+    lt:lineName "RB1" .
+
+lt:line_rb2 a lt:RiverBusLine ;
+    rdfs:label "RB2" ;
+    lt:lineName "RB2" .
+
+lt:line_rb4 a lt:RiverBusLine ;
+    rdfs:label "RB4" ;
+    lt:lineName "RB4" .
+
+lt:line_rb6 a lt:RiverBusLine ;
+    rdfs:label "RB6" ;
+    lt:lineName "RB6" .
+
+lt:line_s1 a lt:TransportLine ;
+    rdfs:label "S1" ;
+    lt:lineName "S1" .
+
+lt:line_s2 a lt:TransportLine ;
+    rdfs:label "S2" ;
+    lt:lineName "S2" .
+
+lt:line_s3 a lt:TransportLine ;
+    rdfs:label "S3" ;
+    lt:lineName "S3" .
+
+lt:line_s4 a lt:TransportLine ;
+    rdfs:label "S4" ;
+    lt:lineName "S4" .
+
+lt:line_scotrail a lt:TransportLine ;
+    rdfs:label "ScotRail" ;
+    lt:lineName "ScotRail" .
+
+lt:line_scs a lt:TransportLine ;
+    rdfs:label "SCS" ;
+    lt:lineName "SCS" .
+
+lt:line_sl1 a lt:TransportLine ;
+    rdfs:label "SL1" ;
+    lt:lineName "SL1" .
+
+lt:line_sl10 a lt:TransportLine ;
+    rdfs:label "SL10" ;
+    lt:lineName "SL10" .
+
+lt:line_sl11 a lt:TransportLine ;
+    rdfs:label "SL11" ;
+    lt:lineName "SL11" .
+
+lt:line_sl2 a lt:TransportLine ;
+    rdfs:label "SL2" ;
+    lt:lineName "SL2" .
+
+lt:line_sl3 a lt:TransportLine ;
+    rdfs:label "SL3" ;
+    lt:lineName "SL3" .
+
+lt:line_sl4 a lt:TransportLine ;
+    rdfs:label "SL4" ;
+    lt:lineName "SL4" .
+
+lt:line_sl5 a lt:TransportLine ;
+    rdfs:label "SL5" ;
+    lt:lineName "SL5" .
+
+lt:line_sl6 a lt:TransportLine ;
+    rdfs:label "SL6" ;
+    lt:lineName "SL6" .
+
+lt:line_sl7 a lt:TransportLine ;
+    rdfs:label "SL7" ;
+    lt:lineName "SL7" .
+
+lt:line_sl8 a lt:TransportLine ;
+    rdfs:label "SL8" ;
+    lt:lineName "SL8" .
+
+lt:line_sl9 a lt:TransportLine ;
+    rdfs:label "SL9" ;
+    lt:lineName "SL9" .
+
+lt:line_south-western-railway a lt:TransportLine ;
+    rdfs:label "South Western Railway" ;
+    lt:lineName "South Western Railway" .
+
+lt:line_southeastern a lt:TransportLine ;
+    rdfs:label "Southeastern" ;
+    lt:lineName "Southeastern" .
+
+lt:line_southern a lt:TransportLine ;
+    rdfs:label "Southern" ;
+    lt:lineName "Southern" .
+
+lt:line_suffragette a lt:OvergroundLine ;
+    rdfs:label "Suffragette" ;
+    lt:lineName "Suffragette" .
+
+lt:line_thameslink a lt:TransportLine ;
+    rdfs:label "Thameslink" ;
+    lt:lineName "Thameslink" .
+
+lt:line_tram a lt:TramLine ;
+    rdfs:label "Tram" ;
+    lt:lineName "Tram" .
+
+lt:line_transpennine-express a lt:TransportLine ;
+    rdfs:label "TransPennine Express" ;
+    lt:lineName "TransPennine Express" .
+
+lt:line_transport-for-wales a lt:TransportLine ;
+    rdfs:label "Transport for Wales" ;
+    lt:lineName "Transport for Wales" .
+
+lt:line_u1 a lt:TransportLine ;
+    rdfs:label "U1" ;
+    lt:lineName "U1" .
+
+lt:line_u10 a lt:TransportLine ;
+    rdfs:label "U10" ;
+    lt:lineName "U10" .
+
+lt:line_u2 a lt:TransportLine ;
+    rdfs:label "U2" ;
+    lt:lineName "U2" .
+
+lt:line_u3 a lt:TransportLine ;
+    rdfs:label "U3" ;
+    lt:lineName "U3" .
+
+lt:line_u4 a lt:TransportLine ;
+    rdfs:label "U4" ;
+    lt:lineName "U4" .
+
+lt:line_u5 a lt:TransportLine ;
+    rdfs:label "U5" ;
+    lt:lineName "U5" .
+
+lt:line_u7 a lt:TransportLine ;
+    rdfs:label "U7" ;
+    lt:lineName "U7" .
+
+lt:line_u9 a lt:TransportLine ;
+    rdfs:label "U9" ;
+    lt:lineName "U9" .
+
+lt:line_victoria a lt:TubeLine ;
+    rdfs:label "Victoria" ;
+    lt:lineName "Victoria" .
+
+lt:line_w11 a lt:TransportLine ;
+    rdfs:label "W11" ;
+    lt:lineName "W11" .
+
+lt:line_w12 a lt:TransportLine ;
+    rdfs:label "W12" ;
+    lt:lineName "W12" .
+
+lt:line_w13 a lt:TransportLine ;
+    rdfs:label "W13" ;
+    lt:lineName "W13" .
+
+lt:line_w14 a lt:TransportLine ;
+    rdfs:label "W14" ;
+    lt:lineName "W14" .
+
+lt:line_w15 a lt:TransportLine ;
+    rdfs:label "W15" ;
+    lt:lineName "W15" .
+
+lt:line_w16 a lt:TransportLine ;
+    rdfs:label "W16" ;
+    lt:lineName "W16" .
+
+lt:line_w19 a lt:TransportLine ;
+    rdfs:label "W19" ;
+    lt:lineName "W19" .
+
+lt:line_w3 a lt:TransportLine ;
+    rdfs:label "W3" ;
+    lt:lineName "W3" .
+
+lt:line_w4 a lt:TransportLine ;
+    rdfs:label "W4" ;
+    lt:lineName "W4" .
+
+lt:line_w5 a lt:TransportLine ;
+    rdfs:label "W5" ;
+    lt:lineName "W5" .
+
+lt:line_w6 a lt:TransportLine ;
+    rdfs:label "W6" ;
+    lt:lineName "W6" .
+
+lt:line_w7 a lt:TransportLine ;
+    rdfs:label "W7" ;
+    lt:lineName "W7" .
+
+lt:line_w8 a lt:TransportLine ;
+    rdfs:label "W8" ;
+    lt:lineName "W8" .
+
+lt:line_w9 a lt:TransportLine ;
+    rdfs:label "W9" ;
+    lt:lineName "W9" .
+
+lt:line_waterloo-city a lt:TubeLine ;
+    rdfs:label "Waterloo & City" ;
+    lt:lineName "Waterloo & City" .
+
+lt:line_weaver a lt:OvergroundLine ;
+    rdfs:label "Weaver" ;
+    lt:lineName "Weaver" .
+
+lt:line_west-midlands-trains a lt:TransportLine ;
+    rdfs:label "West Midlands Trains" ;
+    lt:lineName "West Midlands Trains" .
+
+lt:line_windrush a lt:OvergroundLine ;
+    rdfs:label "Windrush" ;
+    lt:lineName "Windrush" .
+
+lt:line_woolwich-ferry a lt:RiverBusLine ;
+    rdfs:label "Woolwich Ferry" ;
+    lt:lineName "Woolwich Ferry" .
+
+lt:naptanCode a owl:DatatypeProperty ;
+    rdfs:label "NaPTAN stop code" ;
+    rdfs:domain gtfs:Stop ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf gtfs:stopName .
+
+lt:onRoute a owl:ObjectProperty ;
+    rdfs:label "on route" ;
+    rdfs:domain gtfs:Trip ;
+    rdfs:range gtfs:Route .
+
+lt:onTrip a owl:ObjectProperty ;
+    rdfs:label "on trip" ;
+    rdfs:domain gtfs:StopTime ;
+    rdfs:range gtfs:Trip .
+
+lt:operatedBy a owl:ObjectProperty ;
+    rdfs:label "operated by" ;
+    rdfs:domain gtfs:Route ;
+    rdfs:range lt:TransportOperator .
+
+lt:operatorName a owl:DatatypeProperty ;
+    rdfs:label "Operator trading name" ;
+    rdfs:domain lt:TransportOperator ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf schema1:name .
+
+lt:stopsAt a owl:ObjectProperty ;
+    rdfs:label "stops at" ;
+    rdfs:domain gtfs:StopTime ;
+    rdfs:range gtfs:Stop .
+
+lt:wheelchairAccessible a owl:DatatypeProperty ;
+    rdfs:label "wheelchair accessible" ;
+    rdfs:range xsd:boolean .
+
+schema1:BusStation a owl:Class .
+
+schema1:TrainStation a owl:Class .
+
+schema1:geo a owl:ObjectProperty .
+
+schema1:url a owl:DatatypeProperty .
+
+gtfs:Agency a owl:Class .
+
+gtfs:arrivalTime a owl:DatatypeProperty .
+
+gtfs:departureTime a owl:DatatypeProperty .
+
+gtfs:headsign a owl:DatatypeProperty .
+
+gtfs:lat a owl:DatatypeProperty .
+
+gtfs:long a owl:DatatypeProperty .
+
+lt:BusRoute a owl:Class ;
+    rdfs:label "Bus Route" ;
+    rdfs:subClassOf gtfs:Route .
+
+lt:DLRLine a owl:Class ;
+    rdfs:label "DLR Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+lt:ElizabethLine a owl:Class ;
+    rdfs:label "Elizabeth Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+lt:TramLine a owl:Class ;
+    rdfs:label "Tram Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+schema1:Organization a owl:Class .
+
+schema1:Place a owl:Class .
+
+gtfs:Service a owl:Class .
+
+gtfs:routeShortName a owl:DatatypeProperty .
+
+gtfs:stopName a owl:DatatypeProperty .
+
+lt:TransportOperator a owl:Class ;
+    rdfs:label "Transport Operator" ;
+    rdfs:subClassOf schema1:Organization .
+
+schema1:name a owl:DatatypeProperty .
+
+gtfs:StopTime a owl:Class .
+
+gtfs:Trip a owl:Class .
+
+lt:RiverBusLine a owl:Class ;
+    rdfs:label "River Bus Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+gtfs:Stop a owl:Class .
+
+lt:OvergroundLine a owl:Class ;
+    rdfs:label "London Overground Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+gtfs:Route a owl:Class .
+
+lt:TubeLine a owl:Class ;
+    rdfs:label "London Underground Line" ;
+    rdfs:subClassOf lt:TransportLine .
+
+lt:TransportLine a owl:Class ;
+    rdfs:label "Transport Line" ;
+    rdfs:subClassOf schema1:Place .
+
