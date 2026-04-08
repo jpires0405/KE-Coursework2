@@ -20,9 +20,8 @@ llm_competency_questions = [
         "query": """
             SELECT ?stationName (COUNT(?route) AS ?routeCount)
             WHERE {
-                ?operator rdfs:label "Transport for London" .
-                ?route lt:operatedBy ?operator ;
-                       a gtfs:Route ;
+                ?route a gtfs:Route ;
+                       lt:operatedBy lt:tfl ;
                        lt:servesStation|lt:hasStop ?station .
                 ?station rdfs:label|lt:name ?stationName .
             }
@@ -33,28 +32,30 @@ llm_competency_questions = [
     },
     {
         "id": "CQ12",
-        "question": "Which tube lines have the highest average ridership during peak hours, according to the TfL Annual Report?",
+        "question": "Which bus routes have the highest frequency according to the TfL Annual Report?",
         "query": """
-            SELECT DISTINCT ?lineName ?ridership
+            SELECT ?routeName ?frequency
             WHERE {
-                ?line a lt:TubeLine ;
-                      lt:mentionedInReport lt:tfl_annual_report_2024_25 ;
-                      lt:hasRidership ?ridership ;
-                      rdfs:label|lt:name ?lineName .
+                ?route a gtfs:Route ;
+                       lt:mentionedInReport lt:tfl_annual_report_2024_25 ;
+                       lt:hasFrequency ?frequency ;
+                       rdfs:label|lt:name ?routeName .
             }
-            ORDER BY DESC(?ridership)
-            LIMIT 5
+            ORDER BY DESC(?frequency)
+            LIMIT 10
         """
     },
     {
         "id": "CQ13",
-        "question": "What are the names of all train stations that are wheelchair accessible and have a direct connection to the Elizabeth line?",
+        "question": "Which transport operators have routes that are both mentioned in the report and have a frequency value?",
         "query": """
-            SELECT DISTINCT ?stationName
+            SELECT DISTINCT ?operatorName
             WHERE {
-                lt:london_elizabeth_line lt:servesStation|lt:hasStop ?station .
-                ?station lt:wheelchairAccessible true ;
-                         rdfs:label|lt:name ?stationName .
+                ?route a gtfs:Route ;
+                       lt:mentionedInReport lt:tfl_annual_report_2024_25 ;
+                       lt:hasFrequency ?frequency ;
+                       lt:operatedBy ?operator .
+                ?operator rdfs:label|lt:name ?operatorName .
             }
         """
     },
@@ -75,94 +76,94 @@ llm_competency_questions = [
     },
     {
         "id": "CQ15",
-        "question": "What are the coordinates of all stops that are within a 1km radius of a wheelchair accessible train station on the Overground line?",
+        "question": "List all bus stops that are not wheelchair accessible but share a name with an interchange station.",
         "query": """
-            SELECT DISTINCT ?stationName ?lat ?lon
+            SELECT DISTINCT ?busStopName ?interchangeName
             WHERE {
-                lt:london_overground lt:servesStation|lt:hasStop ?station .
-                ?station lt:wheelchairAccessible true ;
-                         rdfs:label|lt:name ?stationName ;
-                         gtfs:lat ?lat ;
-                         gtfs:long ?lon .
+                ?interchange a lt:Interchange ;
+                             rdfs:label|lt:name ?interchangeName .
+                ?busStop a lt:BusStop ;
+                         lt:wheelchairAccessible false ;
+                         rdfs:label|lt:name ?busStopName .
+                FILTER(CONTAINS(LCASE(?busStopName), LCASE(?interchangeName)))
             }
         """
     },
     {
         "id": "CQ16",
-        "question": "Which transport operators have the most routes with night service, and what are the corresponding route numbers?",
+        "question": "Which routes are mentioned in the TfL Annual Report and are operated by an operator that also operates a tube line?",
         "query": """
-            SELECT ?operatorName (COUNT(?route) AS ?nightRouteCount) (GROUP_CONCAT(?routeName; separator=", ") AS ?routes)
+            SELECT DISTINCT ?routeName ?operatorName ?tubeLineName
             WHERE {
-                ?route lt:hasNightService true ;
+                ?route a gtfs:Route ;
+                       lt:mentionedInReport lt:tfl_annual_report_2024_25 ;
                        lt:operatedBy ?operator ;
                        rdfs:label|lt:name ?routeName .
+                ?tubeLine a lt:TubeLine ;
+                          lt:operatedBy ?operator ;
+                          rdfs:label|lt:name ?tubeLineName .
                 ?operator rdfs:label|lt:name ?operatorName .
             }
-            GROUP BY ?operatorName
-            HAVING (COUNT(?route) > 0)
-            ORDER BY DESC(?nightRouteCount)
         """
     },
     {
         "id": "CQ17",
-        "question": "What is the total number of bus stops that are served by routes operated by multiple transport operators, and which operators are they?",
+        "question": "Which bus services are active during the Easter weekend of 2026 (April 4–5, 2026)?",
         "query": """
-            SELECT ?stopName (COUNT(DISTINCT ?operator) AS ?operatorCount) (GROUP_CONCAT(DISTINCT ?operatorName; separator=", ") AS ?operators)
+            SELECT DISTINCT ?serviceId ?startDate ?endDate
             WHERE {
-                ?route a gtfs:Route ;
-                       lt:operatedBy ?operator ;
-                       lt:hasStop|lt:servesStation ?stop .
-                ?operator rdfs:label|lt:name ?operatorName .
-                ?stop rdfs:label|lt:name ?stopName .
+                ?service a gtfs:Service ;
+                         lt:startDate ?startDate ;
+                         lt:endDate ?endDate .
+                FILTER(?startDate <= "20260405" && ?endDate >= "20260404")
+                BIND(STR(?service) AS ?serviceId)
             }
-            GROUP BY ?stopName
-            HAVING (COUNT(DISTINCT ?operator) > 1)
         """
     },
     {
         "id": "CQ18",
-        "question": "Which tram lines have the lowest average ridership during off-peak hours, according to the TfL Annual Report, and what are their corresponding line colours?",
+        "question": "Which transport lines are currently experiencing disruptions, and what are the explicitly stated reasons for these disruptions?",
         "query": """
-            SELECT DISTINCT ?lineName ?color ?ridership
+            SELECT ?lineName ?reason
             WHERE {
-                ?line a lt:TramLine ;
-                      lt:mentionedInReport lt:tfl_annual_report_2024_25 ;
-                      lt:hasRidership ?ridership ;
-                      lt:lineColour|schema:color ?color ;
-                      rdfs:label|lt:name ?lineName .
+                ?line a/rdfs:subClassOf* lt:TransportLine ;
+                      lt:isDisrupted true ;
+                      lt:disruptionReason ?reason ;
+                      schema:name|lt:lineName|rdfs:label ?lineName .
             }
-            ORDER BY ASC(?ridership)
-            LIMIT 5
+            ORDER BY ?lineName
         """
     },
     {
         "id": "CQ19",
-        "question": "What are the names of all places that are served by both a river bus line and a train line?",
+        "question": "What are the names of train stations that are interchanges (lt:Interchange) between at least three different transport lines, and which lines are they?",
         "query": """
-            SELECT DISTINCT ?stopName
+            SELECT ?stationName (GROUP_CONCAT(DISTINCT ?lineName; separator=", ") AS ?lines)
             WHERE {
-                ?riverLine a lt:RiverBusLine ;
-                           lt:servesStation|lt:hasStop ?stop .
-                ?trainLine a lt:TubeLine ;
-                           lt:servesStation|lt:hasStop ?stop .
-                ?stop rdfs:label|lt:name ?stopName .
+                ?station a lt:Interchange ;
+                         rdfs:label|lt:name ?stationName .
+                ?line lt:servesStation|lt:hasStop ?station ;
+                      rdfs:label|lt:name ?lineName .
             }
+            GROUP BY ?stationName
+            HAVING (COUNT(DISTINCT ?line) >= 3)
+            ORDER BY DESC(COUNT(DISTINCT ?line))
         """
     },
     {
         "id": "CQ20",
-        "question": "Which train stations have the most interchanges with other transport lines, and what are the corresponding line names?",
+        "question": "What are the names of all transport operators that operate bus routes, and how many distinct bus routes does each operator manage?",
         "query": """
-            SELECT ?stationName (COUNT(DISTINCT ?line) AS ?lineCount) (GROUP_CONCAT(DISTINCT ?lineName; separator=", ") AS ?lines)
+            SELECT ?operatorName (COUNT(DISTINCT ?route) AS ?routeCount)
             WHERE {
-                ?line lt:servesStation|lt:hasStop ?station ;
-                      rdfs:label|lt:name ?lineName .
-                ?station rdfs:label|lt:name ?stationName .
+                ?operator a lt:TransportOperator ;
+                          schema:name|lt:operatorName|rdfs:label ?operatorName .
+                          
+                ?route a lt:BusRoute ;
+                       lt:operatedBy ?operator .
             }
-            GROUP BY ?stationName
-            HAVING (COUNT(DISTINCT ?line) > 1)
-            ORDER BY DESC(?lineCount)
-            LIMIT 10
+            GROUP BY ?operatorName
+            ORDER BY DESC(?routeCount)
         """
     }
 ]

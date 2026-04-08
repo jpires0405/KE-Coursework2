@@ -384,14 +384,14 @@ The temperature is set to 0.4 (higher than the ontology completion script) to en
 | ID | Question |
 |----|----------|
 | CQ11 | What are the most frequently served stations by bus routes operated by Transport for London? |
-| CQ12 | Which tube lines have the highest average ridership during peak hours, according to the TfL Annual Report? |
-| CQ13 | What are the names of all train stations that are wheelchair accessible and have a direct connection to the Elizabeth line? |
+| CQ12 | Which bus routes have the highest frequency according to the TfL Annual Report? |
+| CQ13 | Which transport operators have routes that are both mentioned in the report and have a frequency value? |
 | CQ14 | Which bus routes have the highest frequency of service and are mentioned in the TfL Annual Report as having improved reliability? |
-| CQ15 | What are the coordinates of all stops that are within a 1km radius of a wheelchair accessible train station on the Overground line? |
-| CQ16 | Which transport operators have the most routes with night service, and what are the corresponding route numbers? |
-| CQ17 | What is the total number of bus stops that are served by routes operated by multiple transport operators, and which operators are they? |
-| CQ18 | Which tram lines have the lowest average ridership during off-peak hours, according to the TfL Annual Report, and what are their corresponding line colours? |
-| CQ19 | What are the names of all places that are served by both a river bus line and a train line, and what are the nearest stops for each mode of transport? |
-| CQ20 | Which train stations have the most interchanges with other transport lines, and what are the corresponding line names and colours? |
+| CQ15 | List all bus stops that are not wheelchair accessible but share a name with an interchange station. |
+| CQ16 | Which routes are mentioned in the TfL Annual Report and are operated by an operator that also operates a tube line? |
+| CQ17 | Which bus services are active during the Easter weekend of 2026 (April 4–5, 2026)? |
+| CQ18 | Which transport lines are currently experiencing disruptions, and what are the explicitly stated reasons for these disruptions? |
+| CQ19 | What are the names of train stations that are interchanges (lt:Interchange) between at least three different transport lines, and which lines are they? |
+| CQ20 | What are the names of all transport operators that operate bus routes, and how many distinct bus routes does each operator manage? |
 
 ---
