@@ -1,0 +1,1165 @@
+@prefix gtfs: <http://vocab.gtfs.org/terms#> .
+@prefix lt: <http://example.org/london-transport#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+
+lt:60_london_oyster_photocards a gtfs:Route ;
+    rdfs:label "60+ London Oyster photocards" .
+
+lt:a10 a gtfs:Route ;
+    rdfs:label "A10" ;
+    lt:connectsTo lt:north_london .
+
+lt:acton a schema1:Place ;
+    rdfs:label "Acton" .
+
+lt:arches a lt:TransportLine ;
+    rdfs:label "Arches" ;
+    lt:lineName "Arches" .
+
+lt:arriva a lt:TransportOperator ;
+    rdfs:label "Arriva" ;
+    lt:operatorName "Arriva" .
+
+lt:audit_and_assurance_committee a gtfs:Route ;
+    rdfs:label "Audit and Assurance Committee" .
+
+lt:averagespeed_safety_camera_system lt:hasFrequency lt:reduced_collisions_involving_death_and_serious_injury_from_seven_in_2019_to_none_in_2023_and_2024 ;
+    lt:locatedIn lt:northern_part_of_the_a10 .
+
+lt:bakerloop_express_bus_route a gtfs:Route ;
+    rdfs:label "Bakerloop express bus route" ;
+    lt:operatedBy lt:tfl .
+
+lt:battersea_bridge lt:hasStop lt:bus_stop .
+
+lt:bbc a schema1:Place ;
+    rdfs:label "BBC" .
+
+lt:beckton_riverside a schema1:Place ;
+    rdfs:label "Beckton Riverside" ;
+    lt:locatedIn lt:dlr .
+
+lt:blackhorse_road a schema1:Place ;
+    rdfs:label "Blackhorse Road" .
+
+lt:blackhorse_road_properties_llp a lt:TransportOperator ;
+    rdfs:label "Blackhorse Road Properties LLP" ;
+    lt:locatedIn lt:london ;
+    lt:operatorName "Blackhorse Road Properties LLP" .
+
+lt:blackhorse_view a schema1:Place ;
+    rdfs:label "Blackhorse View" .
+
+lt:blackwall_tunnels a lt:TransportLine ;
+    rdfs:label "Blackwall Tunnels" ;
+    lt:lineName "Blackwall Tunnels" ;
+    schema1:description "tunnels" .
+
+lt:bollo_lane a schema1:Place ;
+    rdfs:label "Bollo Lane" .
+
+lt:bollo_lane_llp a lt:TransportOperator ;
+    rdfs:label "Bollo Lane LLP" ;
+    lt:locatedIn lt:london ;
+    lt:operatorName "Bollo Lane LLP" .
+
+lt:boroughs a schema1:Place ;
+    rdfs:label "Boroughs" .
+
+lt:build_east a schema1:Place ;
+    rdfs:label "Build East" .
+
+lt:bus_garage a lt:BusLine ;
+    rdfs:label "Bus garage" ;
+    lt:lineName "Bus garage" .
+
+lt:bus_passes a gtfs:Route ;
+    rdfs:label "bus passes" .
+
+lt:bus_route_358 a gtfs:Route ;
+    rdfs:label "Bus route 358" ;
+    lt:servesStation lt:crystal_palace,
+        lt:orpington .
+
+lt:capital_adjustment_account a gtfs:Route ;
+    rdfs:label "Capital Adjustment Account" .
+
+lt:car_parks a lt:TransportLine ;
+    rdfs:label "Car parks" ;
+    lt:lineName "Car parks" .
+
+lt:cbre a lt:TransportOperator ;
+    rdfs:label "CBRE" ;
+    lt:operatorName "CBRE" .
+
+lt:cheshunt a schema1:Place ;
+    rdfs:label "Cheshunt" .
+
+lt:chingford a schema1:Place ;
+    rdfs:label "Chingford" .
+
+lt:clapham_junction a lt:TrainStation ;
+    rdfs:label "Clapham Junction" .
+
+lt:cloud_cable_car a gtfs:Route ;
+    rdfs:label "Cloud Cable Car" .
+
+lt:colindale a schema1:Place ;
+    rdfs:label "Colindale" ;
+    lt:locatedIn lt:london .
+
+lt:congestion_charging a gtfs:Route ;
+    rdfs:label "Congestion Charging" ;
+    lt:hasFrequency lt:272 ;
+    lt:hasRidership lt:3416 ;
+    lt:hasStop lt:london_borough_councils .
+
+lt:connectsTo a owl:ObjectProperty .
+
+lt:contactless_pay a gtfs:Route ;
+    rdfs:label "Contactless Pay" .
+
+lt:covent_garden a lt:TrainStation ;
+    rdfs:label "Covent Garden" .
+
+lt:cromwell_road_bus_station a lt:TrainStation ;
+    rdfs:label "Cromwell Road bus station" .
+
+lt:crossrail a gtfs:Route ;
+    rdfs:label "Crossrail" .
+
+lt:crossrail_limited a lt:TransportOperator ;
+    rdfs:label "Crossrail Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Crossrail Limited" .
+
+lt:crossrail_section a gtfs:Route ;
+    rdfs:label "Crossrail Section" .
+
+lt:crossrail_section_of_the_railways_pension_scheme a gtfs:Route ;
+    rdfs:label "Crossrail Section of the Railways Pension Scheme" .
+
+lt:crossrail_shared_cost_section a gtfs:Route ;
+    rdfs:label "Crossrail Shared Cost Section" ;
+    lt:connectsTo lt:tfl .
+
+lt:crossrail_shared_cost_section_of_the_railways_pension_scheme a gtfs:Route ;
+    rdfs:label "Crossrail Shared Cost Section of the Railways Pension Scheme" .
+
+lt:cycleways a gtfs:Route ;
+    rdfs:label "Cycleways" ;
+    schema1:description "strategic cycle network" .
+
+lt:development_properties a lt:TransportOperator ;
+    rdfs:label "Development properties" ;
+    lt:operatorName "Development properties" .
+
+lt:dft a schema1:Place ;
+    rdfs:label "DfT" .
+
+lt:district_line a lt:TubeLine ;
+    rdfs:label "District line" ;
+    lt:hasStop lt:upminster ;
+    lt:lineName "District line" ;
+    schema1:description "Tube line" .
+
+lt:dlr_network a lt:DLRLine ;
+    rdfs:label "DLR network" ;
+    lt:connectsTo lt:northern_line ;
+    lt:lineName "DLR network" .
+
+lt:docklands_light_railway a lt:DLRLine ;
+    rdfs:label "Docklands Light Railway" ;
+    lt:lineName "Docklands Light Railway" ;
+    lt:operatedBy lt:keolis_amey_docklands_limited_kad .
+
+lt:docklands_light_railway_limited a lt:TransportOperator ;
+    rdfs:label "Docklands Light Railway Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Docklands Light Railway Limited" .
+
+lt:earls_court a schema1:Place ;
+    rdfs:label "Earls Court" .
+
+lt:earls_court_partnership_limited a lt:TransportOperator ;
+    rdfs:label "Earls Court Partnership Limited" ;
+    lt:operatorName "Earls Court Partnership Limited" ;
+    schema1:description "ECPL" .
+
+lt:edgware a schema1:Place ;
+    rdfs:label "Edgware" .
+
+lt:ee a lt:TransportOperator ;
+    rdfs:label "EE" ;
+    lt:operatorName "EE" .
+
+lt:elephant_and_castle a schema1:Place ;
+    rdfs:label "Elephant and Castle" .
+
+lt:enfield_council a lt:TransportOperator ;
+    rdfs:label "Enfield Council" ;
+    lt:operatorName "Enfield Council" .
+
+lt:ernst_young_llp a lt:TransportOperator ;
+    rdfs:label "Ernst & Young LLP" ;
+    lt:operatorName "Ernst & Young LLP" .
+
+lt:essex_and_suffolk_water a lt:TransportOperator ;
+    rdfs:label "Essex and Suffolk Water" ;
+    lt:operatorName "Essex and Suffolk Water" .
+
+lt:european_investment_bank a lt:TransportOperator ;
+    rdfs:label "European Investment Bank" ;
+    lt:operatorName "European Investment Bank" .
+
+lt:extendsTo a owl:ObjectProperty .
+
+lt:finance_committee a gtfs:Route ;
+    rdfs:label "Finance Committee" .
+
+lt:gallions_reach a schema1:Place ;
+    rdfs:label "Gallions Reach" .
+
+lt:gallows_corner a schema1:Place ;
+    rdfs:label "Gallows Corner" .
+
+lt:gallows_corner_flyover lt:locatedIn lt:havering ;
+    lt:operatedBy lt:tfl .
+
+lt:gants_hill a schema1:Place ;
+    rdfs:label "Gants Hill" .
+
+lt:gla a schema1:Place ;
+    rdfs:label "GLA" ;
+    schema1:description "Greater London Authority" .
+
+lt:gla_group a lt:TransportOperator ;
+    rdfs:label "GLA Group" ;
+    lt:operatorName "GLA Group" .
+
+lt:go_ahead_london a lt:TransportOperator ;
+    rdfs:label "Go Ahead London" ;
+    lt:operatorName "Go Ahead London" .
+
+lt:gospel_oak_to_barking_riverside a gtfs:Route ;
+    rdfs:label "Gospel Oak to Barking Riverside" ;
+    lt:servesStation lt:liverpool_street .
+
+lt:greater_london a schema1:Place ;
+    rdfs:label "Greater London" .
+
+lt:green_london a schema1:Place ;
+    rdfs:label "Green London" .
+
+lt:hammersmith_city_line a lt:TubeLine ;
+    rdfs:label "Hammersmith & City line" ;
+    lt:lineName "Hammersmith & City line" ;
+    lt:locatedIn lt:wood_lane ;
+    schema1:description "Tube line" .
+
+lt:hasFrequency a owl:DatatypeProperty .
+
+lt:hasRidership a owl:DatatypeProperty .
+
+lt:hatton_cross a lt:TrainStation ;
+    rdfs:label "Hatton Cross" .
+
+lt:heathrow_terminal_4_underground_station a lt:TrainStation ;
+    rdfs:label "Heathrow Terminal 4 Underground station" ;
+    lt:locatedIn lt:heathrow .
+
+lt:homes_england a lt:TransportOperator ;
+    rdfs:label "Homes England" ;
+    lt:operatorName "Homes England" ;
+    schema1:description "subsidiary" .
+
+lt:hsbc_bank_plc a lt:TransportOperator ;
+    rdfs:label "HSBC Bank plc" ;
+    lt:operatorName "HSBC Bank plc" .
+
+lt:industrial_and_arches a lt:TransportLine ;
+    rdfs:label "Industrial and arches" ;
+    lt:lineName "Industrial and arches" .
+
+lt:jubilee a schema1:Place ;
+    rdfs:label "Jubilee" ;
+    schema1:description "the length of the line" .
+
+lt:kentish_town a schema1:Place ;
+    rdfs:label "Kentish Town" ;
+    lt:locatedIn lt:london .
+
+lt:keolis_amey_docklands_limited a lt:TransportOperator ;
+    rdfs:label "Keolis Amey Docklands Limited" ;
+    lt:operatorName "Keolis Amey Docklands Limited" .
+
+lt:kidbrooke a schema1:Place ;
+    rdfs:label "Kidbrooke" .
+
+lt:kidbrooke_partnership_llp a lt:TransportOperator ;
+    rdfs:label "Kidbrooke Partnership LLP" ;
+    lt:locatedIn lt:london ;
+    lt:operatorName "Kidbrooke Partnership LLP" .
+
+lt:kings_cross_st_pancras_underground_station a lt:TrainStation ;
+    rdfs:label "King's Cross St Pancras Underground station" .
+
+lt:kingston a schema1:Place ;
+    rdfs:label "Kingston" .
+
+lt:lambeth_bridge a schema1:Place ;
+    rdfs:label "Lambeth Bridge" ;
+    lt:hasStop lt:tube_station .
+
+lt:lewisham a schema1:Place ;
+    rdfs:label "Lewisham" .
+
+lt:liberty a lt:TransportLine ;
+    rdfs:label "Liberty" ;
+    lt:lineName "Liberty" ;
+    lt:operatedBy lt:london_overground .
+
+lt:limmo_peninsula a schema1:Place ;
+    rdfs:label "Limmo Peninsula" .
+
+lt:lioness a lt:TransportLine ;
+    rdfs:label "Lioness" ;
+    lt:lineName "Lioness" ;
+    lt:operatedBy lt:london_overground .
+
+lt:local_authorities a schema1:Place ;
+    rdfs:label "Local Authorities" .
+
+lt:local_government_pension_scheme a lt:TransportOperator ;
+    rdfs:label "Local Government Pension Scheme" ;
+    lt:operatorName "Local Government Pension Scheme" .
+
+lt:locatedIn a owl:DatatypeProperty .
+
+lt:london_anchor a schema1:Place ;
+    rdfs:label "London Anchor" ;
+    schema1:description "Institutions’ Network (LAIN)" .
+
+lt:london_boroughs a schema1:Place ;
+    rdfs:label "London Boroughs" .
+
+lt:london_bus_services a lt:TransportOperator ;
+    rdfs:label "London Bus Services" ;
+    lt:operatorName "London Bus Services" .
+
+lt:london_bus_services_limited a lt:TransportOperator ;
+    rdfs:label "London Bus Services Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "London Bus Services Limited" .
+
+lt:london_buses a lt:TransportOperator ;
+    rdfs:label "London Buses" ;
+    lt:operatorName "London Buses" .
+
+lt:london_corporation a schema1:Place ;
+    rdfs:label "London Corporation" .
+
+lt:london_elizabeth_buses a lt:TransportOperator ;
+    rdfs:label "London Elizabeth Buses" ;
+    lt:operatedBy lt:bus_division ;
+    lt:operatorName "London Elizabeth Buses" .
+
+lt:london_elizabeth_line a lt:ElizabethLine ;
+    rdfs:label "London Elizabeth line" ;
+    lt:lineName "London Elizabeth line" ;
+    lt:operatedBy lt:tfl .
+
+lt:london_finance_limited a lt:TransportOperator ;
+    rdfs:label "London Finance Limited" ;
+    lt:operatorName "London Finance Limited" .
+
+lt:london_lane_rental_scheme a gtfs:Route ;
+    rdfs:label "London lane rental scheme" .
+
+lt:london_pension_fund_authority a lt:TransportOperator ;
+    rdfs:label "London Pension Fund Authority" ;
+    lt:operatedBy lt:public_sector_section_of_the_tfl_pension_fund ;
+    lt:operatorName "London Pension Fund Authority" .
+
+lt:london_river_services_limited a lt:TransportOperator ;
+    rdfs:label "London River Services Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "London River Services Limited" .
+
+lt:london_road_roundabout a schema1:Place ;
+    rdfs:label "London Road Roundabout" ;
+    lt:locatedIn lt:twickenham .
+
+lt:london_road_roundabout_in_twickenham a schema1:Place ;
+    rdfs:label "London Road roundabout in Twickenham" .
+
+lt:london_streets a schema1:Place ;
+    rdfs:label "London Streets" .
+
+lt:london_surface_water_flooding_strategy a gtfs:Route ;
+    rdfs:label "London Surface Water Flooding Strategy" .
+
+lt:london_transport a lt:TransportOperator ;
+    rdfs:label "London Transport" ;
+    lt:operatorName "London Transport" .
+
+lt:london_transport_museum a lt:TransportOperator ;
+    rdfs:label "London Transport Museum" ;
+    lt:locatedIn lt:london_underground ;
+    lt:operatorName "London Transport Museum" ;
+    schema1:description "a wholly owned subsidiary group within TfL Group and a registered charity" .
+
+lt:london_transport_museum_limited a schema1:Place ;
+    rdfs:label "London Transport Museum Limited" .
+
+lt:london_treasury_liquidity_fund_ltlf_lp a gtfs:Route ;
+    rdfs:label "London Treasury Liquidity Fund (LTLF) LP" .
+
+lt:london_underground_limited a lt:TransportOperator ;
+    rdfs:label "London Underground Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "London Underground Limited" .
+
+lt:londoners a schema1:Place ;
+    rdfs:label "Londoners" .
+
+lt:londonwide_ulez a gtfs:Route ;
+    rdfs:label "London-wide ULEZ" .
+
+lt:low_emission_zone a schema1:Place ;
+    rdfs:label "Low Emission Zone" .
+
+lt:low_emission_zone_lez a schema1:Place ;
+    rdfs:label "Low Emission Zone (LEZ)" .
+
+lt:marylebone_flyover a lt:TransportLine ;
+    rdfs:label "Marylebone Flyover" ;
+    lt:lineName "Marylebone Flyover" .
+
+lt:mayoral a schema1:Place ;
+    rdfs:label "Mayoral" .
+
+lt:merlin_entertainments a schema1:Place ;
+    rdfs:label "Merlin Entertainments" .
+
+lt:metropolitan_police_service a lt:TransportOperator ;
+    rdfs:label "Metropolitan Police Service" ;
+    lt:operatorName "Metropolitan Police Service" .
+
+lt:mildmay a lt:TransportLine ;
+    rdfs:label "Mildmay" ;
+    lt:lineName "Mildmay" ;
+    lt:operatedBy lt:london_overground .
+
+lt:morgan_sindall a lt:TransportOperator ;
+    rdfs:label "Morgan Sindall" ;
+    lt:operatorName "Morgan Sindall" .
+
+lt:network_rail a lt:TransportOperator ;
+    rdfs:label "Network Rail" ;
+    lt:operatorName "Network Rail" .
+
+lt:new_cross a schema1:Place ;
+    rdfs:label "New Cross" .
+
+lt:night_overground a gtfs:Route ;
+    rdfs:label "Night Overground" ;
+    lt:connectsTo lt:london ;
+    schema1:description "new overground service" .
+
+lt:night_tube a gtfs:Route ;
+    rdfs:label "Night Tube" ;
+    lt:connectsTo lt:london ;
+    schema1:description "new subway service" .
+
+lt:north_greenwich a schema1:Place ;
+    rdfs:label "North Greenwich" .
+
+lt:north_of_london a schema1:Place ;
+    rdfs:label "North of London" .
+
+lt:northwick_park_underground_station a lt:TrainStation ;
+    rdfs:label "Northwick Park Underground station" .
+
+lt:notting_hill_carnival a schema1:Place ;
+    rdfs:label "Notting Hill Carnival" ;
+    lt:locatedIn lt:london .
+
+lt:office a lt:TransportLine ;
+    rdfs:label "Office" ;
+    lt:lineName "Office" .
+
+lt:old_kent_road a schema1:Place ;
+    rdfs:label "Old Kent Road" .
+
+lt:old_street a schema1:Place ;
+    rdfs:label "Old Street" .
+
+lt:olympic_park a schema1:Place ;
+    rdfs:label "Olympic Park" .
+
+lt:oxford_street a schema1:Place ;
+    rdfs:label "Oxford Street" .
+
+lt:oyster a lt:TransportOperator ;
+    rdfs:label "Oyster" ;
+    lt:operatorName "Oyster" .
+
+lt:oyster_card a gtfs:Route ;
+    rdfs:label "Oyster card" .
+
+lt:oyster_cards a gtfs:Route ;
+    rdfs:label "Oyster cards" .
+
+lt:oyster_pay_as_you_go a gtfs:Route ;
+    rdfs:label "Oyster Pay As You Go" .
+
+lt:piccadilly_line a lt:TubeLine ;
+    rdfs:label "Piccadilly line" ;
+    lt:hasFrequency lt:27_trains_per_hour ;
+    lt:hasStop lt:bank_station,
+        lt:liverpool_street_station ;
+    lt:lineName "Piccadilly line" ;
+    lt:operatedBy lt:london_underground,
+        lt:siemens_mobility,
+        lt:tfl .
+
+lt:places_for_london a lt:TransportOperator ;
+    rdfs:label "Places for London" ;
+    lt:operatorName "Places for London" .
+
+lt:places_for_london_limited a lt:TransportOperator ;
+    rdfs:label "Places for London Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Places for London Limited" ;
+    schema1:description "member of the TfL Group" .
+
+lt:pontoon_dock_dlr_station a lt:TrainStation ;
+    rdfs:label "Pontoon Dock DLR station" ;
+    lt:locatedIn lt:london .
+
+lt:public_works_loan_board a lt:TransportOperator ;
+    rdfs:label "Public Works Loan Board" ;
+    lt:operatorName "Public Works Loan Board" .
+
+lt:quarterly_performance_reports a gtfs:Route ;
+    rdfs:label "Quarterly Performance Reports" .
+
+lt:rail a lt:TransportLine ;
+    rdfs:label "rail" ;
+    lt:lineName "rail" ;
+    lt:operatedBy lt:tfl .
+
+lt:rail_division a gtfs:Route ;
+    rdfs:label "Rail division" ;
+    lt:servesStation lt:station .
+
+lt:rail_for_london_infrastructure_limited a lt:TransportOperator ;
+    rdfs:label "Rail for London (Infrastructure) Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Rail for London (Infrastructure) Limited" .
+
+lt:rainham a schema1:Place ;
+    rdfs:label "Rainham" .
+
+lt:retail a lt:TransportLine ;
+    rdfs:label "Retail" ;
+    lt:lineName "Retail" .
+
+lt:richmond_and_clapham a schema1:Place ;
+    rdfs:label "Richmond and Clapham" ;
+    lt:locatedIn lt:stratford .
+
+lt:riverlinx_limited a lt:TransportOperator ;
+    rdfs:label "Riverlinx Limited" ;
+    lt:operatedBy lt:silvertown_tunnel ;
+    lt:operatorName "Riverlinx Limited" .
+
+lt:romford a schema1:Place ;
+    rdfs:label "Romford" .
+
+lt:romford_to_upminster a gtfs:Route ;
+    rdfs:label "Romford to Upminster" ;
+    lt:servesStation lt:dalston .
+
+lt:royal_docks a schema1:Place ;
+    rdfs:label "Royal Docks" .
+
+lt:santander_cycles a gtfs:Route ;
+    rdfs:label "Santander Cycles" ;
+    lt:hasFrequency lt:900_new_ebikes ;
+    lt:hasStop lt:battersea,
+        lt:greenwich ;
+    lt:operatedBy lt:tfl .
+
+lt:servedBy a owl:ObjectProperty .
+
+lt:servesStation a owl:ObjectProperty .
+
+lt:silvertown a schema1:Place ;
+    rdfs:label "Silvertown" .
+
+lt:silvertown_tunnel_cycle_shuttle a gtfs:Route ;
+    rdfs:label "Silvertown Tunnel cycle shuttle" ;
+    lt:connectsTo lt:route .
+
+lt:sl12_route lt:locatedIn lt:gants_hill_and_rainham_via_romford .
+
+lt:sl8_route lt:locatedIn lt:uxbridge_and_abbey_wood_via_woolwich_and_thamesmead .
+
+lt:south_kensington_station a lt:TrainStation ;
+    rdfs:label "South Kensington station" .
+
+lt:south_of_london a schema1:Place ;
+    rdfs:label "South of London" .
+
+lt:southwark_tube_station a lt:TrainStation ;
+    rdfs:label "Southwark Tube station" .
+
+lt:stratford_office a schema1:Place ;
+    rdfs:label "Stratford office" .
+
+lt:student_oyster_photocards a gtfs:Route ;
+    rdfs:label "Student Oyster photocards" .
+
+lt:suffragette a lt:TransportLine ;
+    rdfs:label "Suffragette" ;
+    lt:lineName "Suffragette" ;
+    lt:operatedBy lt:london_overground .
+
+lt:superloop a gtfs:Route ;
+    rdfs:label "Superloop" ;
+    lt:connectsTo lt:310_other_bus_routes_49_rail_stations_and_23_rail_lines .
+
+lt:superloop_bus_network a gtfs:Route ;
+    rdfs:label "Superloop bus network" .
+
+lt:superloop_corridors lt:hasRidership lt:11_per_cent_increase_since_june_2023_baseline .
+
+lt:superloop_express_bus_network a gtfs:Route ;
+    rdfs:label "Superloop express bus network" ;
+    lt:connectsTo lt:outer_london .
+
+lt:surrey_quays_station a lt:TrainStation ;
+    rdfs:label "Surrey Quays station" ;
+    lt:locatedIn lt:london .
+
+lt:tfl_cycle_sundays a gtfs:Route ;
+    rdfs:label "TfL Cycle Sundays" ;
+    lt:hasStop lt:queen_elizabeth_olympic_park .
+
+lt:tfl_go a gtfs:Route ;
+    rdfs:label "TfL Go" ;
+    lt:hasStop lt:jubilee_line ;
+    schema1:description "our journey planning app" .
+
+lt:tfl_go_app a gtfs:Route ;
+    rdfs:label "TfL Go app" ;
+    lt:locatedIn lt:london .
+
+lt:tfl_group a lt:TransportOperator ;
+    rdfs:label "TfL Group" ;
+    lt:operatorName "TfL Group" .
+
+lt:tfl_pension_fund a gtfs:Route ;
+    rdfs:label "TfL Pension Fund" ;
+    lt:hasRidership lt:500_million_passenger_journeys .
+
+lt:tfl_trustee_company_and_limited a lt:TransportOperator ;
+    rdfs:label "TfL Trustee Company and Limited" ;
+    lt:operatorName "TfL Trustee Company and Limited" .
+
+lt:tflgovuk a gtfs:Route ;
+    rdfs:label "tfl.gov.uk" .
+
+lt:thames a schema1:Place ;
+    rdfs:label "Thames" .
+
+lt:therapia_lane_tram_depot a lt:TrainStation ;
+    rdfs:label "Therapia Lane Tram Depot" .
+
+lt:three_uk a lt:TransportOperator ;
+    rdfs:label "Three UK" ;
+    lt:operatorName "Three UK" .
+
+lt:through_ticket a gtfs:Route ;
+    rdfs:label "Through Ticket" .
+
+lt:tramtrack_croydon a lt:TramLine ;
+    rdfs:label "Tramtrack Croydon" ;
+    lt:lineName "Tramtrack Croydon" .
+
+lt:tramtrack_croydon_limited a lt:TransportOperator ;
+    rdfs:label "Tramtrack Croydon Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Tramtrack Croydon Limited" .
+
+lt:transport_for_london a lt:TransportOperator ;
+    rdfs:label "Transport for London" ;
+    lt:operatorName "Transport for London" .
+
+lt:transport_for_london_finance_limited a lt:TransportOperator ;
+    rdfs:label "Transport for London Finance Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Transport for London Finance Limited" .
+
+lt:transport_trading_limited a lt:TransportOperator ;
+    rdfs:label "Transport Trading Limited" ;
+    lt:operatedBy lt:tfl ;
+    lt:operatorName "Transport Trading Limited" .
+
+lt:travelcard a gtfs:Route ;
+    rdfs:label "Travelcard" .
+
+lt:travelcards a gtfs:Route ;
+    rdfs:label "Travelcards" .
+
+lt:uk_infrastructure_bank a lt:TransportOperator ;
+    rdfs:label "UK Infrastructure Bank" ;
+    lt:operatorName "UK Infrastructure Bank" .
+
+lt:ulez a lt:TransportLine ;
+    rdfs:label "ULEZ" ;
+    lt:hasStop lt:crystal_palace,
+        lt:orpington ;
+    lt:lineName "ULEZ" ;
+    lt:locatedIn lt:london ;
+    lt:operatedBy lt:tfl ;
+    schema1:description "Ultra Low Emission Zone" .
+
+lt:ultra_low_emission_zone a schema1:Place ;
+    rdfs:label "Ultra Low Emission Zone" .
+
+lt:ultra_low_emission_zone_ulez a schema1:Place ;
+    rdfs:label "Ultra Low Emission Zone (ULEZ)" .
+
+lt:upminster_depot a lt:TrainStation ;
+    rdfs:label "Upminster depot" .
+
+lt:uxbridge a schema1:Place ;
+    rdfs:label "Uxbridge" .
+
+lt:vauxhall_tube_station a lt:TrainStation ;
+    rdfs:label "Vauxhall Tube station" .
+
+lt:victoria_arcade a schema1:Place ;
+    rdfs:label "Victoria Arcade" .
+
+lt:victoria_coach_station a schema1:Place ;
+    rdfs:label "Victoria Coach Station" .
+
+lt:victoria_tube_station a lt:TrainStation ;
+    rdfs:label "Victoria Tube station" .
+
+lt:virgin_media_o2_vmo2 a lt:TransportOperator ;
+    rdfs:label "Virgin Media O2 (VMO2)" ;
+    lt:operatorName "Virgin Media O2 (VMO2)" .
+
+lt:vodafone a lt:TransportOperator ;
+    rdfs:label "Vodafone" ;
+    lt:operatorName "Vodafone" .
+
+lt:walthamstow a schema1:Place ;
+    rdfs:label "Walthamstow" .
+
+lt:waterloo a schema1:Place ;
+    rdfs:label "Waterloo" .
+
+lt:watford_junction_to_euston a gtfs:Route ;
+    rdfs:label "Watford Junction to Euston" ;
+    lt:servesStation lt:highbury_islington .
+
+lt:weaver a lt:TransportLine ;
+    rdfs:label "Weaver" ;
+    lt:lineName "Weaver" ;
+    lt:operatedBy lt:london_overground .
+
+lt:welltfl a gtfs:Route ;
+    rdfs:label "well@tfl" ;
+    schema1:description "health checks" .
+
+lt:wembley_park a schema1:Place ;
+    rdfs:label "Wembley Park" .
+
+lt:wembley_park_properties_llp a lt:TransportOperator ;
+    rdfs:label "Wembley Park Properties LLP" ;
+    lt:locatedIn lt:london ;
+    lt:operatorName "Wembley Park Properties LLP" .
+
+lt:west_croydon a schema1:Place ;
+    rdfs:label "West Croydon" .
+
+lt:white_city a schema1:Place ;
+    rdfs:label "White City" .
+
+lt:willis_towers_watson a lt:TransportOperator ;
+    rdfs:label "Willis Towers Watson" ;
+    lt:operatorName "Willis Towers Watson" .
+
+lt:willis_towers_watson_wtw a lt:TransportOperator ;
+    rdfs:label "Willis Towers Watson (WTW)" ;
+    lt:operatorName "Willis Towers Watson (WTW)" ;
+    schema1:description "remuneration consultants" .
+
+lt:windrush_line a lt:TransportLine ;
+    rdfs:label "Windrush line" ;
+    lt:lineName "Windrush line" .
+
+lt:woolwich a schema1:Place ;
+    rdfs:label "Woolwich" .
+
+lt:woolwich_ferry a schema1:Place ;
+    rdfs:label "Woolwich Ferry" ;
+    lt:connectsTo lt:river_bus ;
+    lt:locatedIn lt:place ;
+    lt:operatedBy lt:tfl ;
+    schema1:description "A free service providing an important link from Woolwich to North Woolwich" .
+
+lt:yunex_greater_london a lt:TransportOperator ;
+    rdfs:label "Yunex Greater London" ;
+    lt:operatorName "Yunex Greater London" ;
+    schema1:description "Partner of TfL" .
+
+lt:zip_oyster_photocard a gtfs:Route ;
+    rdfs:label "Zip Oyster photocard" .
+
+lt:a13 a gtfs:Route ;
+    rdfs:label "A13" ;
+    lt:servesStation lt:wennington ;
+    schema1:description "Design and construction of improvements to the A13 Gateway contract infrastructure" .
+
+lt:abbey_wood a schema1:Place ;
+    rdfs:label "Abbey Wood" .
+
+lt:bakerloo_line a lt:TubeLine ;
+    rdfs:label "Bakerloo line" ;
+    lt:extendsTo lt:west_london_orbital ;
+    lt:lineName "Bakerloo line" ;
+    lt:locatedIn lt:elephant_castle_to_lewisham ;
+    lt:operatedBy lt:tfl ;
+    lt:servedBy lt:tfl ;
+    lt:servesStation lt:paddington_station .
+
+lt:bank_station a lt:TrainStation ;
+    rdfs:label "Bank station" .
+
+lt:battersea a schema1:Place ;
+    rdfs:label "Battersea" .
+
+lt:brixton_tube_station a lt:TrainStation ;
+    rdfs:label "Brixton Tube station" .
+
+lt:bus a lt:BusLine ;
+    rdfs:label "Bus" ;
+    lt:lineName "Bus" ;
+    lt:servesStation lt:streets .
+
+lt:bus_division a gtfs:Route ;
+    rdfs:label "Bus division" ;
+    lt:servesStation lt:station .
+
+lt:bus_routes a lt:BusLine ;
+    rdfs:label "Bus routes" ;
+    lt:connectsTo lt:london_borough_of_islington ;
+    lt:lineName "Bus routes" .
+
+lt:buses a lt:BusLine ;
+    rdfs:label "buses" ;
+    lt:lineName "buses" ;
+    lt:operatedBy lt:tfl .
+
+lt:central_line a lt:TubeLine ;
+    rdfs:label "Central line" ;
+    lt:hasStop lt:stepney_green ;
+    lt:lineName "Central line" ;
+    schema1:description "Tube line" .
+
+lt:central_london a schema1:Place ;
+    rdfs:label "Central London" .
+
+lt:covent_garden_station a lt:TrainStation ;
+    rdfs:label "Covent Garden station" .
+
+lt:dalston a schema1:Place ;
+    rdfs:label "Dalston" .
+
+lt:dalston_junction a lt:TrainStation ;
+    rdfs:label "Dalston Junction" .
+
+lt:dialaride_fleet a gtfs:Route ;
+    rdfs:label "Dial-a-Ride fleet" .
+
+lt:enfield_town a schema1:Place ;
+    rdfs:label "Enfield Town" .
+
+lt:greenwich a schema1:Place ;
+    rdfs:label "Greenwich" .
+
+lt:greenwich_peninsula a schema1:Place ;
+    rdfs:label "Greenwich Peninsula" .
+
+lt:havering a schema1:Place ;
+    rdfs:label "Havering" .
+
+lt:heathrow_terminals a schema1:Place ;
+    rdfs:label "Heathrow terminals" .
+
+lt:highbury_islington a lt:TrainStation ;
+    rdfs:label "Highbury & Islington" .
+
+lt:ifs_cloud_cable_car a lt:TransportLine ;
+    rdfs:label "IFS Cloud Cable Car" ;
+    lt:lineName "IFS Cloud Cable Car" .
+
+lt:joe_strummer_subway a lt:TrainStation ;
+    rdfs:label "Joe Strummer subway" .
+
+lt:jubilee_line a lt:TubeLine ;
+    rdfs:label "Jubilee line" ;
+    lt:connectsTo lt:dlr,
+        lt:elizabeth_line,
+        lt:london_overground_stations,
+        lt:tube_lines ;
+    lt:lineName "Jubilee line" ;
+    lt:operatedBy lt:tfl ;
+    schema1:description "The Jubilee line is the only line that provides interchanges with every Tube line and the DLR, as well as six national rail stations, London Overground stations and the Elizabeth line." .
+
+lt:keolis_amey_docklands_limited_kad a lt:TransportOperator ;
+    rdfs:label "Keolis Amey Docklands Limited (KAD)" ;
+    lt:operatorName "Keolis Amey Docklands Limited (KAD)" .
+
+lt:kings_cross a lt:TrainStation ;
+    rdfs:label "King's Cross" .
+
+lt:lane_tram_depot a lt:TrainStation ;
+    rdfs:label "Lane Tram Depot" .
+
+lt:liverpool_street a lt:TrainStation ;
+    rdfs:label "Liverpool Street" ;
+    lt:locatedIn lt:enfield_town .
+
+lt:liverpool_street_station a lt:TrainStation ;
+    rdfs:label "Liverpool Street station" ;
+    lt:locatedIn lt:london ;
+    schema1:description "train station" .
+
+lt:london_borough_councils a schema1:Place ;
+    rdfs:label "London Borough Councils" .
+
+lt:london_trams a lt:TransportOperator ;
+    rdfs:label "London Trams" ;
+    lt:locatedIn lt:lane_tram_depot,
+        lt:therapia_lane ;
+    lt:operatorName "London Trams" .
+
+lt:outer_london a schema1:Place ;
+    rdfs:label "Outer London" .
+
+lt:overground_lines a lt:OvergroundLine ;
+    rdfs:label "Overground lines" ;
+    lt:lineName "Overground lines" .
+
+lt:paddington_station a lt:TrainStation ;
+    rdfs:label "Paddington station" ;
+    lt:hasStop lt:bakerloo_line,
+        lt:dlr .
+
+lt:public_sector_section_of_the_tfl_pension_fund a gtfs:Route ;
+    rdfs:label "Public Sector Section of the TfL Pension Fund" .
+
+lt:queen_elizabeth_olympic_park a schema1:Place ;
+    rdfs:label "Queen Elizabeth Olympic Park" .
+
+lt:siemens_mobility a lt:TransportOperator ;
+    rdfs:label "Siemens Mobility" ;
+    lt:operatorName "Siemens Mobility" .
+
+lt:st_jamess_park a schema1:Place ;
+    rdfs:label "St James's Park" .
+
+lt:stations a lt:TrainStation ;
+    rdfs:label "Stations" .
+
+lt:stepney_green a schema1:Place ;
+    rdfs:label "Stepney Green" ;
+    schema1:description "Station" .
+
+lt:stratford a schema1:Place ;
+    rdfs:label "Stratford" .
+
+lt:streets a schema1:Place ;
+    rdfs:label "Streets" .
+
+lt:thamesmead a schema1:Place ;
+    rdfs:label "Thamesmead" ;
+    lt:locatedIn lt:dlr .
+
+lt:therapia_lane a schema1:Place ;
+    rdfs:label "Therapia Lane" .
+
+lt:tram a lt:TramLine ;
+    rdfs:label "Tram" ;
+    lt:hasStop lt:kings_cross_st_pancras,
+        lt:london_borough_of_islington ;
+    lt:lineName "Tram" ;
+    lt:operatedBy lt:tfl .
+
+lt:tube a lt:TubeLine ;
+    rdfs:label "Tube" ;
+    lt:hasStop lt:covent_garden_station,
+        lt:london,
+        lt:waterloo_station ;
+    lt:lineName "Tube" ;
+    lt:operatedBy lt:tfl .
+
+lt:twickenham a schema1:Place ;
+    rdfs:label "Twickenham" .
+
+lt:underground a lt:TubeLine ;
+    rdfs:label "Underground" ;
+    lt:hasStop lt:station ;
+    lt:lineName "Underground" ;
+    lt:servesStation lt:london .
+
+lt:upminster a schema1:Place ;
+    rdfs:label "Upminster" ;
+    schema1:description "Station" .
+
+lt:waterloo_station a lt:TrainStation ;
+    rdfs:label "Waterloo station" .
+
+lt:west_london_orbital a gtfs:Route ;
+    rdfs:label "West London orbital" .
+
+lt:wood_lane a schema1:Place ;
+    rdfs:label "Wood Lane" .
+
+lt:crystal_palace a schema1:Place ;
+    rdfs:label "Crystal Palace" .
+
+lt:orpington a schema1:Place ;
+    rdfs:label "Orpington" .
+
+lt:overground a lt:OvergroundLine ;
+    rdfs:label "Overground" ;
+    lt:hasStop lt:kings_cross_st_pancras,
+        lt:london ;
+    lt:lineName "Overground" ;
+    lt:operatedBy lt:tfl .
+
+lt:river_bus a lt:RiverBusLine ;
+    rdfs:label "River bus" ;
+    lt:connectsTo lt:london_borough_of_islington ;
+    lt:lineName "River bus" .
+
+lt:silvertown_tunnel a gtfs:Route ;
+    rdfs:label "Silvertown Tunnel" ;
+    lt:connectsTo lt:greenwich_peninsula ;
+    lt:locatedIn lt:london ;
+    schema1:description "1.4km tunnel" .
+
+lt:tube_lines a lt:TubeLine ;
+    rdfs:label "Tube lines" ;
+    lt:lineName "Tube lines" .
+
+lt:elizabeth_line a lt:ElizabethLine ;
+    rdfs:label "Elizabeth line" ;
+    lt:connectsTo lt:abbey_wood,
+        lt:central_london,
+        lt:heathrow_terminals,
+        lt:london,
+        lt:northern_line ;
+    lt:hasFrequency lt:10_new_trains ;
+    lt:hasRidership lt:12m,
+        lt:570_million,
+        lt:570_million_passenger_journeys,
+        lt:8m,
+        lt:six_per_cent_uplift_in_job_accessibility ;
+    lt:hasStop lt:kings_cross_st_pancras,
+        lt:london,
+        lt:st_jamess_park,
+        lt:station ;
+    lt:lineName "Elizabeth line" ;
+    lt:locatedIn lt:london ;
+    lt:operatedBy lt:london_underground,
+        lt:tfl ;
+    lt:servesStation lt:london ;
+    schema1:description "railway service" .
+
+lt:london_borough_of_islington a schema1:Place ;
+    rdfs:label "London Borough of Islington" .
+
+lt:london_underground a lt:TubeLine ;
+    rdfs:label "London Underground" ;
+    lt:connectsTo lt:central_line,
+        lt:elizabeth_line ;
+    lt:hasStop lt:kings_cross_st_pancras ;
+    lt:lineName "London Underground" ;
+    lt:operatedBy lt:tfl ;
+    schema1:description "Tube operator",
+        "subway system" .
+
+lt:dlr a lt:DLRLine ;
+    rdfs:label "DLR" ;
+    lt:connectsTo lt:overground ;
+    lt:hasStop lt:kings_cross_st_pancras,
+        lt:london ;
+    lt:lineName "DLR" ;
+    lt:locatedIn lt:thamesmead ;
+    lt:operatedBy lt:tfl,
+        lt:transportoperator ;
+    lt:servedBy lt:tfl ;
+    schema1:description "Docklands Light Railway" .
+
+lt:kings_cross_st_pancras a lt:TrainStation ;
+    rdfs:label "King's Cross St. Pancras" .
+
+lt:london_overground a lt:OvergroundLine ;
+    rdfs:label "London Overground" ;
+    lt:hasStop lt:brixton_tube_station,
+        lt:dalston_junction,
+        lt:stations ;
+    lt:lineName "London Overground" ;
+    lt:operatedBy lt:tfl .
+
+lt:london a schema1:Place ;
+    rdfs:label "London" ;
+    lt:locatedIn lt:kings_cross_st_pancras ;
+    schema1:description "Greater London boundary",
+        "boroughs, areas, landmarks connected by transport",
+        "capital",
+        "city" .
+
+lt:tfl a lt:TransportOperator ;
+    rdfs:label "TfL" ;
+    lt:hasRidership lt:passenger_journeys ;
+    lt:hasStop lt:joe_strummer_subway ;
+    lt:locatedIn lt:london ;
+    lt:operatedBy lt:a13,
+        lt:bus,
+        lt:bus_routes,
+        lt:buses,
+        lt:dialaride_fleet,
+        lt:dlr,
+        lt:elizabeth_line,
+        lt:ifs_cloud_cable_car,
+        lt:london_overground,
+        lt:london_trams,
+        lt:london_underground,
+        lt:overground,
+        lt:overground_lines,
+        lt:river_bus,
+        lt:silvertown_tunnel,
+        lt:tram,
+        lt:tube,
+        lt:tube_lines,
+        lt:underground ;
+    lt:operatorName "TfL" ;
+    lt:servesStation lt:kings_cross ;
+    schema1:description "London's transport authority",
+        "Organisation operating transport services",
+        "Transport for London",
+        "organisation operating transport services" .
+

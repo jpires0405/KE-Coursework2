@@ -130,23 +130,24 @@ competency_questions = [
     }
 ]
 
-for cq in competency_questions:
-    print(f"Executing {cq['id']}: {cq['question']}")
-    results = g.query(PREFIXES + cq["query"])
+if __name__ == "__main__":
+    for cq in competency_questions:
+        print(f"Executing {cq['id']}: {cq['question']}")
+        results = g.query(PREFIXES + cq["query"])
 
-    if len(results) == 0:
-        print("  -> No results found.")
-    else:
-        for row in results:
-           
-            result_dict = row.asdict()
+        if len(results) == 0:
+            print("  -> No results found.")
+        else:
+            for row in results:
             
-            output_parts = []
-            for var_name, var_value in result_dict.items():
-
-                clean_value = str(var_value).split("/")[-1].split("#")[-1]
-                output_parts.append(f"{var_name}: {clean_value}")
+                result_dict = row.asdict()
                 
-            print(f"  -> " + " | ".join(output_parts))
-            
-    print("-" * 50)
+                output_parts = []
+                for var_name, var_value in result_dict.items():
+
+                    clean_value = str(var_value).split("/")[-1].split("#")[-1]
+                    output_parts.append(f"{var_name}: {clean_value}")
+                    
+                print(f"  -> " + " | ".join(output_parts))
+                
+        print("-" * 50)
