@@ -1,5 +1,6 @@
-from rdflib import Graph, Namespace, Literal
+from rdflib import Graph, Namespace, Literal, BNode 
 from rdflib.namespace import RDF, RDFS, OWL, XSD
+from rdflib.collection import Collection
 
 LT = Namespace("http://example.org/london-transport#")
 GTFS = Namespace("http://vocab.gtfs.org/terms#")
@@ -14,6 +15,8 @@ NAMESPACES = {
     "owl": OWL,
     "xsd": XSD,
 }
+
+
 
 
 def add_class(g: Graph, cls, label: str, comment: str=None, parent=None):
@@ -51,10 +54,57 @@ def add_datatype_property(g: Graph, prop, label: str, comment: str=None, domain=
         g.add((prop, RDFS.subPropertyOf, parent))
 
 
+def create_some_restriction(g, prop, cls):
+    r = BNode()
+    g.add((r, RDF.type, OWL.Restriction))
+    g.add((r, OWL.onProperty, prop))
+    g.add((r, OWL.someValuesFrom, cls))
+    return r
+
+
+def create_intersection_class(g, restrictions):
+    collection_node = BNode()
+    intersection = BNode()
+    Collection(g, collection_node, restrictions)
+    g.add((intersection, RDF.type, OWL.Class))
+    g.add((intersection, OWL.intersectionOf, collection_node))
+    return intersection
+
+
+def add_defined_class(g, new_class, restrictions, label, comment, parent):
+    intersection = create_intersection_class(g, restrictions)
+
+    g.add((new_class, RDF.type, OWL.Class))
+    g.add((new_class, OWL.equivalentClass, intersection))
+    g.add((new_class, RDFS.label, Literal(label)))
+    g.add((new_class, RDFS.comment, Literal(comment)))
+    g.add((new_class, RDFS.subClassOf, parent))
+
+
 def build_ontology() -> Graph:
     g = Graph()
     for prefix, ns in NAMESPACES.items():
         g.bind(prefix, ns)
+    
+    # Create defined classes
+    
+    r1 = create_some_restriction(g, LT.operatedBy, LT.TransportOperator)
+    r2 = create_some_restriction(g, LT.hasStop, GTFS.Stop)
+    add_defined_class(g, LT.FullyOperationalRoute, [r1, r2], "Fully Operational Route", "A route operated by an operator and serving at least one stop", GTFS.Route)
+
+    # Route that has trips AND stops
+    r3 = create_some_restriction(g, LT.hasTrip, GTFS.Trip)
+    r4 = create_some_restriction(g, LT.hasStop, GTFS.Stop)
+    add_defined_class(g, LT.RouteWithStopsAndTrips, [r3, r4], "Route With Stops And Trips", "A route with at least one trip and one stop", GTFS.Route)
+
+    r5 = create_some_restriction(g, LT.hasStop, GTFS.Stop)
+    r6 = create_some_restriction(g, LT.connectsTo, GTFS.Stop)
+    add_defined_class(g, LT.WellConnectedRoute, [r5, r6], "Well Connected Route", "A route whose stops are connected to other stops", GTFS.Route)
+
+    # Service that has trips AND those trips are linked to routes
+    r7 = create_some_restriction(g, LT.belongsToService, GTFS.Service)
+    r8 = create_some_restriction(g, LT.onRoute, GTFS.Route)
+    add_defined_class(g, LT.ActiveService, [r7, r8], "Active Service", "A service referenced by trips that are assigned to routes", GTFS.Service)
 
     # Classes from GTFS ontology
     add_class(g, GTFS.Stop, "gtfs:Stop", "A physical location passengers use for transport", SCHEMA.Place)
@@ -153,6 +203,8 @@ def build_ontology() -> Graph:
     g.add((LT.onRoute, OWL.inverseOf, LT.hasTrip))
     add_object_property(g, LT.isServedBy, "is served by", "Inverse property linking a station to its calling routes", LT.TrainStation, GTFS.Route, LT.relatedTo)
     g.add((LT.servesStation, OWL.inverseOf, LT.isServedBy))
+    add_object_property(g, LT.isAboutLine, "is about line", "Inverse of aboutLine linking a transport line to reports about it", LT.TransportLine, LT.Report, LT.relatedTo)
+    g.add((LT.aboutLine, OWL.inverseOf, LT.isAboutLine))
 
     # Symmetric Properties
     add_object_property(g, LT.intersectsWith, "intersects with", "Identifies transport lines that share a common station location", LT.TransportLine, LT.TransportLine, LT.relatedTo)
