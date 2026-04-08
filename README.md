@@ -21,6 +21,12 @@ pip install -r requirements.txt
 pip install groq
 ```
 
+**Data Source requirements - TFL API (Can be skipped if using provided JSON file)**
+
+| Stage | Provider | Setup |
+|-------|----------|-------|
+| Step 1 - TFL JSON creation | [TFL API](https://api-portal.tfl.gov.uk/) | `export TFL_API_KEY="your-key"` |
+
 **LLM requirements — two providers are used at different stages:**
 
 | Stage | Provider | Setup |
@@ -35,6 +41,10 @@ ollama pull llama3    # one-time download, ~4 GB
 
 # Groq
 export GROQ_API_KEY="your-groq-api-key"
+
+# TFL API
+export TFL_API_KEY="your-tfl-api-key"
+
 ```
 
 ---
