@@ -87,20 +87,21 @@ def get_all_ids():
     return all_ids
 
 def get_line_status(modes):
-    status_url = f"{url}/Line/Mode/{modes}/Status?detail=true"
-    status = requests.get(status_url, params=params).json()
-
     status_dict = {}
-    for line in status:
-        disruptions = []
-        for d in line["disruptions"]:
-            disruptions.append(d.get("description", ""))
+    for i, mode in enumerate(modes):
+        status_url = f"{url}/Line/Mode/{mode}/Status?detail=true"
+        status = requests.get(status_url, params=params).json()
 
-        status_dict[line["id"]] = {
-            "statusDescription": line["lineStatuses"][0]["statusSeverityDescription"],
-            "reason": line["lineStatuses"][0].get("reason", ""),
-            "disruptions": disruptions
-        }
+        for line in status:
+            disruptions = []
+            for d in line["disruptions"]:
+                disruptions.append(d.get("description", ""))
+
+            status_dict[line["id"]] = {
+                "statusDescription": line["lineStatuses"][0]["statusSeverityDescription"],
+                "reason": line["lineStatuses"][0].get("reason", ""),
+                "disruptions": disruptions
+            }
 
     return status_dict
 
@@ -165,9 +166,14 @@ def generate_json(lines, last_stops, disruptions):
         json.dump(lines_json, f, indent=3)
 
 if __name__ == "__main__":
-    modes = get_modes()
-    modes = ",".join(modes)
+    print("Getting Modes")
+    modes_list = get_modes()
+    modes = ",".join(modes_list)
+    print("Getting Lines")
     lines = get_lines(modes)
-    disruptions = get_line_status(modes)
+    print("Getting Disruptions")
+    disruptions = get_line_status(modes_list)
+    print("Getting Last Stops")
     last_stops = get_last_stops()
+    print("Generating Json")
     generate_json(lines, last_stops, disruptions)
