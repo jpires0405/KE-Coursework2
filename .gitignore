@@ -14,11 +14,16 @@ venv
 .vscode/
 .idea/
 
-# Data & Large Files
-data/
+# Data & Large Files — ignore raw/processed data but track generated .ttl artefacts
+data/*
+!data/kg/
+!data/processed/
+data/kg/*
+data/processed/*
+!data/kg/*.ttl
+!data/processed/*.ttl
 
 # Documentation & Temporary Files
-CLAUDE.md
 commands.txt
 coursework 2 specification.pdf
 docs/completion_analysis.tex

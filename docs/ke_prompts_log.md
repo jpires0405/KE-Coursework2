@@ -140,7 +140,154 @@ The RAG approach here directly satisfies the KG completion requirement: rather t
 
 ---
 
-## KE Task 4 — LLM-Augmented Competency Question Generation (CQ11–CQ20)
+## KE Task 4 — RAG-Based ABox Instance Population (Gap Resolution)
+
+**Task:** The previous RAG step added 8 new TBox classes/properties but no ABox instances. This step uses RAG to generate instance triples that populate `lt:FareZone`, `lt:Borough`, `lt:Interchange`, `lt:lineColour`, and `lt:modeOfTransport` for real London transport data.
+
+**Date:** 2026-04-08
+
+**Script:** `src/kg/rag_populate_instances.py`
+**Model:** Groq — `llama-3.3-70b-versatile`
+**Output:** `data/kg/rag_instances.ttl` (215 triples) merged into `data/kg/final_submission_kg.ttl` (673,971 total)
+
+---
+
+### RAG Strategy
+
+**Retrieval:** Named transport lines and 40 major station URIs + labels are extracted programmatically from `final_submission_kg.ttl` at runtime using rdflib. This gives the LLM exact URI references that match the KG rather than hallucinated identifiers.
+
+**Why RAG here:** Without the actual URIs from the KG (e.g. `lt:stop_940GZZLUKSX` for King's Cross), the LLM would invent URIs that cannot be linked to existing instances. By extracting and injecting them, the generated triples integrate directly with the existing ABox.
+
+---
+
+### System Prompt
+
+```
+You are an expert Knowledge Graph Engineer for the London Transport domain.
+You write ABox instance triples in strictly valid Turtle syntax.
+You use only URIs and properties already declared in the ontology.
+You never invent new classes or properties — only new instances and literal values.
+You output ONLY a single fenced ```turtle ... ``` code block with no prose outside it.
+```
+
+### User Prompt (condensed — full URIs injected at runtime)
+
+```
+## Ontology Namespace
+All URIs use: @prefix lt: <http://example.org/london-transport#> .
+New classes/properties from previous RAG step: lt:FareZone, lt:Borough, lt:Interchange,
+lt:Fare, lt:FareTier, lt:modeOfTransport (ObjectProperty), lt:lineColour (DatatypeProperty),
+lt:inFareZone (ObjectProperty), lt:locatedIn (ObjectProperty).
+
+## Existing KG Entities (extracted programmatically)
+[24 named transport lines with class and label]
+[40 major station URIs with labels]
+
+## Task — Generate ABox Instance Triples
+
+1. Line Colours and Modes: For every named line, add lt:lineColour (official TfL hex)
+   and lt:modeOfTransport pointing to a new lt:mode_* instance (lt:TransportEntity).
+
+2. Fare Zones: Create lt:fare_zone_1 through lt:fare_zone_6 as lt:FareZone instances.
+   Link each sampled station to its correct zone via lt:inFareZone.
+
+3. Boroughs: Create lt:Borough instances for 15 London boroughs.
+   Link each sampled station to its correct borough via lt:locatedIn.
+
+4. Interchange: Add rdf:type lt:Interchange for 11 confirmed multi-modal interchange stations.
+
+Output ONLY one ```turtle ... ``` block. Do NOT redeclare existing classes or properties.
+```
+
+---
+
+### Results
+
+- **215 new triples** generated and validated with rdflib
+- All 24 named lines have `lt:lineColour` and `lt:modeOfTransport`
+- 6 fare zone instances created; 40 stations linked to correct zones
+- 15 borough instances created; 40 stations linked to correct boroughs
+- 11 major interchange stations typed as `lt:Interchange`
+
+---
+
+## KE Task 5 — RAG-Based ABox Relation Population (Network Connectivity)
+
+**Task:** The canonical `lt:line_*` URIs had zero `lt:servesStation` links and `lt:intersectsWith` used string literals rather than URIs, making SPARQL queries return empty results. This step uses RAG to generate object-property relation triples that connect lines to stations and lines to each other.
+
+**Date:** 2026-04-08
+
+**Script:** `src/kg/rag_populate_relations.py`
+**Model:** Groq — `llama-3.3-70b-versatile`
+**Output:** `data/kg/rag_relations.ttl` (184 triples) merged into `data/kg/final_submission_kg.ttl` (674,113 total)
+
+---
+
+### RAG Strategy
+
+**Retrieval:** The 20 canonical `lt:line_*` URIs (those with `lt:lineColour`) are extracted programmatically from the KG and injected into the prompt. This ensures the LLM generates triples using the exact URIs that exist in the graph rather than hallucinated identifiers.
+
+**Why this matters:** `lt:intersectsWith` already existed in the KG with 61,372 triples, but all used string literals (e.g., `"Bakerloo"`) as objects — not URI references. These cannot be traversed by SPARQL. The RAG prompt explicitly requests URI-to-URI triples, producing graph-traversable relationships.
+
+---
+
+### System Prompt
+
+```
+You are an expert Knowledge Graph Engineer specialising in the London transport network.
+You have authoritative knowledge of which stations each TfL line serves and which lines
+intersect at which stations.
+You write strictly valid Turtle using only the URIs provided — never invent new URIs.
+You output ONLY a single fenced ```turtle ... ``` code block.
+```
+
+### User Prompt (condensed — full URIs injected at runtime)
+
+```
+## Namespace
+@prefix lt: <http://example.org/london-transport#> .
+
+## Relevant Object Properties (already declared)
+- lt:servesStation   domain: lt:TransportLine,  range: lt:TrainStation
+- lt:isServedBy      domain: lt:TrainStation,   range: lt:TransportLine
+- lt:intersectsWith  domain: lt:TransportLine,  range: lt:TransportLine
+- lt:connectsTo      domain: lt:Stop,           range: lt:Stop
+
+## Canonical Transport Line URIs (from the KG)
+[20 named lt:line_* URIs with labels]
+
+## Major Station URIs (from the KG)
+[40 major station URIs with rdfs:label]
+
+## Task — Generate Relation Triples
+
+1. lt:servesStation and lt:isServedBy:
+   For each of the 11 Tube lines and Elizabeth line, generate at least 5 servesStation
+   and corresponding isServedBy triples using only station URIs from the list above.
+
+2. lt:intersectsWith (line-to-line, using URIs):
+   For pairs of lines sharing stations in the list, generate symmetric intersectsWith
+   triples using only canonical line URIs from the list above.
+
+3. lt:connectsTo (station-to-station):
+   For adjacent stations on the same line or major interchange points,
+   generate at least 15 directional connectsTo pairs.
+
+Output ONLY one ```turtle ... ``` block. Use ONLY URIs provided above.
+```
+
+---
+
+### Results
+
+- **184 new triples** — all valid and merged into the final KG
+- All 11 Tube lines + Elizabeth line linked to 5+ stations via `lt:servesStation`/`lt:isServedBy`
+- Symmetric `lt:intersectsWith` URI triples generated for all intersecting canonical line pairs
+- 14 station-to-station `lt:connectsTo` pairs covering the central/eastern network
+
+---
+
+## KE Task 6 — LLM-Augmented Competency Question Generation (CQ11–CQ20)
 
 **Task:** Generate 10 LLM-augmented Competency Questions that complement the 10 manually authored CQs, targeting deeper domain insights and cross-referencing GTFS structured data with TfL Annual Report text.
 
@@ -237,14 +384,14 @@ The temperature is set to 0.4 (higher than the ontology completion script) to en
 | ID | Question |
 |----|----------|
 | CQ11 | What are the most frequently served stations by bus routes operated by Transport for London? |
-| CQ12 | Which tube lines have the highest average ridership during peak hours, according to the TfL Annual Report? |
-| CQ13 | What are the names of all train stations that are wheelchair accessible and have a direct connection to the Elizabeth line? |
+| CQ12 | Which bus routes have the highest frequency according to the TfL Annual Report? |
+| CQ13 | Which transport operators have routes that are both mentioned in the report and have a frequency value? |
 | CQ14 | Which bus routes have the highest frequency of service and are mentioned in the TfL Annual Report as having improved reliability? |
-| CQ15 | What are the coordinates of all stops that are within a 1km radius of a wheelchair accessible train station on the Overground line? |
-| CQ16 | Which transport operators have the most routes with night service, and what are the corresponding route numbers? |
-| CQ17 | What is the total number of bus stops that are served by routes operated by multiple transport operators, and which operators are they? |
-| CQ18 | Which tram lines have the lowest average ridership during off-peak hours, according to the TfL Annual Report, and what are their corresponding line colours? |
-| CQ19 | What are the names of all places that are served by both a river bus line and a train line, and what are the nearest stops for each mode of transport? |
-| CQ20 | Which train stations have the most interchanges with other transport lines, and what are the corresponding line names and colours? |
+| CQ15 | List all bus stops that are not wheelchair accessible but share a name with an interchange station. |
+| CQ16 | Which routes are mentioned in the TfL Annual Report and are operated by an operator that also operates a tube line? |
+| CQ17 | Which bus services are active during the Easter weekend of 2026 (April 4–5, 2026)? |
+| CQ18 | Which transport lines are currently experiencing disruptions, and what are the explicitly stated reasons for these disruptions? |
+| CQ19 | What are the names of train stations that are interchanges (lt:Interchange) between at least three different transport lines, and which lines are they? |
+| CQ20 | What are the names of all transport operators that operate bus routes, and how many distinct bus routes does each operator manage? |
 
 ---
