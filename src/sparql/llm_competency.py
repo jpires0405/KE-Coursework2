@@ -2,7 +2,7 @@ from rdflib import Graph
 
 g = Graph()
 
-g.parse("src/sparql/final_submission_kg.ttl", format="turtle")
+g.parse("data/kg/final_submission_kg.ttl", format="turtle")
 
 
 PREFIXES = """
