@@ -24,7 +24,7 @@ DEFAULT_OUTPUT = REPO_ROOT / "data" / "evaluation" / "evaluation_report.json"
 
 # Try a few import locations for competency questions
 try:
-    from competency import competency_questions, PREFIXES  # type: ignore
+    from src.sparql.competency import competency_questions, PREFIXES  # type: ignore
 except ImportError:
     try:
         from .competency import competency_questions, PREFIXES  # type: ignore

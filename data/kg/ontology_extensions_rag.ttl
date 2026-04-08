@@ -3,50 +3,62 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-lt:FareZone a owl:Class ;
-    rdfs:subClassOf lt:TransportEntity ;
-    rdfs:label "Fare Zone" ;
-    rdfs:comment "A fare zone in the London transport network" .
+lt:FareZone
+  a owl:Class ;
+  rdfs:subClassOf lt:TransportEntity ;
+  rdfs:label "Fare Zone" ;
+  rdfs:comment "A fare zone in the London transport network" .
 
-lt:hasRoute a owl:ObjectProperty ;
-    rdfs:domain lt:TransportLine ;
-    rdfs:range lt:Route ;
-    rdfs:label "has route" ;
-    rdfs:comment "A transport line contains routes. Example usage: lt:TubeLine lt:hasRoute lt:Route123" .
+lt:Borough
+  a owl:Class ;
+  rdfs:subClassOf lt:TransportEntity ;
+  rdfs:label "Borough" ;
+  rdfs:comment "A London borough" .
 
-lt:Borough a owl:Class ;
-    rdfs:subClassOf lt:Place ;
-    rdfs:label "Borough" ;
-    rdfs:comment "A London borough" .
+lt:AccessibilityFeature
+  a owl:Class ;
+  rdfs:subClassOf lt:TransportEntity ;
+  rdfs:label "Accessibility Feature" ;
+  rdfs:comment "A feature that describes the accessibility of a stop or line" .
 
-lt:AccessibilityFeature a owl:Class ;
-    rdfs:subClassOf lt:TransportEntity ;
-    rdfs:label "Accessibility Feature" ;
-    rdfs:comment "A feature describing the accessibility of a stop or line" .
+lt:Interchange
+  a owl:Class ;
+  rdfs:subClassOf lt:TransportEntity ;
+  rdfs:label "Interchange" ;
+  rdfs:comment "A multimodal interchange station" .
 
-lt:Interchange a owl:Class ;
-    rdfs:subClassOf lt:Stop ;
-    rdfs:label "Interchange" ;
-    rdfs:comment "A multimodal interchange station" .
+lt:modeOfTransport
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf lt:relatedTo ;
+  rdfs:domain lt:TransportLine ;
+  rdfs:range lt:TransportEntity ;
+  rdfs:label "mode of transport" ;
+  rdfs:comment "The mode of transport used by a route or line" .
 
-lt:modeOfTransport a owl:ObjectProperty ;
-    rdfs:domain lt:Route ;
-    rdfs:range lt:TransportEntity ;
-    rdfs:label "mode of transport" ;
-    rdfs:comment "The mode of transport used by a route or line" .
+lt:Fare
+  a owl:Class ;
+  rdfs:subClassOf lt:TransportEntity ;
+  rdfs:label "Fare" ;
+  rdfs:comment "A fare or pricing information for a route or line" .
 
-lt:Fare a owl:Class ;
-    rdfs:subClassOf lt:TransportEntity ;
-    rdfs:label "Fare" ;
-    rdfs:comment "A fare or pricing information for a route or line" .
+lt:FareTier
+  a owl:Class ;
+  rdfs:subClassOf lt:Fare ;
+  rdfs:label "Fare Tier" ;
+  rdfs:comment "A tier of fares for a route or line" .
 
-lt:FareTier a owl:Class ;
-    rdfs:subClassOf lt:Fare ;
-    rdfs:label "Fare Tier" ;
-    rdfs:comment "A tier of fares for a route or line" .
+lt:lineColour
+  a owl:DatatypeProperty ;
+  rdfs:subPropertyOf lt:value ;
+  rdfs:domain lt:TransportLine ;
+  rdfs:range xsd:string ;
+  rdfs:label "line colour" ;
+  rdfs:comment "The official colour of a TfL line" .
 
-lt:lineColour a owl:DatatypeProperty ;
-    rdfs:domain lt:TransportLine ;
-    rdfs:range xsd:string ;
-    rdfs:label "line colour" ;
-    rdfs:comment "The official colour of a TfL line" .
+lt:hasRoute
+  a owl:ObjectProperty ;
+  rdfs:subPropertyOf lt:relatedTo ;
+  rdfs:domain lt:TransportLine ;
+  rdfs:range lt:Route ;
+  rdfs:label "has route" ;
+  rdfs:comment "A transport line contains routes. Example usage: :line1 lt:hasRoute :route1." .
