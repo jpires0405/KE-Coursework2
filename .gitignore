@@ -15,13 +15,8 @@ venv
 .idea/
 
 # Data & Large Files — ignore raw/processed data but track generated .ttl artefacts
-data/*
-!data/kg/
-!data/processed/
-data/kg/*
-data/processed/*
-!data/kg/*.ttl
-!data/processed/*.ttl
+data/raw/*
+!data/raw/tfl.json
 
 # Documentation & Temporary Files
 commands.txt

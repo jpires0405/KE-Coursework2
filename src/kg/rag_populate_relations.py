@@ -23,6 +23,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 from rdflib import Graph, Namespace, RDF, RDFS
 
@@ -153,6 +154,7 @@ def extract_turtle(text: str) -> str:
 
 
 def run() -> None:
+    load_dotenv()
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         print("ERROR: GROQ_API_KEY not set.", file=sys.stderr)

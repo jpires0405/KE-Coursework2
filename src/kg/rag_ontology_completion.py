@@ -26,6 +26,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 from rdflib import Graph
 
@@ -123,6 +124,7 @@ def validate_turtle(ttl_str: str) -> Graph:
 
 
 def run() -> None:
+    load_dotenv()
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         print("ERROR: GROQ_API_KEY environment variable is not set.", file=sys.stderr)

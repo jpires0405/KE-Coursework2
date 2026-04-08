@@ -1,0 +1,463 @@
+{
+  "performance": {
+    "kg_file": "data\\kg\\final_submission_kg.ttl",
+    "file_size_mb": 22.43,
+    "parse_time_s": 114.25,
+    "peak_memory_mb": 732.39,
+    "total_triples": 668231
+  },
+  "class_distribution": {
+    "TransportEntity": 6,
+    "Report": 1,
+    "Statistic": 4,
+    "Place": 94,
+    "Organization": 0,
+    "Stop": 0,
+    "BusStop": 23718,
+    "TrainStation": 1176,
+    "Route": 52,
+    "BusRoute": 165,
+    "TrainRoute": 937,
+    "Service": 385,
+    "Trip": 10000,
+    "StopTime": 50000,
+    "TransportLine": 17,
+    "BusLine": 646,
+    "TubeLine": 21,
+    "DLRLine": 4,
+    "OvergroundLine": 9,
+    "ElizabethLine": 3,
+    "TramLine": 3,
+    "RiverBusLine": 6,
+    "NationalRailLine": 25,
+    "TransportOperator": 113
+  },
+  "completeness": {
+    "Report": {
+      "instance_count": 1,
+      "properties": {
+        "name": {
+          "count": 1,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 1,
+          "percent": 100.0
+        }
+      }
+    },
+    "Statistic": {
+      "instance_count": 4,
+      "properties": {
+        "name": {
+          "count": 4,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 4,
+          "percent": 100.0
+        }
+      }
+    },
+    "Place": {
+      "instance_count": 94,
+      "properties": {
+        "name": {
+          "count": 94,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 94,
+          "percent": 100.0
+        }
+      }
+    },
+    "TransportOperator": {
+      "instance_count": 113,
+      "properties": {
+        "operatorName": {
+          "count": 86,
+          "percent": 76.1
+        },
+        "label": {
+          "count": 113,
+          "percent": 100.0
+        }
+      }
+    },
+    "BusStop": {
+      "instance_count": 23718,
+      "properties": {
+        "name": {
+          "count": 23718,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 23718,
+          "percent": 100.0
+        },
+        "lat": {
+          "count": 23718,
+          "percent": 100.0
+        },
+        "long": {
+          "count": 23718,
+          "percent": 100.0
+        },
+        "wheelchairAccessible": {
+          "count": 23718,
+          "percent": 100.0
+        }
+      }
+    },
+    "TrainStation": {
+      "instance_count": 1176,
+      "properties": {
+        "name": {
+          "count": 1176,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 1176,
+          "percent": 100.0
+        },
+        "lat": {
+          "count": 1147,
+          "percent": 97.5
+        },
+        "long": {
+          "count": 1147,
+          "percent": 97.5
+        },
+        "wheelchairAccessible": {
+          "count": 1147,
+          "percent": 97.5
+        }
+      }
+    },
+    "Route": {
+      "instance_count": 52,
+      "properties": {
+        "label": {
+          "count": 52,
+          "percent": 100.0
+        }
+      }
+    },
+    "BusRoute": {
+      "instance_count": 165,
+      "properties": {
+        "busRouteNumber": {
+          "count": 165,
+          "percent": 100.0
+        },
+        "name": {
+          "count": 165,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 0,
+          "percent": 0.0
+        },
+        "operatedBy": {
+          "count": 165,
+          "percent": 100.0
+        }
+      }
+    },
+    "TrainRoute": {
+      "instance_count": 937,
+      "properties": {
+        "routeNumber": {
+          "count": 937,
+          "percent": 100.0
+        },
+        "name": {
+          "count": 937,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 0,
+          "percent": 0.0
+        },
+        "operatedBy": {
+          "count": 937,
+          "percent": 100.0
+        }
+      }
+    },
+    "TransportLine": {
+      "instance_count": 17,
+      "properties": {
+        "lineName": {
+          "count": 1,
+          "percent": 5.9
+        },
+        "label": {
+          "count": 17,
+          "percent": 100.0
+        }
+      }
+    },
+    "TubeLine": {
+      "instance_count": 21,
+      "properties": {
+        "lineName": {
+          "count": 11,
+          "percent": 52.4
+        },
+        "label": {
+          "count": 21,
+          "percent": 100.0
+        }
+      }
+    },
+    "BusLine": {
+      "instance_count": 646,
+      "properties": {
+        "lineName": {
+          "count": 642,
+          "percent": 99.4
+        },
+        "label": {
+          "count": 646,
+          "percent": 100.0
+        }
+      }
+    },
+    "DLRLine": {
+      "instance_count": 4,
+      "properties": {
+        "lineName": {
+          "count": 1,
+          "percent": 25.0
+        },
+        "label": {
+          "count": 4,
+          "percent": 100.0
+        }
+      }
+    },
+    "OvergroundLine": {
+      "instance_count": 9,
+      "properties": {
+        "lineName": {
+          "count": 6,
+          "percent": 66.7
+        },
+        "label": {
+          "count": 9,
+          "percent": 100.0
+        }
+      }
+    },
+    "ElizabethLine": {
+      "instance_count": 3,
+      "properties": {
+        "lineName": {
+          "count": 1,
+          "percent": 33.3
+        },
+        "label": {
+          "count": 3,
+          "percent": 100.0
+        }
+      }
+    },
+    "TramLine": {
+      "instance_count": 3,
+      "properties": {
+        "lineName": {
+          "count": 1,
+          "percent": 33.3
+        },
+        "label": {
+          "count": 3,
+          "percent": 100.0
+        }
+      }
+    },
+    "RiverBusLine": {
+      "instance_count": 6,
+      "properties": {
+        "lineName": {
+          "count": 5,
+          "percent": 83.3
+        },
+        "label": {
+          "count": 6,
+          "percent": 100.0
+        }
+      }
+    },
+    "NationalRailLine": {
+      "instance_count": 25,
+      "properties": {
+        "lineName": {
+          "count": 25,
+          "percent": 100.0
+        },
+        "label": {
+          "count": 25,
+          "percent": 100.0
+        }
+      }
+    },
+    "Service": {
+      "instance_count": 385,
+      "properties": {
+        "startDate": {
+          "count": 385,
+          "percent": 100.0
+        },
+        "endDate": {
+          "count": 385,
+          "percent": 100.0
+        }
+      }
+    },
+    "Trip": {
+      "instance_count": 10000,
+      "properties": {
+        "onRoute": {
+          "count": 10000,
+          "percent": 100.0
+        },
+        "belongsToService": {
+          "count": 10000,
+          "percent": 100.0
+        }
+      }
+    },
+    "StopTime": {
+      "instance_count": 50000,
+      "properties": {
+        "arrivalTime": {
+          "count": 50000,
+          "percent": 100.0
+        },
+        "departureTime": {
+          "count": 50000,
+          "percent": 100.0
+        },
+        "stopsAt": {
+          "count": 50000,
+          "percent": 100.0
+        },
+        "onTrip": {
+          "count": 50000,
+          "percent": 100.0
+        }
+      }
+    }
+  },
+  "source_metrics": {
+    "report_linked_entities": 277,
+    "transport_lines_with_routes": 0,
+    "routes_with_operators": 2,
+    "stations_with_serving_routes": 388,
+    "lines_mentioned_in_report": 16
+  },
+  "queries": {
+    "summary": {
+      "total_queries": 10,
+      "successful_queries": 10,
+      "answered_queries": 10,
+      "success_rate_percent": 100.0,
+      "answer_rate_percent": 100.0,
+      "average_time_ms": 6.4455
+    },
+    "details": [
+      {
+        "id": "CQ1",
+        "question": "What transport operators are in this ontology?",
+        "time_ms": 10.0549,
+        "result_count": 110,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ2",
+        "question": "Names of all tube lines available",
+        "time_ms": 4.3036,
+        "result_count": 21,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ3",
+        "question": "Which stations are served by the Piccadilly line?",
+        "time_ms": 3.6462,
+        "result_count": 7,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ4",
+        "question": "Which bus routes are operated by 'National Express'?",
+        "time_ms": 7.8025,
+        "result_count": 101,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ5",
+        "question": "Which stops are located in Wandsworth?",
+        "time_ms": 3.3099,
+        "result_count": 1,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ6",
+        "question": "What are the operational dates for 'Service 33'?",
+        "time_ms": 3.3736,
+        "result_count": 1,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ7",
+        "question": "Which routes are mentioned in the TFL Annual Report?",
+        "time_ms": 9.1591,
+        "result_count": 52,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ8",
+        "question": "Find the Coordinates of 'Plaistow Green'",
+        "time_ms": 3.5949,
+        "result_count": 4,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ9",
+        "question": "Which stops are wheelchair accessible?",
+        "time_ms": 9.5384,
+        "result_count": 9,
+        "success": true,
+        "answered": true,
+        "error": null
+      },
+      {
+        "id": "CQ10",
+        "question": "Which lines have night service?",
+        "time_ms": 9.6714,
+        "result_count": 6,
+        "success": true,
+        "answered": true,
+        "error": null
+      }
+    ]
+  }
+}

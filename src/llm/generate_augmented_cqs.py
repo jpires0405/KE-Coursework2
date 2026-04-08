@@ -17,6 +17,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 REQUIREMENTS_PATH = REPO_ROOT / "docs" / "requirements.md"
@@ -126,6 +127,7 @@ def append_to_requirements(cqs: list[str]) -> None:
 
 
 def run() -> None:
+    load_dotenv()
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         print("ERROR: GROQ_API_KEY environment variable is not set.", file=sys.stderr)
