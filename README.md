@@ -21,7 +21,7 @@ pip install -r requirements.txt
 pip install groq
 ```
 
-**Data Source requirements - TFL API (Can be skipped if using provided JSON file)**
+**Data Source requirements - TFL API (Can be skipped if using provided tfl JSON file in data/raw)**
 
 | Stage | Provider | Setup |
 |-------|----------|-------|
@@ -50,7 +50,7 @@ TFL_API_KEY=your_tfl_api_key
 GROQ_API_KEY=your_groq_api_key
 ```
 
-Replace your_tfl_api_key and your_groq_api_key with your API keys
+Replace your_tfl_api_key and your_groq_api_key with your API keys. TFL_API_KEY can be skipped if using JSON provided in data/raw
 
 ---
 
@@ -281,6 +281,8 @@ Requires `GROQ_API_KEY` to be set.
 python src/kg/rag_populate_instances.py
 ```
 
+Keep trying until no error is shown.
+
 Reads `final_submission_kg.ttl` to extract named transport lines and major stations as retrieval context, then calls Groq to generate ABox instance triples that populate the new ontology classes added in Step 9. Specifically: `lt:lineColour` and `lt:modeOfTransport` for all named lines; `lt:FareZone` instances (zones 1–6) linked to 40 major stations; `lt:Borough` instances linked to stations; and `lt:Interchange` typing for major multi-modal stations. Merges the result directly back into `final_submission_kg.ttl`.
 
 **Expected output:**
@@ -312,6 +314,8 @@ Requires `GROQ_API_KEY` to be set.
 ```bash
 python src/kg/rag_populate_relations.py
 ```
+
+Keep trying until no error is shown.
 
 Extracts the canonical line URIs and major station URIs from `final_submission_kg.ttl` and passes them to Groq as retrieval context. The model uses its knowledge of the real London transport network to generate `lt:servesStation` / `lt:isServedBy` links between tube lines and stations, `lt:intersectsWith` links between lines that share a station, and `lt:connectsTo` links between adjacent stations. Merges results back into `final_submission_kg.ttl`.
 
