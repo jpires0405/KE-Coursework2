@@ -39,13 +39,18 @@ pip install groq
 ollama serve
 ollama pull llama3    # one-time download, ~4 GB
 
-# Groq
-export GROQ_API_KEY="your-groq-api-key"
-
-# TFL API
-export TFL_API_KEY="your-tfl-api-key"
-
 ```
+
+## Environment Variables
+
+This project requires API keys to run. Create a `.env` file in the root of the project and add the following:
+
+```env
+TFL_API_KEY=your_tfl_api_key
+GROQ_API_KEY=your_groq_api_key
+```
+
+Replace your_tfl_api_key and your_groq_api_key with your API keys
 
 ---
 
