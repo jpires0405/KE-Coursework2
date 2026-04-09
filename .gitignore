@@ -1,1 +1,25 @@
+# Environment & Virtual Environments
 .env
+.venv
+venv
+
+# Python Cache & Build Artifacts
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS & Editor Files
+.DS_Store
+.vscode/
+.idea/
+
+# Data & Large Files — ignore raw/processed data but track generated .ttl artefacts
+data/raw/*
+!data/raw/tfl.json
+
+# Documentation & Temporary Files
+commands.txt
+coursework 2 specification.pdf
+docs/completion_analysis.tex
+docs/Completion_Analysis.pdf

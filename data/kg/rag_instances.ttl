@@ -1,0 +1,246 @@
+@prefix lt: <http://example.org/london-transport#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Line Colours and Modes of Transport
+lt:line_bakerloo lt:lineColour "#AE2069" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_central lt:lineColour "#FF0033" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_circle lt:lineColour "#FFC400" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_district lt:lineColour "#007D42" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_hammersmith-city lt:lineColour "#F3A9E1" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_jubilee lt:lineColour "#6A5ACD" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_metropolitan lt:lineColour "#9B0056" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_northern lt:lineColour "#000000" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_piccadilly lt:lineColour "#0019A8" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_victoria lt:lineColour "#0098CB" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_waterloo-city lt:lineColour "#76D7F7" ;
+    lt:modeOfTransport lt:mode_tube .
+lt:line_elizabeth a lt:ElizabethLine ;
+    lt:lineColour "#9F9F9F" ;
+    lt:modeOfTransport lt:mode_elizabeth_line .
+lt:line_dlr a lt:DLRLine ;
+    lt:lineColour "#00B5A9" ;
+    lt:modeOfTransport lt:mode_dlr .
+lt:line_tram a lt:TramLine ;
+    lt:lineColour "#FFA07A" ;
+    lt:modeOfTransport lt:mode_tram .
+lt:line_rb1 a lt:RiverBusLine ;
+    lt:lineColour "#0097A7" ;
+    lt:modeOfTransport lt:mode_river_bus .
+lt:line_rb2 a lt:RiverBusLine ;
+    lt:lineColour "#0097A7" ;
+    lt:modeOfTransport lt:mode_river_bus .
+lt:line_rb4 a lt:RiverBusLine ;
+    lt:lineColour "#0097A7" ;
+    lt:modeOfTransport lt:mode_river_bus .
+lt:line_rb6 a lt:RiverBusLine ;
+    lt:lineColour "#0097A7" ;
+    lt:modeOfTransport lt:mode_river_bus .
+lt:line_liberty a lt:OvergroundLine ;
+    lt:lineColour "#FFC080" ;
+    lt:modeOfTransport lt:mode_overground .
+lt:line_lioness a lt:OvergroundLine ;
+    lt:lineColour "#FFC080" ;
+    lt:modeOfTransport lt:mode_overground .
+lt:line_mildmay a lt:OvergroundLine ;
+    lt:lineColour "#FFC080" ;
+    lt:modeOfTransport lt:mode_overground .
+lt:line_suffragette a lt:OvergroundLine ;
+    lt:lineColour "#FFC080" ;
+    lt:modeOfTransport lt:mode_overground .
+lt:line_weaver a lt:OvergroundLine ;
+    lt:lineColour "#FFC080" ;
+    lt:modeOfTransport lt:mode_overground .
+lt:line_windrush a lt:OvergroundLine ;
+    lt:lineColour "#FFC080" ;
+    lt:modeOfTransport lt:mode_overground .
+
+lt:mode_tube a lt:TransportEntity ;
+    rdfs:label "Tube" .
+lt:mode_dlr a lt:TransportEntity ;
+    rdfs:label "DLR" .
+lt:mode_tram a lt:TransportEntity ;
+    rdfs:label "Tram" .
+lt:mode_river_bus a lt:TransportEntity ;
+    rdfs:label "River Bus" .
+lt:mode_overground a lt:TransportEntity ;
+    rdfs:label "Overground" .
+lt:mode_elizabeth_line a lt:TransportEntity ;
+    rdfs:label "Elizabeth Line" .
+
+# Fare Zone Instances
+lt:fare_zone_1 a lt:FareZone ;
+    rdfs:label "Fare Zone 1" ;
+    lt:name "Zone 1" .
+lt:fare_zone_2 a lt:FareZone ;
+    rdfs:label "Fare Zone 2" ;
+    lt:name "Zone 2" .
+lt:fare_zone_3 a lt:FareZone ;
+    rdfs:label "Fare Zone 3" ;
+    lt:name "Zone 3" .
+lt:fare_zone_4 a lt:FareZone ;
+    rdfs:label "Fare Zone 4" ;
+    lt:name "Zone 4" .
+lt:fare_zone_5 a lt:FareZone ;
+    rdfs:label "Fare Zone 5" ;
+    lt:name "Zone 5" .
+lt:fare_zone_6 a lt:FareZone ;
+    rdfs:label "Fare Zone 6" ;
+    lt:name "Zone 6" .
+
+# Linking Stations to Fare Zones
+lt:stop_940GZZLUKSX lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUVIC lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLULBG lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUWLO lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUSRA lt:inFareZone lt:fare_zone_3 .
+lt:stop_940GZZLUPAC lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLULMN lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUCST lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUBKF lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUMGT lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUBNK lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUCXR lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUEUS lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUWYP lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUGPK lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUOXC lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUTCR lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUHBN lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUSVS lt:inFareZone lt:fare_zone_3 .
+lt:stop_940GZZLUFPK lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUWHP lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUELY lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUCPK lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUSHP lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUHSD lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUGNR lt:inFareZone lt:fare_zone_3 .
+lt:stop_940GZZLUWIM lt:inFareZone lt:fare_zone_3 .
+lt:stop_940GZZLURMD lt:inFareZone lt:fare_zone_4 .
+lt:stop_940GZZLUBXN lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUCAM lt:inFareZone lt:fare_zone_2 .
+lt:stop_940GZZLUACT lt:inFareZone lt:fare_zone_3 .
+lt:stop_940GZZLUALD lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUADE lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUAGL lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUBST lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUBND lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUWSP lt:inFareZone lt:fare_zone_4 .
+lt:stop_940GZZLUSKS lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUKNB lt:inFareZone lt:fare_zone_1 .
+lt:stop_940GZZLUHSC lt:inFareZone lt:fare_zone_1 .
+
+# Borough Instances
+lt:borough_city_of_london a lt:Borough ;
+    rdfs:label "City of London" ;
+    lt:name "City of London" .
+lt:borough_westminster a lt:Borough ;
+    rdfs:label "Westminster" ;
+    lt:name "Westminster" .
+lt:borough_camden a lt:Borough ;
+    rdfs:label "Camden" ;
+    lt:name "Camden" .
+lt:borough_islington a lt:Borough ;
+    rdfs:label "Islington" ;
+    lt:name "Islington" .
+lt:borough_hackney a lt:Borough ;
+    rdfs:label "Hackney" ;
+    lt:name "Hackney" .
+lt:borough_tower_hamlets a lt:Borough ;
+    rdfs:label "Tower Hamlets" ;
+    lt:name "Tower Hamlets" .
+lt:borough_southwark a lt:Borough ;
+    rdfs:label "Southwark" ;
+    lt:name "Southwark" .
+lt:borough_lambeth a lt:Borough ;
+    rdfs:label "Lambeth" ;
+    lt:name "Lambeth" .
+lt:borough_wandsworth a lt:Borough ;
+    rdfs:label "Wandsworth" ;
+    lt:name "Wandsworth" .
+lt:borough_hammersmith_and_fulham a lt:Borough ;
+    rdfs:label "Hammersmith and Fulham" ;
+    lt:name "Hammersmith and Fulham" .
+lt:borough_kensington_and_chelsea a lt:Borough ;
+    rdfs:label "Kensington and Chelsea" ;
+    lt:name "Kensington and Chelsea" .
+lt:borough_ealing a lt:Borough ;
+    rdfs:label "Ealing" ;
+    lt:name "Ealing" .
+lt:borough_newham a lt:Borough ;
+    rdfs:label "Newham" ;
+    lt:name "Newham" .
+lt:borough_stratford a lt:Borough ;
+    rdfs:label "Stratford" ;
+    lt:name "Stratford" .
+lt:borough_greenwich a lt:Borough ;
+    rdfs:label "Greenwich" ;
+    lt:name "Greenwich" .
+
+# Linking Stations to Boroughs
+lt:stop_940GZZLUKSX lt:locatedIn lt:borough_camden .
+lt:stop_940GZZLUVIC lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLULBG lt:locatedIn lt:borough_southwark .
+lt:stop_940GZZLUWLO lt:locatedIn lt:borough_lambeth .
+lt:stop_940GZZLUSRA lt:locatedIn lt:borough_newham .
+lt:stop_940GZZLUPAC lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLULMN lt:locatedIn lt:borough_city_of_london .
+lt:stop_940GZZLUCST lt:locatedIn lt:borough_city_of_london .
+lt:stop_940GZZLUBKF lt:locatedIn lt:borough_city_of_london .
+lt:stop_940GZZLUMGT lt:locatedIn lt:borough_islington .
+lt:stop_940GZZLUBNK lt:locatedIn lt:borough_city_of_london .
+lt:stop_940GZZLUCXR lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLUEUS lt:locatedIn lt:borough_camden .
+lt:stop_940GZZLUWYP lt:locatedIn lt:borough_camden .
+lt:stop_940GZZLUGPK lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLUOXC lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLUTCR lt:locatedIn lt:borough_camden .
+lt:stop_940GZZLUHBN lt:locatedIn lt:borough_islington .
+lt:stop_940GZZLUSVS lt:locatedIn lt:borough_haringey .
+lt:stop_940GZZLUFPK lt:locatedIn lt:borough_haringey .
+lt:stop_940GZZLUWHP lt:locatedIn lt:borough_tower_hamlets .
+lt:stop_940GZZLUELY lt:locatedIn lt:borough_southwark .
+lt:stop_940GZZLUCPK lt:locatedIn lt:borough_wandsworth .
+lt:stop_940GZZLUSHP lt:locatedIn lt:borough_hammersmith_and_fulham .
+lt:stop_940GZZLUHSD lt:locatedIn lt:borough_hammersmith_and_fulham .
+lt:stop_940GZZLUGNR lt:locatedIn lt:borough_hounslow .
+lt:stop_940GZZLUWIM lt:locatedIn lt:borough_merton .
+lt:stop_940GZZLURMD lt:locatedIn lt:borough_richmond_upon_thames .
+lt:stop_940GZZLUBXN lt:locatedIn lt:borough_lambeth .
+lt:stop_940GZZLUCAM lt:locatedIn lt:borough_camden .
+lt:stop_940GZZLUACT lt:locatedIn lt:borough_ealing .
+lt:stop_940GZZLUALD lt:locatedIn lt:borough_tower_hamlets .
+lt:stop_940GZZLUADE lt:locatedIn lt:borough_tower_hamlets .
+lt:stop_940GZZLUAGL lt:locatedIn lt:borough_islington .
+lt:stop_940GZZLUBST lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLUBND lt:locatedIn lt:borough_westminster .
+lt:stop_940GZZLUWSP lt:locatedIn lt:borough_brent .
+lt:stop_940GZZLUSKS lt:locatedIn lt:borough_kensington_and_chelsea .
+lt:stop_940GZZLUKNB lt:locatedIn lt:borough_kensington_and_chelsea .
+lt:stop_940GZZLUHSC lt:locatedIn lt:borough_camden .
+
+# Interchange Classification
+lt:stop_940GZZLUKSX a lt:Interchange .
+lt:stop_940GZZLUVIC a lt:Interchange .
+lt:stop_940GZZLULBG a lt:Interchange .
+lt:stop_940GZZLUWLO a lt:Interchange .
+lt:stop_940GZZLUSRA a lt:Interchange .
+lt:stop_940GZZLUPAC a lt:Interchange .
+lt:stop_940GZZLULMN a lt:Interchange .
+lt:stop_940GZZLUWLO a lt:Interchange .
+lt:stop_940GZZLUWHP a lt:Interchange .
+lt:stop_940GZZLUCPK a lt:Interchange .
+lt:stop_940GZZLUHBN a lt:Interchange .
+lt:stop_940GZZLUHSD a lt:Interchange .

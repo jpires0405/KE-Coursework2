@@ -1,0 +1,282 @@
+{
+  "ontology_gaps": [
+    {
+      "id": "O1",
+      "title": "No FareZone class or zone property on stops",
+      "description": "London's fare zone system (zones 1-9) is fundamental to the transport domain. The ontology has no FareZone class and stops have no property linking them to a fare zone.",
+      "resolution": "Add lt:FareZone as a subclass of lt:TransportEntity and a lt:inFareZone object property with domain lt:Stop and range lt:FareZone. Populate using TfL API stop data or NaPTAN.",
+      "evidence": "0 classes matching 'zone' exist",
+      "query_result": "0"
+    },
+    {
+      "id": "O2",
+      "title": "TransportLine has no hasRoute links defined in practice",
+      "description": "The ontology defines lt:hasRoute (TransportLine → Route), but no instances use it. There is no way to navigate from a TransportLine to its constituent routes.",
+      "resolution": "Map each GTFS route's agency to its parent TransportLine using route names/IDs. For example, Piccadilly line routes should link via lt:hasRoute to their corresponding lt:TrainRoute instances.",
+      "evidence": "0 hasRoute links exist",
+      "query_result": "0"
+    },
+    {
+      "id": "O3",
+      "title": "No borough or area class for spatial context",
+      "description": "The ontology has lt:Place but no Borough or Area subclass. London has 33 boroughs that are central to how transport is organised. Stops cannot be linked to their borough.",
+      "resolution": "Add lt:Borough as a subclass of lt:Place and a lt:inBorough property. Populate by reverse-geocoding stop coordinates or using NaPTAN locality data.",
+      "evidence": "0 Borough classes exist",
+      "query_result": "0"
+    },
+    {
+      "id": "O4",
+      "title": "Accessibility is modelled as a single boolean",
+      "description": "Wheelchair accessibility is a single boolean on Stop. Real accessibility includes step-free access, platform-to-train gap, lifts, tactile paving, hearing loops, and accessible toilets. The ontology cannot express which specific accessibility features a stop has.",
+      "resolution": "Add lt:AccessibilityFeature class with subclasses (StepFreeAccess, Lift, TactilePaving, etc.) and a lt:hasAccessibilityFeature object property on lt:Stop. Populate from TfL accessibility data or the annual report.",
+      "evidence": "Only 1 accessibility property (wheelchairAccessible boolean)",
+      "query_result": "1"
+    },
+    {
+      "id": "O5",
+      "title": "No interchange/connection class between lines or stops",
+      "description": "The ontology has lt:connectsTo but no Interchange or Connection class to model transfer points between lines. Interchanges are critical for route planning and have properties like walking time and whether they are cross-platform or out-of-station.",
+      "resolution": "Add lt:Interchange class linking two lt:Stop instances with properties lt:transferTime and lt:transferType. Populate from GTFS transfers.txt if available, or from TfL interchange data.",
+      "evidence": "0 interchange/connection classes exist",
+      "query_result": "0"
+    },
+    {
+      "id": "O6",
+      "title": "No modeOfTransport property for lines",
+      "description": "Transport mode (bus, tube, DLR, tram, etc.) is implicit in the subclass hierarchy (BusLine, TubeLine) but there is no explicit modeOfTransport datatype property. This makes it hard to query 'all lines of mode X' without enumerating every subclass.",
+      "resolution": "Add lt:modeOfTransport datatype property with domain lt:TransportLine and range xsd:string. Populate from the TfL JSON mode field or derive from the subclass type.",
+      "evidence": "0 mode-related properties exist",
+      "query_result": "0"
+    },
+    {
+      "id": "O7",
+      "title": "No Fare or pricing class",
+      "description": "Fares and pricing are entirely absent from the ontology. There is no Fare class, no ticketPrice property, and no way to represent Oyster caps, contactless fares, or concessionary pricing — all central to London transport.",
+      "resolution": "Add lt:Fare class with properties lt:fareAmount (xsd:decimal), lt:fareType (xsd:string), and link it to routes or zones. Populate from TfL fares data or extract from the annual report.",
+      "evidence": "0 fare/pricing classes exist",
+      "query_result": "0"
+    },
+    {
+      "id": "O8",
+      "title": "No colour property for transport lines",
+      "description": "London tube lines have official colours (e.g. Bakerloo is brown, Central is red) used on maps and signage. The ontology has no colour/color property to capture this. This also applies to Overground line naming colours introduced in 2024.",
+      "resolution": "Add lt:lineColour datatype property with domain lt:TransportLine and range xsd:string. Populate from TfL API line data or extract from the annual report (which discusses the new Overground line colour names).",
+      "evidence": "0 colour-related properties exist",
+      "query_result": "0"
+    }
+  ],
+  "instance_gaps": [
+    {
+      "id": "I1",
+      "title": "TransportLine instances lack operatedBy relationships",
+      "description": "704 TransportLine instances exist (from TfL JSON) but only 1 has an operatedBy link. Lines like the Piccadilly, Northern, and bus routes have no operator information.",
+      "resolution": "Use RAG: query KG for lines without operators, retrieve matching passages from the TfL report, and use the LLM to determine which operator runs each line. Most are operated by TfL directly, but some bus routes are contracted out.",
+      "counts": {
+        "total": "17",
+        "with_operator": "7"
+      },
+      "samples": [
+        {
+          "line": "line_london-cable-car",
+          "name": "IFS Cloud Cable Car"
+        }
+      ]
+    },
+    {
+      "id": "I2",
+      "title": "Stops have no locatedIn borough or area",
+      "description": "24,865 stops have latitude/longitude coordinates but zero have a locatedIn relationship to any place or borough. This makes spatial queries about which stops serve which area of London impossible.",
+      "resolution": "Use RAG: for key stations mentioned in the TfL report, extract their borough from report text. For the wider stop set, reverse-geocode coordinates or use NaPTAN locality data.",
+      "counts": {
+        "total": "24894",
+        "with_location": "872"
+      },
+      "samples": [
+        {
+          "stop": "stop_0100BRP90233",
+          "name": "Triangle West",
+          "lat": "51.45652",
+          "lon": "-2.60802"
+        },
+        {
+          "stop": "stop_0100BRP90237",
+          "name": "Queen's Road",
+          "lat": "51.45651",
+          "lon": "-2.60658"
+        },
+        {
+          "stop": "stop_0100BRP90983",
+          "name": "Clifton Down Station",
+          "lat": "51.46419",
+          "lon": "-2.60958"
+        },
+        {
+          "stop": "stop_0100BRP90986",
+          "name": "Black Boy Hill",
+          "lat": "51.47123",
+          "lon": "-2.61603"
+        },
+        {
+          "stop": "stop_0100BRP90988",
+          "name": "Black Boy Hill",
+          "lat": "51.47069",
+          "lon": "-2.61515"
+        }
+      ]
+    },
+    {
+      "id": "I3",
+      "title": "LLM-extracted entities are disconnected from GTFS data",
+      "description": "The LLM extracted entities like lt:elizabeth_line and lt:london_overground from the PDF, but these are separate nodes from the GTFS-sourced route and line instances. The Elizabeth Line exists as both lt:elizabeth_line (LLM) and as multiple lt:TrainRoute instances (GTFS) with no link.",
+      "resolution": "Use RAG: query both LLM entities and GTFS routes, use the LLM to identify matches (e.g. 'Elizabeth line' from PDF = GTFS routes with 'Elizabeth' in their name), then add owl:sameAs or lt:hasRoute links between them.",
+      "counts": {
+        "llm_entities": "277"
+      },
+      "samples": [
+        {
+          "entity": "60_london_oyster_photocards",
+          "label": "60+ London Oyster photocards",
+          "type": "Route"
+        },
+        {
+          "entity": "a10",
+          "label": "A10",
+          "type": "Route"
+        },
+        {
+          "entity": "acton",
+          "label": "Acton",
+          "type": "https://schema.org/Place"
+        },
+        {
+          "entity": "arches",
+          "label": "Arches",
+          "type": "TransportLine"
+        },
+        {
+          "entity": "arriva",
+          "label": "Arriva",
+          "type": "TransportOperator"
+        }
+      ]
+    },
+    {
+      "id": "I4",
+      "title": "TransportOperator instances mostly lack names",
+      "description": "57 TransportOperator instances exist in the KG, but the majority sourced from GTFS have names only via rdfs:label in the GTFS KG. After merging, operator data is sparse — no website, contact info, or lines-operated linkage.",
+      "resolution": "Use RAG: retrieve passages from the TfL report mentioning operators (TfL, Arriva, Go-Ahead, etc.) and use the LLM to extract operator details and which lines they operate.",
+      "counts": {
+        "total": "113",
+        "with_name": "56"
+      },
+      "samples": [
+        {
+          "op": "arriva"
+        },
+        {
+          "op": "blackhorse_road_properties_llp"
+        },
+        {
+          "op": "bollo_lane_llp"
+        },
+        {
+          "op": "cbre"
+        },
+        {
+          "op": "crossrail_limited"
+        }
+      ]
+    },
+    {
+      "id": "I5",
+      "title": "Trips have no human-readable names (headsigns)",
+      "description": "10,000 Trip instances exist but none have a lt:name or rdfs:label. They only link to routes via lt:onRoute. Without headsigns, it is impossible to know the direction or destination of a trip.",
+      "resolution": "Re-examine GTFS trips.txt — the trip_headsign field may be empty in this dataset. Use RAG to extract typical headsigns for major lines from the report, or derive from the last stop in each trip's stop_time sequence.",
+      "counts": {
+        "total": "10000",
+        "with_name": "7890"
+      },
+      "samples": [
+        {
+          "trip": "trip_VJ00c7c42e36d350",
+          "route": "route_3348"
+        },
+        {
+          "trip": "trip_VJ00d365084d8f1a",
+          "route": "route_3338"
+        },
+        {
+          "trip": "trip_VJ00e5864ec6dc03",
+          "route": "route_3338"
+        },
+        {
+          "trip": "trip_VJ00f241530c5032",
+          "route": "route_3338"
+        },
+        {
+          "trip": "trip_VJ011ad3f48930b9",
+          "route": "route_3340"
+        }
+      ]
+    },
+    {
+      "id": "I6",
+      "title": "TransportLine instances have no hasRoute links to GTFS Routes",
+      "description": "704 TransportLine instances (from TfL JSON) and 1,102 Route instances (from GTFS) exist as separate, unlinked nodes. The ontology defines lt:hasRoute (TransportLine → Route) but no instances use it. It is impossible to navigate from a named line like 'Northern' to its actual GTFS route schedules.",
+      "resolution": "Use RAG: query KG for TransportLines and Routes, use the LLM to match line names to route names/numbers, then add lt:hasRoute links between them.",
+      "counts": {
+        "total": "17",
+        "with_route": "0"
+      },
+      "samples": [
+        {
+          "line": "line_london-cable-car",
+          "name": "IFS Cloud Cable Car"
+        }
+      ]
+    },
+    {
+      "id": "I7",
+      "title": "TubeLines have zero servesStation links",
+      "description": "11 TubeLine instances exist (Bakerloo, Central, Circle, etc.) but none link to any station via lt:servesStation. It is impossible to query which stations a tube line serves.",
+      "resolution": "Use RAG: retrieve passages from the TfL report mentioning tube line stations, or use the LLM's knowledge of tube stations to populate servesStation links for each line.",
+      "counts": {
+        "total": "21",
+        "with_station": "2"
+      },
+      "samples": [
+        {
+          "line": "district_line",
+          "label": "District line"
+        },
+        {
+          "line": "hammersmith_city_line",
+          "label": "Hammersmith & City line"
+        },
+        {
+          "line": "piccadilly_line",
+          "label": "Piccadilly line"
+        },
+        {
+          "line": "central_line",
+          "label": "Central line"
+        },
+        {
+          "line": "jubilee_line",
+          "label": "Jubilee line"
+        }
+      ]
+    },
+    {
+      "id": "I8",
+      "title": "All 24,865 stops have wheelchairAccessible = false",
+      "description": "Every stop in the KG has lt:wheelchairAccessible set to false. This is almost certainly a data mapping issue — many London stations do have step-free access. The GTFS wheelchair_boarding field likely uses '0' for 'no info' rather than 'not accessible'.",
+      "resolution": "Use RAG: extract accessibility information from the TfL annual report (which discusses step-free access progress) and update key stations. Also re-examine the GTFS wheelchair_boarding mapping ('0' = unknown, not 'false').",
+      "counts": {
+        "total": "24865",
+        "accessible": "0"
+      },
+      "samples": []
+    }
+  ]
+}
