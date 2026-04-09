@@ -1,0 +1,98 @@
+Knowledge Engineering Prompts & Queries Log
+5CCSAKNE KE Coursework 2 — London Public Transport KG
+
+KE TASK 1 — Data Source Identification (Structured)
+Date: 2026-03-21 | Script: src/ingestion/download_gtfs.py
+
+Search queries:
+1. "static GTFS feed" London download open data
+2. TfL GTFS open data developer portal site:tfl.gov.uk
+3. UK bus open data GTFS London government download
+
+Selected: UK Department for Transport — Bus Open Data Service (BODS), London Static GTFS Feed.
+URL: https://data.bus-data.dft.gov.uk/timetable/download/gtfs-file/london/
+Rationale: Official government dataset covering London bus routes, stops, trips, and schedules. Freely available.
+
+KE TASK 2 — Data Source Identification (Unstructured Text)
+Date: 2026-03-21 | Script: src/ingestion/download_tfl_report.py
+
+Search queries:
+1. TfL annual report 2024 PDF site:tfl.gov.uk
+2. "Transport for London" annual report statement accounts 2024 filetype:pdf
+3. TfL publications reports site:content.tfl.gov.uk
+
+Selected: TfL Annual Report and Statement of Accounts 2024/25.
+URL: https://content.tfl.gov.uk/tfl-annual-report-and-statement-of-accounts-2024-25.pdf
+Rationale: Authoritative document covering operational performance and services across all TfL modes.
+
+KE TASK 3 — RAG-Based TBox Completion
+Date: 2026-04-05 | Script: src/kg/rag_ontology_completion.py
+Model: Groq llama-3.3-70b-versatile | Output: data/kg/ontology_extensions_rag.ttl
+
+RAG Strategy: Full source of src/kg/ontology.py injected verbatim as context, grounding the LLM in the exact namespace and class hierarchy to prevent hallucination.
+
+Identified TBox gaps: (1) No lt:FareZone class; (2) lt:hasRoute unused, no domain/range; (3) No lt:Borough class; (4) Accessibility only boolean, no lt:AccessibilityFeature; (5) No lt:Interchange class; (6) No lt:modeOfTransport property; (7) No lt:Fare/lt:FareTier class; (8) No lt:lineColour property.
+
+SYSTEM PROMPT:
+You are an expert Knowledge Graph Engineer specialising in public transport ontologies. You write precise, valid OWL/RDF in Turtle syntax using established ontology engineering principles. You always declare new classes as owl:Class with rdfs:label and rdfs:comment. You always declare new properties as owl:ObjectProperty or owl:DatatypeProperty with rdfs:label, rdfs:comment, rdfs:domain, and rdfs:range. You use subClassOf and subPropertyOf to integrate new elements into the existing hierarchy. You output ONLY a single fenced Turtle code block — no prose before or after.
+
+USER PROMPT:
+Existing Ontology (Retrieval Context): The following is the complete source of our current London Transport ontology, defined in Python using rdflib. Read it carefully — all new elements must integrate with the existing namespace, class hierarchy, and property set.
+{ontology_source}
+Task: Resolve these 8 TBox gaps: (1) No lt:FareZone class. (2) lt:hasRoute has no domain/range and is unused. (3) No lt:Borough class. (4) No lt:AccessibilityFeature class. (5) No lt:Interchange class. (6) No lt:modeOfTransport property. (7) No lt:Fare or lt:FareTier class. (8) No lt:lineColour datatype property.
+Instructions: Generate valid OWL/RDF Turtle resolving all 8 gaps. Use prefix lt: <http://example.org/london-transport#> (do not redeclare). For each new class: owl:Class, rdfs:subClassOf, rdfs:label, rdfs:comment. For each new property: rdfs:domain, rdfs:range, rdfs:label, rdfs:comment. Output ONLY a single Turtle fenced block.
+
+KE TASK 4 — RAG-Based ABox Instance Population
+Date: 2026-04-08 | Script: src/kg/rag_populate_instances.py
+Model: Groq llama-3.3-70b-versatile | Output: data/kg/rag_instances.ttl (215 triples)
+
+RAG Strategy: Named lines and 40 major station URIs extracted programmatically from the KG at runtime and injected as context, ensuring generated triples use exact existing URIs.
+
+SYSTEM PROMPT:
+You are an expert Knowledge Graph Engineer for the London Transport domain. You write ABox instance triples in strictly valid Turtle syntax. You use only URIs and properties already declared in the ontology. You never invent new classes or properties — only new instances and literal values. You output ONLY a single fenced Turtle code block with no prose outside it.
+
+USER PROMPT:
+Ontology Namespace: @prefix lt: <http://example.org/london-transport#>
+New classes/properties available: lt:FareZone, lt:Borough, lt:Interchange, lt:Fare, lt:FareTier, lt:modeOfTransport, lt:lineColour, lt:inFareZone, lt:locatedIn.
+Existing KG Entities (extracted programmatically): [24 named transport lines with class and label]; [40 major station URIs with labels]
+Task:
+1. Line Colours/Modes: Add lt:lineColour (official TfL hex) and lt:modeOfTransport for every named line.
+2. Fare Zones: Create lt:fare_zone_1 through lt:fare_zone_6; link stations via lt:inFareZone.
+3. Boroughs: Create 15 lt:Borough instances; link stations via lt:locatedIn.
+4. Interchange: Type 11 major multi-modal stations as lt:Interchange.
+Output ONLY one Turtle block. Do NOT redeclare existing classes or properties.
+
+KE TASK 5 — RAG-Based ABox Relation Population
+Date: 2026-04-08 | Script: src/kg/rag_populate_relations.py
+Model: Groq llama-3.3-70b-versatile | Output: data/kg/rag_relations.ttl (184 triples)
+
+RAG Strategy: The 20 canonical lt:line_* URIs and 40 major station URIs extracted programmatically and injected as context. Existing lt:intersectsWith triples used string literals; this step replaces them with traversable URI-to-URI triples.
+
+SYSTEM PROMPT:
+You are an expert Knowledge Graph Engineer specialising in the London transport network. You have authoritative knowledge of which stations each TfL line serves and which lines intersect at which stations. You write strictly valid Turtle using only the URIs provided — never invent new URIs. You output ONLY a single fenced Turtle code block.
+
+USER PROMPT:
+Namespace: @prefix lt: <http://example.org/london-transport#>
+Object Properties: lt:servesStation (TransportLine->TrainStation), lt:isServedBy (TrainStation->TransportLine), lt:intersectsWith (TransportLine->TransportLine), lt:connectsTo (Stop->Stop).
+Canonical Line URIs: [20 named lt:line_* URIs with labels]
+Major Station URIs: [40 station URIs with rdfs:label]
+Task:
+1. servesStation/isServedBy: For each of the 11 Tube lines and Elizabeth line, generate at least 5 servesStation and corresponding isServedBy triples.
+2. intersectsWith: Generate symmetric URI-to-URI intersectsWith triples for line pairs sharing stations.
+3. connectsTo: Generate at least 15 directional station-to-station connectsTo pairs.
+Output ONLY one Turtle block. Use ONLY URIs provided above.
+
+KE TASK 6 — LLM-Augmented Competency Question Generation (CQ11-CQ20)
+Date: 2026-04-06 | Script: src/llm/generate_augmented_cqs.py
+Model: Groq llama-3.3-70b-versatile (temp 0.4) | Output: docs/requirements.md
+
+SYSTEM PROMPT:
+You are an expert Knowledge Engineer specialising in public transport ontologies and SPARQL-queryable Knowledge Graphs. You have deep familiarity with the London transport network and the GTFS data standard. Generate Competency Questions that are precise, non-trivial, and directly answerable by SPARQL over a KG built from: (1) structured GTFS schedule data and (2) unstructured text from the TfL Annual Report 2024/25.
+
+USER PROMPT:
+Context: London Transport KG combining (1) London GTFS feed and (2) TfL Annual Report 2024/25.
+Ontology (lt: namespace): lt:TransportOperator, lt:TransportLine and subclasses (TubeLine, DLRLine, OvergroundLine, ElizabethLine, BusLine, TramLine, RiverBusLine), lt:Route, lt:BusRoute, lt:TrainRoute, lt:Stop, lt:BusStop, lt:TrainStation, lt:Service, lt:Trip, lt:StopTime.
+Key properties: lt:operatedBy, lt:servesStation, lt:mentionedInReport, lt:wheelchairAccessible, lt:lineColour, lt:hasFrequency, lt:connectsTo.
+Manual CQs (do not repeat): CQ1-CQ10 covering operators, tube lines, Piccadilly stations, National Express routes, Wandsworth stops, Service 33 dates, report-mentioned routes, Plaistow Green coordinates, wheelchair-accessible stops, night service lines.
+Task: Generate exactly 10 new CQs (CQ11-CQ20) that: (1) complement CQ1-CQ10 without paraphrasing; (2) target multi-hop queries, aggregations, and comparisons; (3) at least 3 cross-reference GTFS and TfL Report data; (4) at least 2 involve accessibility or interchange; (5) are answerable by SPARQL.
+Output Format: Return ONLY a numbered list CQ11 through CQ20 — no preamble or commentary.
